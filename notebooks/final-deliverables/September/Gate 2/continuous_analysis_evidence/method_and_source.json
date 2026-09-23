@@ -1,0 +1,36 @@
+{
+  "method_version": "1.0.0",
+  "source_path": "data/allstate_claims_data.csv",
+  "source_bytes": 70025339,
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "source_rows": 188318,
+  "continuous_fields": [
+    "cont1",
+    "cont2",
+    "cont3",
+    "cont4",
+    "cont5",
+    "cont6",
+    "cont7",
+    "cont8",
+    "cont9",
+    "cont10",
+    "cont11",
+    "cont12",
+    "cont13",
+    "cont14"
+  ],
+  "target": "loss",
+  "target_unit": "USD",
+  "transformed_target": "log1p_loss",
+  "histogram_bins": 30,
+  "requested_quantile_bins": 10,
+  "quantile_method": "pd.qcut; duplicate edges dropped; right-closed, lowest included; constant field one bin",
+  "correlation_methods": [
+    "Pearson",
+    "Spearman"
+  ],
+  "feature_removal_in_september": "None based solely on target or predictor correlations",
+  "figure_count": 29,
+  "limitations": "Associations are marginal and observational; no causal or individual reserve inference."
+}
