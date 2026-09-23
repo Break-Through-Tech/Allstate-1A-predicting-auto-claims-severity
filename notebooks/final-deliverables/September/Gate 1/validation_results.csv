@@ -1,0 +1,25 @@
+check,observed,expected,status
+row count,188318,188318,pass
+column count,132,132,pass
+header order,True,True,pass
+identifier count,1,1,pass
+categorical predictor count,116,116,pass
+continuous predictor count,14,14,pass
+target count,1,1,pass
+id present,True,True,pass
+missing ids,0,0,pass
+unique ids,188318,188318,pass
+duplicate ids,0,0,pass
+duplicate rows,0,0,pass
+missing cells,0,0,pass
+continuous fields numeric,True,True,pass
+continuous parse failures,0,0,pass
+non-finite continuous values,0,0,pass
+continuous range violations,0,0,pass
+loss numeric,True,True,pass
+loss parse failures,0,0,pass
+non-finite loss values,0,0,pass
+non-positive loss values,0,0,pass
+categorical fields,True,True,pass
+categorical fields unordered,True,True,pass
+profile rows,132,132,pass
