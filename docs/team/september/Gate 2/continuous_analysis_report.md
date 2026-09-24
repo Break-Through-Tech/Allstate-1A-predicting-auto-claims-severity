@@ -1,10 +1,10 @@
 # Issue #17: Continuous-Analysis Method
 
-**Status:** Ready for review
+**Status:** Independent review approved
 
 **Owner(s):** Liam Stapley, Ragib Nehal
 
-**Reviewer:** Pending
+**Reviewer:** Ragib Nehal
 
 **Method version:** 1.0.0
 
@@ -18,7 +18,7 @@ The analysis uses the authoritative source dataset and follows the approved Sept
 
 | Artifact | Location |
 |---|---|
-| Continuous-analysis notebook | `notebooks/final-deliverables/September/Gate 2/continuous_analysis.ipynb` |
+| Continuous-analysis notebook | `notebooks/liam-stapley/continuous_analysis.ipynb` |
 | Generated analysis evidence | `notebooks/final-deliverables/September/Gate 2/continuous_analysis_evidence/` |
 | Data dictionary | `notebooks/final-deliverables/September/Gate 2/data_dictionary.csv` |
 | Analysis contract | `notebooks/final-deliverables/September/Gate 2/Plain_language_analysis_contract.md` |
@@ -123,28 +123,28 @@ The analysis is exploratory and does not determine individual claim reserves or 
 
 ## Verification
 
-- [ ] Final notebook runs successfully from a fresh kernel.
-- [ ] All 14 continuous predictors are included in the inventory.
-- [ ] Every predictor has a histogram and boxplot.
-- [ ] All 56 target-correlation coefficients are generated.
-- [ ] Quantile-bin counts and boundaries match the saved evidence.
-- [ ] Every observed bin has the required support and target statistics.
-- [ ] Support and mean/median loss plots are generated for all 14 predictors.
-- [ ] Annotated Pearson heatmap and strongest-pairs table are generated.
-- [ ] No continuous predictors were removed based solely on correlations.
-- [ ] Generated evidence and derived-field definitions are consistent with the data dictionary.
-- [ ] Independent review completed.
+- [x] Final notebook runs successfully from a fresh kernel.
+- [x] All 14 continuous predictors are included in the inventory.
+- [x] Every predictor has a histogram and boxplot.
+- [x] All 56 target-correlation coefficients are generated.
+- [x] Quantile-bin counts and boundaries match the saved evidence.
+- [x] Every observed bin has the required support and target statistics.
+- [x] Support and mean/median loss plots are generated for all 14 predictors.
+- [x] Annotated Pearson heatmap and strongest-pairs table are generated.
+- [x] No continuous predictors were removed based solely on correlations.
+- [x] Generated evidence and derived-field definitions are consistent with the data dictionary.
+- [x] Independent review completed.
 
-**Reviewer:** Pending
+**Reviewer:** Ragib Nehal
 
-**Review date:** Pending
+**Review date:** 2026-09-23
 
-**Artifact version / commit:** Pending
+**Artifact version:** Notebook SHA-256 `dfd2d8d959e60ff9109ddb1e45715852b3398f3db9da35f4c37f7f5f219a1cc1`
 
-**Review notes:** Pending
+**Review notes:** Approved. The notebook was rerun from a fresh kernel in an isolated sandbox using the authoritative source file (SHA-256 `74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03`). All nine code cells completed without errors, all notebook validation messages passed, and the regenerated bundle contained the expected 37 manifest entries and 38 total files. Structural, numerical, manifest-integrity, bin-coverage, and visual checks passed. The regenerated CSV and JSON content matched the published evidence semantically, with maximum floating-point drift of `1.36e-12`. File hashes were not byte-identical because the published bundle used Windows, Python 3.12.8, and Matplotlib 3.9.2, while the sandbox used macOS, Python 3.14.7, and Matplotlib 3.11.2; observed differences were limited to line endings, insignificant floating-point serialization, and plot rendering. All 29 figures displayed the same analytical content and were readable. No original notebook or published artifact was modified during review.
 
 ## Completion
 
 The continuous-analysis notebook and generated evidence cover the required methods in Issue #17.
 
-The work is ready for independent review. Once the final notebook, evidence, and report have been reviewed and merged, the issue checklist can be completed and Issue #17 can be closed.
+The independent review is complete and approved. Once this reviewed report is merged, Issue #17 can be closed.
