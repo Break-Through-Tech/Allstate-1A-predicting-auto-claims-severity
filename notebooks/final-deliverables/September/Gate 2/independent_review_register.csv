@@ -1,0 +1,6 @@
+issue,artifact,artifact_path,artifact_sha256,author,independent_reviewer,review_date,review_decision,fresh_run_verified,disagreements,limitations,review_notes
+#10,target_analysis,notebooks/final-deliverables/September/Gate 2/target_analysis.ipynb,18b2b4fc9926a41be137abf1f5329c8f867db3f82610a4f02907995d6b95d54f,Mia Chavez / Junaid Pathan,Liam Stapley,,pending,pending,,,
+#15,data_dictionary,notebooks/final-deliverables/September/Gate 2/data_dictionary.csv,ff63a03ace0bee921a17b9535ca1e55cde62d8b7b987f6c51de540972fbefa32,Liam Stapley,,,pending,pending,,,
+#16,categorical_analysis,notebooks/final-deliverables/September/Gate 2/categorical_analysis_method.ipynb,98ac02eb9c2fb13e36bb06e9439ae92ff9416931de79d0208f9f7203c9b79289,@ezixuan27 / @jonathandeng7,Liam Stapley,,pending,pending,,,
+#17,continuous_analysis,notebooks/liam-stapley/continuous_analysis.ipynb,dfd2d8d959e60ff9109ddb1e45715852b3398f3db9da35f4c37f7f5f219a1cc1,Liam Stapley / Ragib Nehal,,,pending,pending,,,
+#11,findings_register,notebooks/final-deliverables/September/Gate 2/findings_register.csv,ad503980844e6ead8b27204a845fa538cfc36804ccf00750e3ecebf8a2ae8b82,Allstate 1A team,,,pending,not applicable,,,
