@@ -1,0 +1,29 @@
+category,check,observed,expected,status
+source identity,source file size,70025339,70025339,pass
+source identity,source SHA-256,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,pass
+source schema,row count,188318,188318,pass
+source schema,column count,132,132,pass
+source schema,ordered header,True,True,pass
+feature roles,identifier,1,1,pass
+feature roles,categorical_predictor,116,116,pass
+feature roles,continuous_predictor,14,14,pass
+feature roles,regression_target,1,1,pass
+feature roles,one-to-one column coverage,True,True,pass
+profile reproduction,profile row count,132,132,pass
+profile reproduction,ordered profile columns,True,True,pass
+profile reproduction,exact frozen profile match,True,True,pass
+dataset integrity,identifier row count,188318,188318,pass
+dataset integrity,identifier missing count,0,0,pass
+dataset integrity,identifier unique count,188318,188318,pass
+dataset integrity,repeated identifier count,0,0,pass
+dataset integrity,total missing cells,0,0,pass
+dataset integrity,fully duplicated rows,0,0,pass
+blocking resolution,source identity,True,True,pass
+blocking resolution,source schema,True,True,pass
+blocking resolution,feature roles,True,True,pass
+blocking resolution,frozen profile reproduction,True,True,pass
+blocking resolution,identifier and dataset integrity,True,True,pass
+blocking resolution,numeric ranges,True,True,pass
+blocking resolution,distribution summaries,True,True,pass
+blocking resolution,continuous target relationships,True,True,pass
+blocking resolution,categorical target relationships,True,True,pass
