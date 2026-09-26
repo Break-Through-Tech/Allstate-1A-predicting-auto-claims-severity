@@ -1,0 +1,17 @@
+column,role,observed_min,observed_max,frozen_min,frozen_max,domain_rule,status
+id,identifier,1.0,587633.0,1.0,587633.0,observed only,pass
+cont1,continuous_predictor,1.6e-05,0.984975,1.6e-05,0.984975,"[0, 1]",pass
+cont2,continuous_predictor,0.001149,0.862654,0.001149,0.862654,"[0, 1]",pass
+cont3,continuous_predictor,0.002634,0.944251,0.002634,0.944251,"[0, 1]",pass
+cont4,continuous_predictor,0.176921,0.954297,0.176921,0.954297,"[0, 1]",pass
+cont5,continuous_predictor,0.281143,0.983674,0.281143,0.983674,"[0, 1]",pass
+cont6,continuous_predictor,0.012683,0.997162,0.012683,0.997162,"[0, 1]",pass
+cont7,continuous_predictor,0.069503,1.0,0.069503,1.0,"[0, 1]",pass
+cont8,continuous_predictor,0.23688,0.9802,0.23688,0.9802,"[0, 1]",pass
+cont9,continuous_predictor,8e-05,0.9954,8e-05,0.9954,"[0, 1]",pass
+cont10,continuous_predictor,0.0,0.99498,0.0,0.99498,"[0, 1]",pass
+cont11,continuous_predictor,0.035321,0.998742,0.035321,0.998742,"[0, 1]",pass
+cont12,continuous_predictor,0.036232,0.998484,0.036232,0.998484,"[0, 1]",pass
+cont13,continuous_predictor,0.000228,0.988494,0.000228,0.988494,"[0, 1]",pass
+cont14,continuous_predictor,0.179722,0.844848,0.179722,0.844848,"[0, 1]",pass
+loss,regression_target,0.67,121012.25,0.67,121012.25,observed only,pass

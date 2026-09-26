@@ -1,0 +1,168 @@
+{
+  "generated_at_utc": "2026-09-26T07:13:18.460201+00:00",
+  "source_path": "data/allstate_claims_data.csv",
+  "source_bytes": 70025339,
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "source_rows": 188318,
+  "source_columns": 132,
+  "python_version": "3.14.2",
+  "pandas_version": "3.0.5",
+  "artifacts": {
+    "source_profile.csv": {
+      "rows": 132,
+      "columns": [
+        "column",
+        "role",
+        "source_dtype",
+        "workflow_dtype",
+        "missing",
+        "n_unique",
+        "min",
+        "max"
+      ],
+      "sha256": "ebe75abdd1e9828d27fa6a4c03c28ceb3fcaccd4f815e9e4233c8774277a7568"
+    },
+    "validation_results.csv": {
+      "rows": 28,
+      "columns": [
+        "category",
+        "check",
+        "observed",
+        "expected",
+        "status"
+      ],
+      "sha256": "5df3bca4c3c29c4e020afaa198b1fa5ab402499fe5947d4d0fea1cbc3c08067b"
+    },
+    "numeric_ranges.csv": {
+      "rows": 16,
+      "columns": [
+        "column",
+        "role",
+        "observed_min",
+        "observed_max",
+        "frozen_min",
+        "frozen_max",
+        "domain_rule",
+        "status"
+      ],
+      "sha256": "cd3d30d799b79b23c2ba21c413f9bd498656a04120b77d9bf6a4649867b2d176"
+    },
+    "categorical_support.csv": {
+      "rows": 116,
+      "columns": [
+        "column",
+        "level_count",
+        "minimum_level_support",
+        "rare_level_count",
+        "rare_row_count",
+        "rare_row_share",
+        "dominant_level",
+        "dominant_level_count",
+        "dominant_level_share",
+        "has_rare_level",
+        "has_dominant_level"
+      ],
+      "sha256": "e70dc68772fcb206068b918dd74de5716e46073116edd230f171e43d7a498d66"
+    },
+    "distribution_summary.csv": {
+      "rows": 15,
+      "columns": [
+        "column",
+        "role",
+        "count",
+        "unique_count",
+        "mean",
+        "std",
+        "min",
+        "q1",
+        "median",
+        "q3",
+        "max",
+        "iqr",
+        "skewness",
+        "strong_skew",
+        "lower_iqr_fence",
+        "upper_iqr_fence",
+        "iqr_outlier_count",
+        "iqr_outlier_share",
+        "summary_finite",
+        "positive_iqr"
+      ],
+      "sha256": "742f07e98384fb82a0a10c19fe43b7e5014631b5bfe45c7cec9ee6dc35bbaacc"
+    },
+    "continuous_target_relationships.csv": {
+      "rows": 14,
+      "columns": [
+        "predictor",
+        "pearson_loss",
+        "spearman_loss",
+        "pearson_log1p_loss",
+        "spearman_log1p_loss",
+        "requested_quantile_bins",
+        "actual_quantile_bins",
+        "assigned_row_count",
+        "unassigned_row_count",
+        "quantile_bins_reduced"
+      ],
+      "sha256": "513512137ee4684447d34b1554b1aae69cf53ecf7ece62763b217c1c0c6c1b89"
+    },
+    "continuous_quantile_bins.csv": {
+      "rows": 137,
+      "columns": [
+        "predictor",
+        "quantile_bin",
+        "row_count",
+        "mean_loss",
+        "median_loss",
+        "mean_log1p_loss",
+        "median_log1p_loss"
+      ],
+      "sha256": "50d8b3c246c7db7f1a04906b2e5494cdc3eb6aa7896f2e460a9e8d59d1cc2ab2"
+    },
+    "categorical_target_relationships.csv": {
+      "rows": 116,
+      "columns": [
+        "predictor",
+        "level_count",
+        "supported_level_count",
+        "rare_level_count",
+        "rare_row_count",
+        "accounted_row_count",
+        "supported_comparison_available",
+        "supported_mean_loss_range",
+        "supported_median_loss_range",
+        "supported_mean_log1p_loss_range"
+      ],
+      "sha256": "eb4ece04160369f47816597804ab5bc77beaad747598d2865a2e5f6e00dc6107"
+    },
+    "categorical_level_target_relationships.csv": {
+      "rows": 1139,
+      "columns": [
+        "predictor",
+        "level",
+        "row_count",
+        "mean_loss",
+        "median_loss",
+        "mean_log1p_loss",
+        "median_log1p_loss",
+        "is_rare"
+      ],
+      "sha256": "b1996e340b64f0618a57996fd417bfad12335924cbaf0a65132ad84faa60bfdf"
+    },
+    "anomaly_register.csv": {
+      "rows": 6,
+      "columns": [
+        "id",
+        "description",
+        "affected_count",
+        "severity",
+        "owner",
+        "status",
+        "evidence",
+        "handling_decision",
+        "likely_impact"
+      ],
+      "sha256": "dde031bacdc6df8bc5d77209e98d6ca7d2de5c1f77abe03ac4690548dcbaae9e"
+    }
+  }
+}
