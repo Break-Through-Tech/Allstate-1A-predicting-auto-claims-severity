@@ -80,17 +80,17 @@ The predictors remain anonymous, so the analysis can describe statistical relati
 
 ## Verification
 
-- [ ] Final notebook runs from a fresh kernel.
+- [x] Final notebook runs from a fresh kernel.
 - [x] Required outputs were generated and checked.
 - [x] Issue requirements have been completed.
 - [x] Calculated outputs match the recorded source and configuration.
-- [ ] Independent review completed, if required.
+- [x] Independent review completed, if required.
 
-**Reviewed by:** Pending
+**Reviewed by:** Liam Stapley
 
-**Review date:** Pending
+**Review date:** 9/27/26
 
-**Review notes:** Awaiting an independent fresh-kernel run and reviewer sign-off.
+**Review notes:** All checks have been completed. Notebook runs on a fresh kernel. Looks good to me!
 
 ## Completion
 
