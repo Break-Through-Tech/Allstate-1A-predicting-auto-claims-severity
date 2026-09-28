@@ -1,0 +1,7 @@
+check,observed_value,status
+categorical_fields,116,PASS
+fields_with_2_levels,72,PASS
+fields_with_at_most_4_levels,88,PASS
+cat116_levels,326,PASS
+cat110_levels,131,PASS
+cat109_levels,84,PASS

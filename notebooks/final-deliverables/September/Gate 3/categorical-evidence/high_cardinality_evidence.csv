@@ -1,0 +1,4 @@
+field,total_levels,supported_levels,rare_levels,rare_rows,denominator,rare_row_share,eda_handling
+cat116,326,103,223,6673,188318,0.03543474335963636,Retain for EDA; summarize adequately supported levels and rare tail separately. No automatic deletion.
+cat110,131,39,92,2916,188318,0.0154844465213097,Retain for EDA; summarize adequately supported levels and rare tail separately. No automatic deletion.
+cat109,84,13,71,2791,188318,0.014820675665629415,Retain for EDA; summarize adequately supported levels and rare tail separately. No automatic deletion.
