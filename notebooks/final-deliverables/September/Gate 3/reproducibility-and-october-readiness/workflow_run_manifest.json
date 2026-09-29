@@ -1,0 +1,22 @@
+{
+  "workflow_run_id": "G3-20260929T042604Z-5ece32b7",
+  "run_started_utc": "2026-09-29T04:26:04.444440+00:00",
+  "git_branch": "main",
+  "git_commit": "5ece32b745e57335eafc4dc95181475f551e17f0",
+  "working_tree_clean_at_start": true,
+  "source_path": "data/allstate_claims_data.csv",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "source_size_bytes": 70025339,
+  "runtime_context": "VS Code / local Jupyter",
+  "python_version": "3.12.8",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "artifact_bundle_ids": {
+    "Gate 1": "GATE1-3c893f22f14ced97",
+    "Gate 2": "GATE2-8e529ab389c94c3d",
+    "Gate 3": "GATE3-c4860456366d67d3"
+  },
+  "rounding_decimals": 6,
+  "rare_level_threshold": 188,
+  "requested_continuous_bins": 10,
+  "target_histogram_bins": 100
+}

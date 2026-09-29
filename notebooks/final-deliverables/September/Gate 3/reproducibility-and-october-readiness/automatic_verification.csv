@@ -1,0 +1,12 @@
+requirement,status
+clean_committed_start,PASS
+all_workflow_notebooks_ran,PASS
+all_artifact_comparisons_pass,PASS
+source_hash_recorded,PASS
+git_revision_recorded,PASS
+dependencies_recorded,PASS
+random_seed_inventory_recorded,PASS
+analysis_settings_recorded,PASS
+workflow_run_id_recorded,PASS
+artifact_bundle_ids_recorded,PASS
+october_plan_created,PASS
