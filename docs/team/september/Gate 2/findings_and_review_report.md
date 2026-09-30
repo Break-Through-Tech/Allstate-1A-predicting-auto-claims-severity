@@ -1,5 +1,13 @@
 # Issue #11: Findings and Review Method
 
+> **Superseded for current findings:** The canonical register has been expanded
+> to version 2.0.0 by Issue #21. Use the Gate 3
+> [`findings_and_limitations_report.md`](../Gate%203/findings_and_limitations_report.md)
+> and `notebooks/ragib-nehal/ragib_nehal_task_13.ipynb` for the current synthesis
+> and recalculation workflow. Independent recalculation by a named non-author is
+> still pending, so Issue #21 is ready for independent review rather than
+> complete.
+
 **Status:** Documentation in progress; Gate 2 approval pending  
 **Owner:** Allstate 1A team  
 **Documentation coordinator:** Liam Stapley  
