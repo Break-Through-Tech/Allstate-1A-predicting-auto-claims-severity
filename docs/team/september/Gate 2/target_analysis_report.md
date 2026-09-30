@@ -74,6 +74,13 @@ The raw histogram does not display the uppermost 1% of observed losses. This res
 
 The log-transformed visualization is not a replacement for original-dollar reporting or MAE evaluation.
 
+High-loss claims are relatively sparse and can strongly affect the mean, skewness,
+correlations, and future model errors. Their size alone is not evidence that they
+are invalid or should be removed.
+
+This single labeled dataset cannot establish whether the loss distribution will
+remain stable for future claims.
+
 The target analysis does not establish model performance or determine individual reserves.
 
 ## Verification

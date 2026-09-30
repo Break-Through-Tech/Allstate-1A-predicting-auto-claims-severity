@@ -1,0 +1,7 @@
+notebook,status,executed_copy
+notebooks/final-deliverables/September/Gate 1/task_1.ipynb,PASS,notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/rerun_notebooks/Gate_1__task_1.ipynb
+notebooks/final-deliverables/September/Gate 1/task_2.ipynb,PASS,notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/rerun_notebooks/Gate_1__task_2.ipynb
+notebooks/final-deliverables/September/Gate 2/target_analysis.ipynb,PASS,notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/rerun_notebooks/Gate_2__target_analysis.ipynb
+notebooks/final-deliverables/September/Gate 2/categorical_analysis_method.ipynb,PASS,notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/rerun_notebooks/Gate_2__categorical_analysis_method.ipynb
+notebooks/final-deliverables/September/Gate 2/continuous_analysis.ipynb,PASS,notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/rerun_notebooks/Gate_2__continuous_analysis.ipynb
+notebooks/final-deliverables/September/Gate 2/findings_and_review.ipynb,PASS,notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/rerun_notebooks/Gate_2__findings_and_review.ipynb

@@ -1,9 +1,9 @@
 # Issue #16: Categorical-Analysis Method
 
-**Status:** Reviewed; methodology confirmation pending  
+**Status:** Reviewed 
 **Authors:** @ezixuan27 and @jonathandeng7  
-**Reviewer:** Liam Stapley  
-**Review result:** Numerical requirements covered; plotting approach and rare-level threshold require confirmation
+**Reviewer:** Liam Stapley, Jonathan Deng
+**Review result:** Numerical requirements covered
 
 ## Scope
 
@@ -15,7 +15,7 @@ The analysis uses raw `loss` for numerical target summaries and `log1p(loss)` fo
 
 | Artifact | Location |
 |---|---|
-| Categorical-analysis notebook | `notebooks/final-deliverables/September/Gate 2/task_6.ipynb` |
+| Categorical-analysis notebook | `notebooks/final-deliverables/September/Gate 2/categorical_analysis_method.ipynb` |
 | Categorical inventory | `notebooks/final-deliverables/September/Gate 2/categorical_inventory.csv` |
 | Level-to-target tables | `notebooks/final-deliverables/September/Gate 2/categorical_level_target_tables.csv` |
 | Data dictionary | `notebooks/final-deliverables/September/Gate 2/data_dictionary.csv` |
@@ -89,7 +89,7 @@ The generated plots provide selected readable views, while the numerical tables 
 
 ## Independent Review
 
-Liam reviewed `task_6.ipynb` against Issue #16.
+Liam reviewed `categorical_analysis_method.ipynb` against Issue #16.
 
 The notebook covers the required categorical inventory, level-to-target statistics, recorded rare-level rule, and categorical encoding restriction.
 
@@ -120,12 +120,12 @@ The rare-level threshold is an EDA display and support rule, not an automatic da
 - [x] High-cardinality plots and separate rare-tail summaries are present for selected fields.
 - [x] Original categorical labels are preserved.
 - [x] No arbitrary numeric encoding is used for categorical associations.
-- [ ] Team confirms the rare-level threshold.
-- [ ] Team confirms the plotting coverage or expands it.
-- [ ] Final committed notebook and generated CSVs are verified.
+- [x] Team confirms the rare-level threshold.
+- [x] Team confirms the plotting coverage or expands it.
+- [x] Final committed notebook and generated CSVs are verified.
 
-**Reviewer:** Liam Stapley  
-**Final review date:** Pending  
+**Reviewer:** Liam Stapley, Jonathan Deng  
+**Final review date:** 9/28/26 
 **Artifact commit:** Pending
 
 ## Completion

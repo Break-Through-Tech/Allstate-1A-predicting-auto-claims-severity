@@ -1,0 +1,9 @@
+{
+  "target_histogram_bins": 100,
+  "categorical_rare_level_threshold": 188,
+  "continuous_requested_quantile_bins": 10,
+  "numeric_comparison_rounding_decimals": 6,
+  "numeric_absolute_tolerance": 1e-06,
+  "categorical_support_rule": "support < 188 is rare for EDA display/support; not an automatic removal rule",
+  "continuous_bin_rule": "request 10 quantile bins; record fewer bins when repeated values prevent distinct boundaries"
+}
