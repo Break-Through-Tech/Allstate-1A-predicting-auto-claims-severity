@@ -1,0 +1,2 @@
+workflow_run_id,git_commit,gate1_bundle_id,gate2_bundle_id,gate3_bundle_id,runtime_context,team_approval,approved_by,approval_date,independent_reviewer,review_date,disagreements,limitations,review_notes
+G3-20260929T042604Z-5ece32b7,5ece32b745e57335eafc4dc95181475f551e17f0,GATE1-3c893f22f14ced97,GATE2-8e529ab389c94c3d,GATE3-c4860456366d67d3,VS Code / local Jupyter,pending,,,,,,,"Clean reproducibility run completed successfully in VS Code/local Jupyter. Final team approval and independent Gate 4 review are pending."

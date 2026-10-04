@@ -85,6 +85,15 @@ any specific real-world quantity.
 - Investigating the strongly correlated continuous predictors for their
   effect on linear-model interpretation.
 
+## Important limitations
+
+- The meanings of the `cat*` and `cont*` predictors remain anonymous. Statistical patterns cannot be assigned confirmed business meanings without additional documentation.
+- Marginal association does not establish causation or complete predictive usefulness. A weak individual correlation does not mean a feature will be unhelpful in a multivariable or nonlinear model.
+- Large claims are relatively sparse but economically meaningful. They should not be removed simply because they are uncommon.
+- The project contains one labeled claims dataset. September analysis cannot establish whether these distributions or relationships will remain stable in future periods or external populations.
+- `log1p(loss)` and other transformed target views are visualization tools, not model-evaluation results. Model evaluation remains on original-unit `loss`.
+- September EDA does not establish production readiness, authorize automated claim decisions, or determine an appropriate reserve for an individual claim.
+
 ## What the evidence does not justify
 
 - It does not establish causation for any observed association.
