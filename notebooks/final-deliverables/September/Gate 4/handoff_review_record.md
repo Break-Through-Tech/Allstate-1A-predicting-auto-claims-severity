@@ -20,7 +20,7 @@ Each team member should review the final September handoff and record approval o
 - [ ] @ragib-nehal
 - [ ] @jonathandeng7
 - [ ] @junaid-pathan
-- [ ] @liamstapley
+- [x] @liamstapley
 
 ## Dissent / requested changes
 
