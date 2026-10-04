@@ -1,0 +1,88 @@
+{
+  "issue": "#21",
+  "status": "ready for independent review",
+  "workflow_run_id": "issue21-74037cb248a1-v2",
+  "base_git_revision": "b5564fb9af5d05056764ed282bd1e47ab5cdb312",
+  "working_tree_dirty": true,
+  "notebook": {
+    "path": "notebooks/ragib-nehal/ragib_nehal_task_13.ipynb",
+    "executable_source_sha256": "87a00fb867bb526aa75be8b1bd12996f33bf9300f1fd6887663b91a9289170e3"
+  },
+  "source": {
+    "path": "data/allstate_claims_data.csv",
+    "sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+    "rows": 188318,
+    "columns": 132
+  },
+  "runtime": {
+    "python": "3.14.2",
+    "pandas": "3.0.5",
+    "numpy": "2.5.1"
+  },
+  "configuration": {
+    "random_seed": null,
+    "requested_quantile_bins": 10,
+    "quantile_duplicate_rule": "drop",
+    "categorical_support_threshold_rows": 188
+  },
+  "review": {
+    "reviewer": "pending",
+    "review_date": "pending",
+    "review_decision": "pending"
+  },
+  "artifacts": [
+    {
+      "path": "notebooks/final-deliverables/September/Gate 2/findings_register.csv",
+      "sha256": "84e9efd41d58c8d11d691e064ada82b80ce687ead2ae78bdb1077bb1f7f5a0ff",
+      "row_count": 7,
+      "columns": [
+        "finding_id",
+        "title",
+        "evidence_artifact",
+        "evidence_path",
+        "evidence_locator",
+        "evidence_sha256",
+        "observed_result",
+        "interpretation",
+        "evidence_status",
+        "limitation_or_alternative_explanation",
+        "possible_october_implication",
+        "owner",
+        "reviewer",
+        "review_decision",
+        "review_notes",
+        "register_version"
+      ]
+    },
+    {
+      "path": "notebooks/final-deliverables/September/Gate 3/findings-and-limitations/finding_evidence_checks.csv",
+      "sha256": "53c20e7c2302ec447be3cfed7e33dc293cfc19b5662964327b4f3972fcac946b",
+      "row_count": 7,
+      "columns": [
+        "finding_id",
+        "headline",
+        "evidence_path",
+        "validation",
+        "comparison_count",
+        "max_absolute_difference",
+        "status"
+      ]
+    },
+    {
+      "path": "notebooks/final-deliverables/September/Gate 3/findings-and-limitations/independent_recalculation_results.csv",
+      "sha256": "52827480f708cea6aa18dd4b094422c29f2d72ed8eeea0582e90ff05a7fefc9d",
+      "row_count": 58,
+      "columns": [
+        "review_area",
+        "metric",
+        "expected_value",
+        "recalculated_value",
+        "tolerance",
+        "comparison_status",
+        "reviewer",
+        "review_date",
+        "review_decision"
+      ]
+    }
+  ]
+}

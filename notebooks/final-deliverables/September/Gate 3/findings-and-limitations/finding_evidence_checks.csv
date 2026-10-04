@@ -1,0 +1,8 @@
+finding_id,headline,evidence_path,validation,comparison_count,max_absolute_difference,status
+F-001,target tail,notebooks/final-deliverables/September/Gate 3/target_distribution_evidence/target_distribution_summary.csv,five target-summary fields compared with published evidence,5,0.0,PASS
+F-002,source cleanliness,notebooks/final-deliverables/September/Gate 3/data_quality_evidence/source_profile.csv,"schema, missingness, identifier uniqueness, and field count compared",4,0.0,PASS
+F-003,categorical cardinality mixture,notebooks/final-deliverables/September/Gate 3/categorical-evidence/categorical_evidence_summary.csv,six inventory checks compared with published evidence,6,0.0,PASS
+F-004,weak marginal correlations,notebooks/final-deliverables/September/Gate 3/data_quality_evidence/continuous_target_relationships.csv,Pearson and Spearman values for all 14 predictors compared,28,9.71445146547012e-17,PASS
+F-005,binned target patterns,notebooks/final-deliverables/September/Gate 3/data_quality_evidence/continuous_quantile_bins.csv,"row count, mean loss, and median loss for all 137 bins compared",411,4.547473508864641e-13,PASS
+F-006,continuous redundancy,notebooks/final-deliverables/September/Gate 2/continuous_analysis_evidence/predictor_pairs.csv,both correlation fields for all 91 unique pairs compared,182,2.220446049250313e-16,PASS
+F-007,interpretation and validation limits,Challenge-Project-Overview.md,anonymous-field statement and single supplied CSV confirmed,2,0.0,PASS
