@@ -25,9 +25,13 @@ Primary evaluation metric: MAE on untouched validation data in original `loss` u
 
 ## Split / cross-validation design
 
-October will create the train/validation split before fitting any learned preprocessing.
+The proposed October starting design is a reproducible 80/20 train/validation
+split with random seed 42. The split must be created before fitting any learned
+preprocessing.
 
-The exact split proportion or cross-validation design and random seed must be selected and recorded before model fitting begins.
+This is a documented starting proposal, not a completed experiment or an
+irreversible choice. Any change to cross-validation or the seed must be approved
+and recorded before model fitting, with the reason for the deviation.
 
 Validation data must remain untouched during preprocessing and model fitting.
 
@@ -86,10 +90,11 @@ Candidate regression families may include:
 
 - mean-constant baseline;
 - median-constant comparator;
-- linear regression;
+- generalized linear model (GLM), including ordinary linear regression as an
+  initial specification;
 - regularized linear regression;
 - random forest regression;
-- gradient boosting regression;
+- gradient boosting machine (GBM) regression;
 - XGBoost regression;
 - CatBoost regression; and
 - neural-network regression if time and evidence justify it.
