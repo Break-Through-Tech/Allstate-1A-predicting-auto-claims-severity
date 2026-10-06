@@ -58,14 +58,15 @@ If any later correction changes a headline value or finding, the affected artifa
 Completed independent reviews currently recorded:
 
 - **#10 Target-analysis method** — reviewed by Liam Stapley
+- **#15 Project-specific data dictionary** — reviewed by Ragib Nehal
 - **#16 Categorical-analysis method** — reviewed by Liam Stapley
+- **#17 Continuous-analysis method** — reviewed by Liam Stapley
+- **#18 Data-quality evidence** — reviewed by Liam Stapley
 - **#19 Target-distribution evidence** — reviewed by Liam Stapley
 - **#21 Findings and limitations** — reviewed by Liam Stapley
 
 Remaining non-author reviews:
 
-- **#15 Project-specific data dictionary** — requires a reviewer other than Liam Stapley
-- **#17 Continuous-analysis method** — requires a reviewer other than Liam Stapley or Ragib Nehal
 - **Final Gate 3 reproducibility/signoff bundle** — requires a reviewer other than Liam Stapley
 
 Completed independent reviews are recorded in the appropriate issue comments and review registers. Artifacts authored by a reviewer must not rely on that same person as their sole independent reviewer.

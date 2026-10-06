@@ -1,7 +1,10 @@
 ipykernel
+nbformat
+nbclient
 numpy
 pandas
 matplotlib
 seaborn
 scipy
 jinja2
+ydata-profiling

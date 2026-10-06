@@ -1,10 +1,10 @@
 # Issue #18: Data-Quality Evidence
 
-**Status:** Ready for review
+**Status:** Approved
 
 **Owner(s):** Ragib Nehal
 
-**Reviewer:** Pending
+**Reviewer:** Liam Stapley
 
 **Artifact version:** 1.0
 
@@ -94,6 +94,4 @@ The predictors remain anonymous, so the analysis can describe statistical relati
 
 ## Completion
 
-The Issue #18 analysis and evidence-generation work is complete and ready for review. The frozen Gate 1 profile is reproduced, every requested exact result is reported, the continuing need for level-support, distribution, and target-relationship analysis is demonstrated, all blocking checks pass, and every identified non-blocking finding is preserved with its required ownership and handling metadata.
-
-Independent fresh-kernel execution and reviewer approval remain outstanding before the artifact bundle can be marked approved.
+The Issue #18 analysis and evidence-generation work is complete and approved. The frozen Gate 1 profile is reproduced, every requested exact result is reported, the continuing need for level-support, distribution, and target-relationship analysis is demonstrated, all blocking checks pass, and every identified non-blocking finding is preserved with its required ownership and handling metadata. Liam Stapley completed the fresh-kernel review on 2026-09-27.

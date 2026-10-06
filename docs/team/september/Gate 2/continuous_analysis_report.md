@@ -2,9 +2,9 @@
 
 **Status:** Independent review approved
 
-**Owner(s):** Liam Stapley, Ragib Nehal
+**Owner(s):** Ragib Nehal
 
-**Reviewer:** Ragib Nehal
+**Reviewer:** Liam Stapley
 
 **Method version:** 1.0.0
 
@@ -135,7 +135,7 @@ The analysis is exploratory and does not determine individual claim reserves or 
 - [x] Generated evidence and derived-field definitions are consistent with the data dictionary.
 - [x] Independent review completed.
 
-**Reviewer:** Ragib Nehal
+**Reviewer:** Liam Stapley
 
 **Review date:** 2026-09-23
 

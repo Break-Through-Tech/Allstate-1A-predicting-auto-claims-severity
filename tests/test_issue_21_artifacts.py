@@ -70,7 +70,8 @@ class Issue21ArtifactTests(unittest.TestCase):
         ])
         self.assertEqual({row["register_version"] for row in rows}, {"2.0.0"})
         self.assertEqual(len({row["finding_id"] for row in rows}), 7)
-        self.assertTrue(all(row["review_decision"] == "pending" for row in rows))
+        self.assertTrue(all(row["review_decision"] == "approved" for row in rows))
+        self.assertTrue(all(row["reviewer"] == "Liam Stapley" for row in rows))
         self.assertTrue(all(row["evidence_status"] in {
             "directly observed", "consistent with a pattern", "hypothesis", "inconclusive"
         } for row in rows))
@@ -123,7 +124,9 @@ class Issue21ArtifactTests(unittest.TestCase):
                 tolerances.get(metric, 0),
             )
             self.assertEqual(results.loc[metric, "comparison_status"], "PASS")
-            self.assertEqual(results.loc[metric, "review_decision"], "pending")
+            self.assertEqual(results.loc[metric, "reviewer"], "Liam Stapley")
+            self.assertEqual(results.loc[metric, "review_date"], "2026-10-04")
+            self.assertEqual(results.loc[metric, "review_decision"], "approved")
 
     def test_headline_rankings_are_recalculated_from_source(self):
         data = pd.read_csv(SOURCE_PATH)
@@ -154,7 +157,12 @@ class Issue21ArtifactTests(unittest.TestCase):
     def test_manifest_hashes_and_review_register_are_current(self):
         manifest = json.loads((EVIDENCE_DIR / "run_manifest.json").read_text())
         self.assertEqual(manifest["issue"], "#21")
-        self.assertEqual(manifest["status"], "ready for independent review")
+        self.assertEqual(manifest["status"], "approved")
+        self.assertEqual(manifest["review"], {
+            "reviewer": "Liam Stapley",
+            "review_date": "2026-10-04",
+            "review_decision": "approved",
+        })
         self.assertEqual(manifest["source"]["sha256"], sha256(SOURCE_PATH))
         self.assertEqual(
             manifest["notebook"]["executable_source_sha256"],
@@ -173,9 +181,9 @@ class Issue21ArtifactTests(unittest.TestCase):
         self.assertEqual(len(issue21), 1)
         row = issue21.iloc[0]
         self.assertEqual(row["author"], "Ragib Nehal")
-        self.assertEqual(row["independent_reviewer"], "")
-        self.assertEqual(row["review_decision"], "pending")
-        self.assertEqual(row["fresh_run_verified"], "pending")
+        self.assertEqual(row["independent_reviewer"], "Liam Stapley")
+        self.assertEqual(row["review_decision"], "approved")
+        self.assertEqual(row["fresh_run_verified"], "reviewed")
 
     # checks that the finding checks are derived from evidence comparisons and have expected properties 
     def test_finding_checks_are_derived_from_evidence_comparisons(self):

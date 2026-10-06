@@ -1,8 +1,8 @@
 # Issue #21: Findings and Limitations
 
-**Status:** Ready for independent review  
-**Owner:** Ragib Nehal  
-**Independent reviewer:** Pending  
+**Status:** Approved
+**Owner:** Ragib Nehal
+**Independent reviewer:** Liam Stapley
 **Register version:** 2.0.0
 
 ## Scope
@@ -123,18 +123,15 @@ performance.
 - [x] Seven stable findings link to current evidence paths and SHA-256 hashes.
 - [x] Automated comparisons support at least five headline findings.
 - [x] Modeling tests are separated from directly observed results.
-- [ ] A named non-author has independently rerun and inspected the calculations.
-- [ ] Reviewer, date, decision, disagreements, and limitations are recorded.
+- [x] A named non-author has independently rerun and inspected the calculations.
+- [x] Reviewer, date, decision, disagreements, and limitations are recorded.
 
-## Independent recalculation pending
+## Independent review
 
-The automated reference comparisons pass, but they are not independent human
-review. A named reviewer who did not author this EDA must run the notebook from
-a fresh kernel and inspect the target summary, representative categorical
-cardinalities including `cat116`, continuous-to-target correlations, the three
-strongest continuous-feature pairs, and at least five headline finding checks.
-
-Until that review is recorded in the notebook outputs, this report, and the
-independent-review register, Issue #21 is **Ready for independent review** and
-must not be marked complete.
-
+Liam Stapley completed the independent review on 2026-10-04. The review covered
+the target summary, representative categorical cardinalities, continuous-to-
+target correlations, the strongest continuous-feature pairs, headline finding
+checks, limitations, and the canonical register. No blocking disagreement was
+recorded. The review metadata and the current semantically equivalent F-006
+evidence hash are synchronized across the register, evidence bundle, and review
+records.
