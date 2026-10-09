@@ -17,10 +17,22 @@ Each team member should review the final September handoff and record approval o
 
 - [ ] @MiaChavez1
 - [ ] @ezixuan27
-- [ ] @ragib-nehal
+- [x] @ragib-nehal
 - [ ] @jonathandeng7
 - [ ] @junaid-pathan
 - [x] @liamstapley
+
+## Outstanding independent-review assignments
+
+The latest Issue #22 handoff comment requests these final non-author reviews:
+
+- **@MiaChavez1** — Issue #17 continuous-analysis artifacts.
+- **@junaid-pathan** — Issue #15 data dictionary and final Gate 4 record update.
+- **@jonathandeng7** — final Gate 3 reproducibility/signoff bundle.
+
+These assignments remain pending until the named reviewer records a decision on
+GitHub. Earlier reviews remain part of the audit history but do not replace the
+latest assigned review.
 
 ## Dissent / requested changes
 
@@ -35,7 +47,8 @@ None recorded yet.
 
 ## Work explicitly deferred to October
 
-- Train/validation or cross-validation design and random seed selection.
+- Execute the proposed 80/20 train/validation split with seed 42, or record an
+  approved design/seed change before model fitting.
 - Feature selection.
 - Categorical encoding and rare/unseen-level experiments.
 - Model fitting and hyperparameter tuning.
@@ -52,8 +65,9 @@ See `retrospective.md`.
 
 ## Approval statement
 
-A team member may approve asynchronously by commenting:
+A team member may approve asynchronously by using the complete statement
+requested in the Issue #22 handoff comment:
 
-> Reviewed and approved the final September handoff. I have no additional blockers or requested changes.
+> Reviewed and approved the final September handoff and frozen methods. I have no additional blockers or requested changes, and I accept the documented VS Code/Jupyter reproducibility runtime deviation.
 
 Any disagreement or requested change should be recorded in Issue #22 before the handoff is considered approved.

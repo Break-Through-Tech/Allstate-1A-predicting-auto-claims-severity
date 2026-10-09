@@ -2,7 +2,12 @@
 
 ## Split and evaluation
 
-1. Create the train/validation split before fitting any preprocessing.
+The proposed October starting design is an 80/20 train/validation split with
+random seed 42. This is a proposal rather than a completed experiment. Any
+approved change to the split design or seed must be recorded before model
+fitting.
+
+1. Create the proposed split before fitting any preprocessing.
 2. Keep validation data untouched during preprocessing and model selection.
 3. Fit all learned preprocessing steps using training data only.
 4. Evaluate final validation predictions using MAE in original `loss` units.

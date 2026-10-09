@@ -67,7 +67,9 @@ Completed independent reviews currently recorded:
 
 Remaining non-author reviews:
 
-- **Final Gate 3 reproducibility/signoff bundle** — requires a reviewer other than Liam Stapley
+- **#17 Continuous-analysis method** — final assigned review by Mia Chavez
+- **#15 Project-specific data dictionary** — final assigned review by Junaid Pathan
+- **Final Gate 3 reproducibility/signoff bundle** — assigned to Jonathan Deng
 
 Completed independent reviews are recorded in the appropriate issue comments and review registers. Artifacts authored by a reviewer must not rely on that same person as their sole independent reviewer.
 

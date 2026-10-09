@@ -14,8 +14,9 @@ Confirms the final September Artifact Bundle referenced by Issue #13 and records
 | Categorical cardinality, support, and target-effect evidence | `notebooks/final-deliverables/September/Gate 3/categorical-evidence/` | present |
 | Continuous distribution, binned-target, and correlation evidence | `notebooks/final-deliverables/September/Gate 2/continuous_analysis_evidence/`, `notebooks/final-deliverables/September/Gate 3/continuous-evidence/` | present |
 | Findings register | `notebooks/final-deliverables/September/Gate 2/findings_register.csv` | present; seven evidence-linked findings recorded |
-| Independent-review records | `notebooks/final-deliverables/September/Gate 2/independent_review_register.csv`, `method_approvals.csv` | present; final review and approval status recorded |
+| Independent-review records | `notebooks/final-deliverables/September/Gate 2/independent_review_register.csv`, `method_approvals.csv` | present; final assigned reviews and team approval remain pending |
 | Instructions for reproducing the September workflow | `notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/workflow_run_manifest.json`, `reproducibility_and_october_readiness.ipynb` | present |
+| Frozen reproducibility checks | `notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/reproducibility_checks.csv` | present; canonical passing receipt |
 
 ## Frozen reproducibility receipt
 
@@ -30,8 +31,10 @@ Confirms the final September Artifact Bundle referenced by Issue #13 and records
 ## Gate 4 completion status
 
 - Final findings register contains seven evidence-linked findings.
-- Independent review records contain completed reviews and any remaining reviewer assignments.
-- Method approvals are recorded through the final asynchronous handoff.
+- Independent review records contain completed reviews and identify the remaining
+  reviewer assignments from Issue #22.
+- Existing method approvals are recorded; final asynchronous team approval of
+  the frozen methods remains pending.
 - The final reproducibility run and Artifact Bundle IDs are recorded.
 - No unresolved blocking source, schema, target, or EDA defect is known.
 
