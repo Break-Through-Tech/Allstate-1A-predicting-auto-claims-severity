@@ -25,11 +25,22 @@
   "primary_metric": "MAE",
   "metric_units": "original loss units",
   "split": {
-    "status": "pending",
-    "method": null,
-    "random_seed": null,
-    "train_claims": null,
-    "validation_claims": null
+    "status": "frozen",
+    "version": "OCT-SPLIT-001",
+    "method": "Stratified random split on 20 quantile bins of loss: 15% test drawn first, then 15/85 of the remainder as validation; 5-fold StratifiedKFold inside train",
+    "random_seed": 42,
+    "train_claims": 131822,
+    "validation_claims": 28248,
+    "test_claims": 28248,
+    "cv_folds": 5,
+    "manifest_path": "notebooks/final-deliverables/October/Gate 1/partition_manifest.csv",
+    "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+    "decision_record": "docs/team/october/Gate 1/split_design_decision.md",
+    "library_versions": {
+      "scikit-learn": "1.6.1",
+      "pandas": "2.3.3",
+      "numpy": "2.0.2"
+    }
   },
   "required_baselines": [
     "training_mean_constant",
