@@ -10,7 +10,7 @@
 | OCT-004 | Address collinearity in linear models | Experiment | TBD | Compare retaining correlated predictors, regularization, feature reduction, or other model-specific approaches. No automatic removal. |
 | OCT-005 | Establish constant baselines | Required | TBD | Fit mean and median baselines on training data only. |
 | OCT-006 | Inspect high-loss performance | Experiment | TBD | Supplement overall MAE with severity-stratified error analysis. |
-| OCT-007 | Test feature-selection strategies | Experiment | TBD | Compare feature sets using the same claim-level train/validation split. Model-specific preprocessing is allowed. |
+| OCT-007 | Test feature-selection strategies | Experiment | TBD | Compare feature sets using the same claim-level train/validation/test split. Model-specific preprocessing is allowed. |
 | OCT-008 | Preserve interpretability/business usefulness | Required consideration | Team | Consider interpretability alongside predictive performance. |
 | OCT-009 | Assess future distribution stability | Deferred | Team | Requires future-period or external data not currently available. |
 
@@ -41,7 +41,7 @@ Retaining correlated predictors is acceptable for predictive modeling unless val
 
 ### Fair model comparison
 
-All comparable models should use the same claim-level train/validation split.
+All comparable models should use the same claim-level train/validation/test split.
 
 Different models may use different preprocessing or feature-engineering approaches.
 
@@ -60,8 +60,8 @@ New modeling decisions should create a new October modeling-data/model version r
 ## October approval
 
 - [ ] Modeling contract reviewed
-- [ ] September recommendations triaged
-- [ ] Challenge Advisor guidance recorded
-- [ ] Carryover limitations documented
-- [ ] Initial modeling-data version approved
+- [x] September recommendations triaged
+- [x] Challenge Advisor guidance recorded
+- [x] Carryover limitations documented
+- [x] Initial modeling-data version approved
 - [ ] GitHub Projects board updated

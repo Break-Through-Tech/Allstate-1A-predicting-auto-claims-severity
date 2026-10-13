@@ -25,11 +25,19 @@
   "primary_metric": "MAE",
   "metric_units": "original loss units",
   "split": {
-    "status": "pending",
-    "method": null,
-    "random_seed": null,
-    "train_claims": null,
-    "validation_claims": null
+    "status": "frozen",
+    "method": "two-stage sklearn.model_selection.train_test_split",
+    "procedure": "Split 70% training and 30% remainder, then divide the remainder equally into validation and test partitions.",
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "shuffle": true,
+    "stratification": null,
+    "random_seed": 42,
+    "random_seed_usage": "Use random seed 42 for both split stages.",
+    "train_claims": 131822,
+    "validation_claims": 28248,
+    "test_claims": 28248
   },
   "required_baselines": [
     "training_mean_constant",
