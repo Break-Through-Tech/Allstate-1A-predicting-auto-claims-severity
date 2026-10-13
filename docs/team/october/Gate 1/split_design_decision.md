@@ -1,6 +1,6 @@
 # October Split Design Decision
 
-**Status:** Draft - proposed values pending review by Liam Stapley and the team
+**Status:** Manifest generated (`OCT-SPLIT-001`, see `split_design_report.md`) - proposed thresholds and stopping rule pending review by Liam Stapley and the team
 **Owners:** Ella Zou, Liam Stapley
 **Milestone:** Modeling / October - Gate 1, Evaluation and split design
 **Modeling-data version:** `OCT-MD-001` (see `modeling_contract.md`)
