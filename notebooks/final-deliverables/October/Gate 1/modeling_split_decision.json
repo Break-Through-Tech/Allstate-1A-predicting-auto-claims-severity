@@ -1,0 +1,36 @@
+{
+  "decision_id": "OCT-SPLIT-001",
+  "status": "approved",
+  "modeling_data_version": "OCT-MD-001",
+  "eligible_claims": 188318,
+  "split_method": "random permutation of unique claim ids",
+  "proportions": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "actual_counts": {
+    "train": 131823,
+    "validation": 28248,
+    "test": 28247
+  },
+  "random_seed": 2026,
+  "cross_validation": "not used for initial comparison; any future folds stay inside training",
+  "validation_use": "select predeclared models using validation MAE in original loss units",
+  "test_use": "reserved for one November final evaluation; test targets and scores remain unused during October",
+  "initial_comparison": [
+    "training-mean constant baseline",
+    "training-median constant comparator",
+    "one linear regression model",
+    "one nonlinear/tree-based model"
+  ],
+  "stopping_rule": "stop the initial comparison after all predeclared candidates are evaluated; do not seed-hunt",
+  "split_change_rule": "change only for documented ID, overlap, omission, or partition-integrity failure",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "artifacts": {
+    "partition_manifest": "notebooks/final-deliverables/October/Gate 1/partition_manifest.csv",
+    "target_summary": "notebooks/final-deliverables/October/Gate 1/partition_target_summary.csv",
+    "high_loss_support": "notebooks/final-deliverables/October/Gate 1/partition_high_loss_support.csv",
+    "categorical_coverage": "notebooks/final-deliverables/October/Gate 1/partition_categorical_coverage.csv"
+  }
+}

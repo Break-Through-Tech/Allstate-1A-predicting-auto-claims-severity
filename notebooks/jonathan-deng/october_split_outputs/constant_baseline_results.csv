@@ -1,0 +1,3 @@
+model,training_value,validation_mae_original_units,validation_rows
+training_mean_constant,3038.626059109564,1949.857659588146,28248
+training_median_constant,2115.56,1796.557249362787,28248
