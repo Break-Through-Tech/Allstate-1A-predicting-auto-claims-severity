@@ -1,0 +1,46 @@
+{
+  "modeling_data_version": "OCT-MD-001",
+  "source_path": "data/allstate_claims_data.csv",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "source_rows": 188318,
+  "source_columns": 132,
+  "eligible_rows": 188318,
+  "target": "loss",
+  "identifier_columns": [
+    "id"
+  ],
+  "excluded_from_features": [
+    "id",
+    "loss"
+  ],
+  "categorical_features": {
+    "prefix": "cat",
+    "count": 116
+  },
+  "continuous_features": {
+    "prefix": "cont",
+    "count": 14
+  },
+  "feature_count": 130,
+  "primary_metric": "MAE",
+  "metric_units": "original loss units",
+  "split": {
+    "status": "pending",
+    "method": null,
+    "random_seed": null,
+    "train_claims": null,
+    "validation_claims": null
+  },
+  "required_baselines": [
+    "training_mean_constant",
+    "training_median_constant"
+  ],
+  "preprocessing_rule": "Fit all learned preprocessing on training data only.",
+  "september_eda_exposure_disclosed": true,
+  "september_workflow_run_id": "G3-20260929T042604Z-5ece32b7",
+  "september_artifact_bundle_ids": {
+    "gate1": "GATE1-3c893f22f14ced97",
+    "gate2": "GATE2-8e529ab389c94c3d",
+    "gate3": "GATE3-c4860456366d67d3"
+  }
+}
