@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -15,6 +16,7 @@ CHECKS_PATH = GATE1 / "split_checks.csv"
 TARGET_SUMMARY_PATH = GATE1 / "partition_target_summary.csv"
 HIGH_LOSS_PATH = GATE1 / "high_loss_support.csv"
 CATEGORICAL_COVERAGE_PATH = GATE1 / "categorical_level_coverage.csv"
+NOTEBOOK_PATH = GATE1 / "split_design.ipynb"
 
 EXPECTED_COUNTS = {"train": 131822, "validation": 28248, "test": 28248}
 
@@ -81,7 +83,7 @@ class SplitChecksTests(unittest.TestCase):
     def test_all_integrity_checks_pass(self):
         integrity = self.checks[self.checks["kind"] == "integrity"]
         self.assertEqual(
-            sorted(integrity["check_id"]), ["I1", "I2", "I3", "I4", "I5", "I6"]
+            sorted(integrity["check_id"]), ["I1", "I2", "I3", "I4", "I5", "I6", "I7"]
         )
         self.assertTrue((integrity["status"] == "pass").all(), integrity.to_string())
 
@@ -89,6 +91,43 @@ class SplitChecksTests(unittest.TestCase):
         distribution = self.checks[self.checks["kind"] == "distribution"]
         self.assertEqual(sorted(distribution["check_id"]), ["D1", "D2", "D3"])
         self.assertTrue(distribution["status"].isin(["pass", "flag"]).all())
+
+
+class FrozenSplitGuardTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))
+        cls.code_cells = [
+            "".join(cell["source"]) for cell in notebook["cells"] if cell["cell_type"] == "code"
+        ]
+        cls.split = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))["split"]
+
+    def cell_index(self, text):
+        return next(i for i, source in enumerate(self.code_cells) if text in source)
+
+    # a rerun on different library versions must not silently re-freeze a new split
+    def test_notebook_pins_the_registered_manifest_hash(self):
+        pin = 'FROZEN_MANIFEST_SHA256 = "{}"'.format(self.split["manifest_sha256"])
+        self.assertTrue(any(pin in source for source in self.code_cells))
+
+    def test_manifest_is_written_only_after_integrity_assert(self):
+        write_cell = self.cell_index("MANIFEST_PATH.write_bytes")
+        assert_cell = self.cell_index("assert not failed")
+        self.assertGreaterEqual(write_cell, assert_cell)
+        source = self.code_cells[write_cell]
+        if write_cell == assert_cell:
+            self.assertLess(source.index("assert not failed"), source.index("MANIFEST_PATH.write_bytes"))
+
+    def test_colab_users_can_set_root_by_hand(self):
+        self.assertTrue(any("ROOT_OVERRIDE = None" in source for source in self.code_cells))
+
+    # git line-ending conversion on Windows checkouts would change the manifest hash
+    def test_manifest_is_exempt_from_line_ending_conversion(self):
+        result = subprocess.run(
+            ["git", "check-attr", "text", "--", str(MANIFEST_PATH.relative_to(ROOT))],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        )
+        self.assertTrue(result.stdout.strip().endswith("text: unset"), result.stdout)
 
 
 # test-partition targets stay unexamined in October, so no table may report them

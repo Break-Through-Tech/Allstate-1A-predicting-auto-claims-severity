@@ -22,7 +22,7 @@ is fit. The design, its reasons, and the partition-use and stopping rules are in
 | Split design decision | `docs/team/october/Gate 1/split_design_decision.md` | Design, reasons, change rules, partition-use rules, stopping rule |
 | Split notebook | `notebooks/final-deliverables/October/Gate 1/split_design.ipynb` | Builds the manifest and all evidence below |
 | Partition manifest | `notebooks/final-deliverables/October/Gate 1/partition_manifest.csv` | `id, partition, cv_fold` for all 188,318 claims |
-| Split checks | `notebooks/final-deliverables/October/Gate 1/split_checks.csv` | Integrity checks I1-I6 and distribution checks D1-D3 |
+| Split checks | `notebooks/final-deliverables/October/Gate 1/split_checks.csv` | Integrity checks I1-I7 and distribution checks D1-D3 |
 | Target summary | `notebooks/final-deliverables/October/Gate 1/partition_target_summary.csv` | `loss` summary for train and validation |
 | High-loss support | `notebooks/final-deliverables/October/Gate 1/high_loss_support.csv` | Claims above training p90 and p99 |
 | Categorical coverage | `notebooks/final-deliverables/October/Gate 1/categorical_level_coverage.csv` | Validation levels unseen in train, per `cat` field |
@@ -35,8 +35,11 @@ is fit. The design, its reasons, and the partition-use and stopping rules are in
 - Stratified random split on 20 quantile bins of `loss`, seed 42: 15% test drawn
   first, then 15/85 of the remainder as validation. 5-fold `StratifiedKFold`
   inside train on the same bins and seed.
-- scikit-learn 1.6.1, pandas 2.3.3, numpy 2.0.2 (recorded in the run manifest;
-  a different scikit-learn version may draw a different split from the same seed).
+- scikit-learn 1.6.1 (pinned in `requirements.txt`), pandas 2.3.3, numpy 2.0.2,
+  recorded in the run manifest. A different scikit-learn version may draw a
+  different split from the same seed; check I7 catches that.
+- `.gitattributes` exempts the manifest from line-ending conversion so Windows
+  checkouts keep the same hash.
 
 ## Results
 
@@ -48,10 +51,12 @@ is fit. The design, its reasons, and the partition-use and stopping rules are in
 | validation | 28,248 | - |
 | test | 28,248 | - |
 
-**Integrity checks:** I1-I6 all pass. The source hash matches, ids are unique,
+**Integrity checks:** I1-I7 all pass. The source hash matches, ids are unique,
 every claim is in exactly one partition, counts match 70/15/15 within 1 claim,
-folds cover train only, and regenerating with seed 42 reproduces an identical
-manifest.
+folds cover train only, regenerating with seed 42 reproduces an identical
+manifest, and that manifest matches the frozen hash. A rerun that produces a
+different manifest stops before writing any file (checked by running the
+notebook with a wrong frozen hash).
 
 **Train vs. validation `loss`:**
 
@@ -91,7 +96,7 @@ representation.
 ## Verification
 
 - [x] Final notebook runs from a fresh kernel (executed headlessly with nbclient).
-- [x] Required outputs were generated and checked (`tests/test_october_split_artifacts.py`, 12 tests pass).
+- [x] Required outputs were generated and checked (`tests/test_october_split_artifacts.py`, 16 tests pass).
 - [ ] Issue requirements have been completed (pending team approval of proposed thresholds and stopping rule).
 - [x] Calculated outputs match the recorded source and configuration.
 - [ ] Independent review completed, if required.

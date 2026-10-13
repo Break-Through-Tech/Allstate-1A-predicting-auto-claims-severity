@@ -12,12 +12,31 @@
 |---|---|
 | Partitions | train 70% / validation 15% / test 15% |
 | Eligible rows | all 188,318 rows of `data/allstate_claims_data.csv` |
-| Random seed | `42` (inherited from the September October evaluation plan; fixed before any split was drawn) |
+| Random seed | `42` (inherited from the October evaluation plan drafted in September; fixed before any split was drawn) |
 | Stratification | 20 quantile bins of `loss` (5% each) |
 | Construction | two steps: draw 15% test; then draw validation as 15/85 of the remainder |
 | Cross-validation | 5 folds inside train only, stratified on the same `loss` bins |
 | Manifest | `notebooks/final-deliverables/October/Gate 1/partition_manifest.csv` with columns `id, partition, cv_fold` |
 | Registration | manifest SHA-256, method, seed, and partition counts recorded in the `split` block of `modeling_run_manifest.json` |
+
+## Change from the September proposal
+
+The October evaluation plan drafted in September
+(`notebooks/final-deliverables/September/Gate 3/reproducibility-and-october-readiness/october_evaluation_plan.md`)
+proposed an 80/20 train/validation split with seed 42 and asked that any change
+be recorded before model fitting. This decision keeps the seed and changes the
+design to 70/15/15 with a reserved test partition, recorded here before any
+model was fit.
+
+The September plan also said validation stays untouched during model selection
+and that choices are not tuned against final validation results. That role now
+belongs to the reserved test partition, which October never fits, tunes, or
+scores on. Hyperparameter tuning happens only inside train through the 5 CV
+folds. Validation becomes a limited comparison set: candidates are compared on
+it, every comparison is logged, and the stopping rule below caps how often it
+is consulted. This matches the October milestone's guidance to treat validation
+"as a limited comparison and selection check, not as training data" and the
+modeling contract's rule that validation is excluded from fitting and tuning.
 
 ## Why this design
 
@@ -49,6 +68,9 @@ Each check records pass or fail:
 5. Every train row has exactly one `cv_fold` in 0-4; fold sizes differ by at
    most 1% of train; validation and test rows have an empty `cv_fold`.
 6. Regenerating the split with seed 42 reproduces an identical manifest hash.
+7. The rebuilt manifest matches the frozen `OCT-SPLIT-001` hash. On a mismatch
+   (for example, a different scikit-learn version) the notebook stops before
+   writing any file.
 
 ## Pre-comparison checks (train vs. validation only)
 
