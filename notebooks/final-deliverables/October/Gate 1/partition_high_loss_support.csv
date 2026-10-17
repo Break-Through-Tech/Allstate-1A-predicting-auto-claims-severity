@@ -1,3 +1,0 @@
-partition,threshold_source,threshold,rows_at_or_above_threshold
-train,training 95th percentile,8533.163999999999,6592
-validation,training 95th percentile,8533.163999999999,1338

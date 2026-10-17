@@ -1,0 +1,11 @@
+check_id,kind,description,expected,observed,status
+I1,integrity,Source SHA-256 matches the modeling contract,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,pass
+I2,integrity,id is unique in the source,188318,188318,pass
+I3,integrity,Every source id appears exactly once in the manifest,188318 unique ids matching source,"188318 rows, 188318 unique, same set: True",pass
+I4,integrity,Partition counts match 70/15/15 within 1 claim,"{'train': 131822.6, 'validation': 28247.7, 'test': 28247.7}","{'train': 131822, 'test': 28248, 'validation': 28248}",pass
+I5,integrity,"Each train claim has one fold 0-4, fold sizes within 1% of train, no folds outside train",folds 0-4 on train only,"{0: 26365, 1: 26365, 2: 26364, 3: 26364, 4: 26364}",pass
+I6,integrity,Regenerating with seed 42 gives an identical manifest,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,pass
+I7,integrity,Rebuilt manifest matches the frozen OCT-SPLIT-001 hash,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,pass
+D1,distribution,Validation mean loss within 2% of train (proposed threshold),<= 2%,0.19%,pass
+D2,distribution,Validation median loss within 2% of train (proposed threshold),<= 2%,0.01%,pass
+D3,distribution,Validation p99 loss within 5% of train (proposed threshold),<= 5%,0.38%,pass
