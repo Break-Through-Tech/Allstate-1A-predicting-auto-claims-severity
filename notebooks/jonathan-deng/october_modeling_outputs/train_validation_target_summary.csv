@@ -1,0 +1,3 @@
+partition,claim_count,mean_loss_original_units,median_loss_original_units,p90_loss_original_units,p99_loss_original_units
+train,131822,3038.840254813309,2115.39,6401.738,14024.143299999967
+validation,28248,3033.031763310677,2115.62,6403.809,13971.179199999957
