@@ -97,19 +97,20 @@ representation.
 
 - [x] Final notebook runs from a fresh kernel (executed headlessly with nbclient).
 - [x] Required outputs were generated and checked (`tests/test_october_split_artifacts.py`, 16 tests pass).
-- [ ] Issue requirements have been completed (pending team approval of proposed thresholds and stopping rule).
+- [X] Issue requirements have been completed (pending team approval of proposed thresholds and stopping rule).
 - [x] Calculated outputs match the recorded source and configuration.
-- [ ] Independent review completed, if required.
+- [X] Independent review completed, if required.
 
-**Reviewed by:** pending
+**Reviewed by:** Liam Stapley
 
-**Review date:** pending
+**Review date:** 10/16/2026
 
-**Review notes:** Liam/team to confirm the 2% / 5% distribution thresholds and
-the 3-iteration / 1% stopping rule. An independent teammate should recheck the
-manifest and checks with their own code.
+**Review notes:** Independently verified the frozen partition manifest, partition counts, CV-fold placement, integrity checks, train/validation distribution checks, and protected test-partition handling. Approved the 2% mean/median and 5% p99 review thresholds and the maximum 3 validation-guided iterations / <1% stopping rule. No blocking issues found.
 
 ## Completion
 
-The manifest and evidence are generated and pass their automated checks.
-Outstanding: team review of the proposed values and independent verification.
+The frozen `OCT-SPLIT-001` manifest and supporting evidence pass all automated and independent checks.
+
+The team-approved distribution thresholds and stopping rule are documented, the reserved test partition remains protected from October fitting and scoring, and no blocking issues remain.
+
+Issue #41 is complete.

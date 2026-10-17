@@ -4,7 +4,7 @@
 
 Estimate one claim's final paid amount (`loss`) from the anonymous claim fields available in the modeling dataset.
 
-This should not be described as an up-front claim estimator until the Challenge Advisor confirms which predictor fields are available when a claim is first filed.
+The Challenge Advisor confirmed that the supplied predictor fields may be assumed to be available at prediction time for October modeling. This challenge assumption does not establish that the same fields would be available at first notice of loss in a production setting.
 
 ## September handoff
 
@@ -74,19 +74,19 @@ Every reported model score must identify:
 
 ## Evaluation design
 
-The same claim-level train/validation split must be used across comparable models.
+The same claim-level train/validation/test split must be used across comparable models.
 
 Different model families may use different preprocessing, encoding, feature-selection, or feature-engineering approaches when appropriate.
 
 The comparison remains fair as long as:
 
-- the same claims are assigned to the same training and validation partitions;
+- the same claims are assigned to the same training, validation, and test partitions;
 - learned preprocessing is fit using training data only;
-- validation data remains excluded from fitting/tuning;
+- validation data remains excluded from fitting, and test data remains excluded from fitting, tuning, and model selection;
 - each preprocessing/model configuration is documented; and
-- all reported scores use the same defined evaluation metric and validation claims.
+- comparable model-selection scores use the same defined evaluation metric and validation claims, while final test results use the untouched test claims.
 
-The exact split design and random seed must be frozen before the first comparable model run and recorded in `notebooks/final-deliverables/October/modeling_run_manifest.json`.
+The exact split design and random seed must be frozen before the first comparable model run and recorded in `notebooks/final-deliverables/October/Gate 1/modeling_run_manifest.json`.
 
 ## Required baselines
 
@@ -181,7 +181,7 @@ The team may experiment with these approaches. Retaining correlated predictors i
 
 ### Fair model comparison
 
-Comparable models should use the same claim-level train/test or train/validation split.
+Comparable models should use the same claim-level train/validation/test split.
 
 Model-specific preprocessing and feature engineering may differ as long as the underlying claims in each partition remain the same.
 
@@ -191,12 +191,12 @@ The Challenge Advisor previously confirmed that the supplied predictor fields ca
 
 For October modeling, all approved predictor fields may therefore be treated as eligible inputs from an availability/leakage-timing perspective.
 
-This does not remove the need for standard train/validation leakage controls during preprocessing and model fitting.
+This does not remove the need for standard train/validation/test leakage controls during preprocessing, model fitting, tuning, and final evaluation.
 
 ## Modeling limitations
 
 - Predictor meanings remain anonymous.
 - September EDA used the full labeled dataset before the October split.
-- A later internal validation partition is held out from modeling, but it is not wholly unseen in the same sense as an external dataset because September EDA informed modeling hypotheses.
+- Later internal validation and test partitions are held out from model fitting, but they are not wholly unseen in the same sense as external data because September EDA informed modeling hypotheses.
 - The supplied dataset cannot establish future-period distribution stability.
 - Model performance will not by itself establish production readiness or determine an individual claim reserve.

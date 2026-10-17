@@ -1,0 +1,30 @@
+{
+  "decision_id": "OCT-SPLIT-PROVISIONAL-JD-001",
+  "status": "provisional_personal_review",
+  "modeling_data_version": "OCT-MD-001",
+  "eligible_claims": 188318,
+  "split_method": "random permutation of unique claim ids",
+  "proportions": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "actual_counts": {
+    "test": 28247,
+    "train": 131823,
+    "validation": 28248
+  },
+  "random_seed": 2026,
+  "cross_validation": "not used initially; future folds must remain inside training",
+  "validation_use": "compare predeclared models using MAE in original loss units",
+  "test_use": "reserved for one November final evaluation; test targets remain unused in October",
+  "initial_comparison": [
+    "training-mean constant baseline",
+    "training-median constant comparator",
+    "one linear regression model",
+    "one nonlinear/tree-based model"
+  ],
+  "stopping_rule": "stop after all predeclared candidates are evaluated; do not seed-hunt",
+  "split_change_rule": "change only for documented technical or integrity failure",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03"
+}

@@ -12,9 +12,9 @@ The work freezes the initial modeling dataset, target, eligible features, evalua
 
 ## Deliverables
 
-- `docs/team/october/modeling_contract.md`
-- `docs/team/october/october_decision_record.md`
-- `notebooks/final-deliverables/October/modeling_run_manifest.json`
+- `docs/team/october/Gate 1/modeling_contract.md`
+- `docs/team/october/Gate 1/october_decision_record.md`
+- `notebooks/final-deliverables/October/Gate 1/modeling_run_manifest.json`
 - Updated GitHub Projects board
 
 ## September handoff
@@ -35,15 +35,16 @@ The October contract incorporates the following guidance from Nancy Zhang:
 
 - Because the predictor definitions are anonymous, extensive feature engineering is not recommended as a primary focus. The team should prioritize encoding, feature selection, and model choice.
 - Highly correlated continuous predictors may be retained, removed, combined, regularized, or handled through dimensionality reduction depending on the model and validation results.
-- Fair model comparison does not require identical preprocessing across models. Comparable models should use the same claim-level train/validation split.
+- Fair model comparison does not require identical preprocessing across models. Comparable models should use the same claim-level train/validation/test split.
 
 ## Evaluation boundaries
 
 - The claim-level split is frozen before comparable modeling begins.
 - Learned preprocessing is fitted on training data only.
+- Validation data is used for model comparison and tuning; the test partition remains untouched until final evaluation.
 - Mean- and median-constant baselines are required.
 - MAE remains the primary comparison metric in original loss units.
-- Model-specific preprocessing is allowed as long as validation leakage is avoided and the same claims remain in the same partitions.
+- Model-specific preprocessing is allowed as long as validation and test leakage are avoided and the same claims remain in the same partitions.
 
 ## September EDA exposure
 

@@ -1,6 +1,6 @@
 # October Split Design Decision
 
-**Status:** Manifest generated (`OCT-SPLIT-001`, see `split_design_report.md`) - proposed thresholds and stopping rule pending review by Liam Stapley and the team
+**Status:** Approved (`OCT-SPLIT-001`)
 **Owners:** Ella Zou, Liam Stapley
 **Milestone:** Modeling / October - Gate 1, Evaluation and split design
 **Modeling-data version:** `OCT-MD-001` (see `modeling_contract.md`)
@@ -138,9 +138,9 @@ previous result. Record every iteration's result and the stop decision.
 - A random internal split is evidence about this supplied file only. It says
   nothing about future-period stability (OCT-009).
 
-## Open items for review
+## Review status
 
-- [ ] Liam/team review of the 2% / 5% distribution thresholds
-- [ ] Liam/team review of the 3-iteration cap and 1% stopping criterion
-- [ ] Independent teammate check of the manifest and integrity checks
-- [ ] Team approval recorded
+- [x] 2% / 5% distribution thresholds reviewed and approved
+- [x] 3-iteration cap and 1% stopping criterion reviewed and approved
+- [x] Independent manifest and integrity verification completed
+- [x] Final split design approved
