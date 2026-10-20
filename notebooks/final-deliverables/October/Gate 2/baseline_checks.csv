@@ -1,0 +1,8 @@
+check_id,description,expected,observed,status
+B1,Source SHA-256 matches the Gate 1 run manifest,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,pass
+B2,Partition manifest SHA-256 matches frozen OCT-SPLIT-001,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,pass
+B3,Train and validation claim counts match the frozen split,"{'train': 131822, 'validation': 28248}","{'train': 131822, 'validation': 28248}",pass
+B4,Exactly one prediction per validation claim,28248 unique validation ids,"28248 rows, 28248 unique, same set: True",pass
+B5,Each prediction is joined to its own claim's loss by id,scored ids and losses equal validation ids and losses,aligned: True,pass
+B6,All predictions are finite,True,True,pass
+B7,MAE matches an independent plain-Python calculation,"{'training_mean_constant': 1962.918654, 'training_median_constant': 1805.086353}","{'training_mean_constant': 1962.918654, 'training_median_constant': 1805.086353}",pass

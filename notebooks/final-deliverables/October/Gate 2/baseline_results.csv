@@ -1,0 +1,3 @@
+model,role,fitted_on,evaluated_on,fitted_constant,train_claims,validation_claims,validation_mae
+training_mean_constant,required baseline,train,validation,3038.8402548133095,131822,28248,1962.918654312225
+training_median_constant,comparator,train,validation,2115.39,131822,28248,1805.0863526621356
