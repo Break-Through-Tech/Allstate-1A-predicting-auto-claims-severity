@@ -74,6 +74,14 @@ class PartitionManifestTests(unittest.TestCase):
         for library in ["scikit-learn", "pandas", "numpy"]:
             self.assertIn(library, self.split["library_versions"])
 
+    # a provisional split (seed 2026) was once copied here under this version; keep one record
+    def test_split_version_is_registered_only_in_run_manifest(self):
+        records = sorted(
+            path.name for path in GATE1.glob("*.json")
+            if self.split["version"] in path.read_text(encoding="utf-8")
+        )
+        self.assertEqual(records, [RUN_MANIFEST_PATH.name])
+
 
 class SplitChecksTests(unittest.TestCase):
     @classmethod

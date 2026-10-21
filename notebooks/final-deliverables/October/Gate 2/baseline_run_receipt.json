@@ -1,0 +1,53 @@
+{
+  "run_id": "OCT-BASE-20261021T040859Z-1d82244e",
+  "run_utc": "2026-10-21T04:08:59+00:00",
+  "modeling_data_version": "OCT-MD-001",
+  "split_version": "OCT-SPLIT-001",
+  "manifest_path": "notebooks\\final-deliverables\\October\\Gate 1\\partition_manifest.csv",
+  "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+  "source_path": "data\\allstate_claims_data.csv",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "notebook_path": "notebooks\\final-deliverables\\October\\Gate 2\\constant_baselines.ipynb",
+  "notebook_code_sha256": "921dff4e504a60ab134c02d288e6a69b6f9a7686df60e1fdeb1ff927bdf5d4ee",
+  "git_commit": "1812832dcdffde7b450872e27c90e9201c9ac0ef",
+  "git_dirty": true,
+  "library_versions": {
+    "python": "3.12.8",
+    "scikit-learn": "1.5.1",
+    "pandas": "2.2.2",
+    "numpy": "1.26.4"
+  },
+  "metric": "MAE",
+  "metric_units": "original loss units",
+  "results": [
+    {
+      "model": "training_mean_constant",
+      "role": "required baseline",
+      "fitted_on": "train",
+      "evaluated_on": "validation",
+      "fitted_constant": 3038.8402548133095,
+      "train_claims": 131822,
+      "validation_claims": 28248,
+      "validation_mae": 1962.918654312225
+    },
+    {
+      "model": "training_median_constant",
+      "role": "comparator",
+      "fitted_on": "train",
+      "evaluated_on": "validation",
+      "fitted_constant": 2115.39,
+      "train_claims": 131822,
+      "validation_claims": 28248,
+      "validation_mae": 1805.0863526621356
+    }
+  ],
+  "checks": {
+    "B1": "pass",
+    "B2": "pass",
+    "B3": "pass",
+    "B4": "pass",
+    "B5": "pass",
+    "B6": "pass",
+    "B7": "pass"
+  }
+}
