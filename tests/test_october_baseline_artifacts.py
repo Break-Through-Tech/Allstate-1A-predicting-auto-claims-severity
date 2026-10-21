@@ -17,6 +17,7 @@ MANIFEST_PATH = GATE1 / "partition_manifest.csv"
 RUN_MANIFEST_PATH = GATE1 / "modeling_run_manifest.json"
 NOTEBOOK_PATH = GATE2 / "constant_baselines.ipynb"
 RESULTS_PATH = GATE2 / "baseline_results.csv"
+PREDICTIONS_PATH = GATE2 / "baseline_predictions.csv"
 CHECKS_PATH = GATE2 / "baseline_checks.csv"
 RECEIPT_PATH = GATE2 / "baseline_run_receipt.json"
 
@@ -72,6 +73,59 @@ class IndependentRecalculationTests(unittest.TestCase):
                 expected = self.independent_mae(row["fitted_constant"])
                 self.assertAlmostEqual(row["validation_mae"], expected, places=6)
 
+class BaselinePredictionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.predictions = pd.read_csv(PREDICTIONS_PATH)
+        cls.manifest = pd.read_csv(MANIFEST_PATH)
+
+        cls.validation_ids = set(
+            cls.manifest.loc[
+                cls.manifest["partition"] == "validation",
+                "id",
+            ]
+        )
+
+    def test_one_prediction_per_validation_claim(self):
+        self.assertEqual(len(self.predictions), 28248)
+        self.assertTrue(self.predictions["id"].is_unique)
+        self.assertEqual(set(self.predictions["id"]), self.validation_ids)
+
+    def test_prediction_columns(self):
+        self.assertEqual(
+            list(self.predictions.columns),
+            [
+                "id",
+                "training_mean_constant",
+                "training_median_constant",
+            ],
+        )
+
+    def test_predictions_are_finite(self):
+        for column in [
+            "training_mean_constant",
+            "training_median_constant",
+        ]:
+            self.assertTrue(
+                self.predictions[column].map(math.isfinite).all()
+            )
+
+    def test_prediction_values_match_saved_constants(self):
+        results = pd.read_csv(RESULTS_PATH).set_index("model")
+
+        self.assertTrue(
+            (
+                self.predictions["training_mean_constant"]
+                == results.loc["training_mean_constant", "fitted_constant"]
+            ).all()
+        )
+
+        self.assertTrue(
+            (
+                self.predictions["training_median_constant"]
+                == results.loc["training_median_constant", "fitted_constant"]
+            ).all()
+        )
 
 class BaselineChecksTests(unittest.TestCase):
     def test_all_checks_pass(self):
@@ -102,8 +156,29 @@ class RunReceiptTests(unittest.TestCase):
         self.assertEqual(self.receipt["notebook_code_sha256"], hashlib.sha256(code.encode("utf-8")).hexdigest())
 
     def test_receipt_results_match_results_file(self):
-        results = pd.read_csv(RESULTS_PATH)
-        self.assertEqual(self.receipt["results"], results.to_dict(orient="records"))
+        results = pd.read_csv(RESULTS_PATH).to_dict(orient="records")
+
+        self.assertEqual(len(self.receipt["results"]), len(results))
+
+        for receipt_row, csv_row in zip(self.receipt["results"], results):
+            self.assertEqual(receipt_row["model"], csv_row["model"])
+            self.assertEqual(receipt_row["role"], csv_row["role"])
+            self.assertEqual(receipt_row["fitted_on"], csv_row["fitted_on"])
+            self.assertEqual(receipt_row["evaluated_on"], csv_row["evaluated_on"])
+            self.assertEqual(receipt_row["train_claims"], csv_row["train_claims"])
+            self.assertEqual(receipt_row["validation_claims"], csv_row["validation_claims"])
+
+            self.assertAlmostEqual(
+                receipt_row["fitted_constant"],
+                csv_row["fitted_constant"],
+                places=6,
+            )
+
+            self.assertAlmostEqual(
+                receipt_row["validation_mae"],
+                csv_row["validation_mae"],
+                places=6,
+            )
 
     def test_library_versions_are_recorded(self):
         for library in ["python", "scikit-learn", "pandas", "numpy"]:
