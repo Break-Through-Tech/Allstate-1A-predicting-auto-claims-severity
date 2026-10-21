@@ -1,0 +1,15 @@
+model,partition,tail_definition,threshold_original_loss_units,support_claims,mae_original_loss_units,overall_validation_mae_original_loss_units
+training_mean_constant,validation,loss >= training p90,6401.738,2826,6608.170647522147,1962.9186543122248
+training_mean_constant,validation,loss >= training p99,14024.143299999967,279,15170.37598174583,1962.9186543122248
+training_median_constant,validation,loss >= training p90,6401.738,2826,7531.620902335457,1805.0863526621354
+training_median_constant,validation,loss >= training p99,14024.143299999967,279,16093.826236559138,1805.0863526621354
+multivariate_linear_regression,validation,loss >= training p90,6401.738,2826,3446.8822090441026,1290.1266730719435
+multivariate_linear_regression,validation,loss >= training p99,14024.143299999967,279,9492.500507043813,1290.1266730719435
+ridge_one_hot,validation,loss >= training p90,6401.738,2826,3435.7164314813695,1288.8146948991848
+ridge_one_hot,validation,loss >= training p99,14024.143299999967,279,9502.228267346638,1288.8146948991848
+hist_gradient_boosting_v1,validation,loss >= training p90,6401.738,2826,3315.60917337639,1187.5328568848252
+hist_gradient_boosting_v1,validation,loss >= training p99,14024.143299999967,279,7767.737309688936,1187.5328568848252
+hist_gradient_boosting_v2,validation,loss >= training p90,6401.738,2826,3399.3461567826184,1209.21854085244
+hist_gradient_boosting_v2,validation,loss >= training p99,14024.143299999967,279,8184.985498470472,1209.21854085244
+random_forest,validation,loss >= training p90,6401.738,2826,3429.0092830369913,1223.5079291362442
+random_forest,validation,loss >= training p99,14024.143299999967,279,8263.84400167198,1223.5079291362442
