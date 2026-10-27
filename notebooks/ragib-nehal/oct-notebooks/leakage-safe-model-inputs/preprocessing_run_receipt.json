@@ -1,6 +1,6 @@
 {
-  "run_id": "OCT-PREP-20261027T071318Z-6125bc85",
-  "run_utc": "2026-10-27T07:13:18+00:00",
+  "run_id": "OCT-PREP-20261027T071543Z-0ed75827",
+  "run_utc": "2026-10-27T07:15:43+00:00",
   "modeling_data_version": "OCT-MD-001",
   "split_version": "OCT-SPLIT-001",
   "source_path": "data/allstate_claims_data.csv",
@@ -9,8 +9,8 @@
   "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
   "preprocessing_code_path": "notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/preprocessing_pipeline.py",
   "preprocessing_code_sha256": "51e01ca4678da8c4a855ec1e30d32cfe9dc40e49ae41f46d758b6909de305cac",
-  "git_commit": "6125bc857763a64b3a10b6c2fe6fcbe86270504d",
-  "git_dirty_before_run": true,
+  "git_commit": "0ed75827177ddcb176b7c9c81d9fc2f3c060e804",
+  "git_dirty_before_run": false,
   "library_versions": {
     "python": "3.12.12",
     "scikit-learn": "1.6.1",
