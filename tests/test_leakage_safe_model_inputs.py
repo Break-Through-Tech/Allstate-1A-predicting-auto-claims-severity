@@ -10,6 +10,10 @@ from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
+from scipy import sparse
+from sklearn.base import BaseEstimator, RegressorMixin
+from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.model_selection import cross_validate
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +27,18 @@ ISSUE_DIR = (
 sys.path.insert(0, str(ISSUE_DIR))
 
 import preprocessing_pipeline as pipeline  # noqa: E402
+
+
+class RecordingRegressor(RegressorMixin, BaseEstimator):
+    fit_sizes = []
+
+    def fit(self, X, y):
+        type(self).fit_sizes.append(len(y))
+        self.constant_ = float(np.mean(y))
+        return self
+
+    def predict(self, X):
+        return np.full(X.shape[0], self.constant_)
 
 
 def _sha256(path: Path) -> str:
@@ -178,6 +194,159 @@ class FrozenDataBoundaryTests(unittest.TestCase):
         split = pipeline.make_predefined_split(folds)
 
         np.testing.assert_array_equal(split.test_fold, [0, 1, 2, 0])
+
+
+class CategoryHandlingTests(unittest.TestCase):
+    def _model_frame(self) -> pd.DataFrame:
+        columns = {
+            "cat1": ["A"] * 132 + ["B"],
+            "cat2": ["X"] * 133,
+            **{column: ["A"] * 133 for column in pipeline.CATEGORICAL_COLUMNS[2:]},
+            **{
+                column: np.arange(133, dtype=float) + index
+                for index, column in enumerate(
+                    pipeline.CONTINUOUS_COLUMNS, start=1
+                )
+            },
+        }
+        frame = pd.DataFrame(columns)
+        frame.loc[0, "cont1"] = np.nan
+        return frame.loc[:, pipeline.FEATURE_COLUMNS]
+
+    def test_rare_grouper_learns_training_counts_only(self):
+        train = np.array([["A"]] * 132 + [["B"]], dtype=object)
+        validation = np.array([["Z"]] * 200, dtype=object)
+        grouper = pipeline.RareCategoryGrouper(min_frequency=132)
+
+        grouper.fit(train)
+        transformed = grouper.transform(validation)
+
+        self.assertEqual(grouper.frequent_values_[0], frozenset({"A"}))
+        self.assertEqual(grouper.rare_values_[0], frozenset({"B"}))
+        self.assertTrue((transformed[:, 0] == pipeline.RARE_VALUE).all())
+
+    def test_rare_grouper_uses_missing_code_without_supported_rare_bucket(self):
+        train = np.array([["A"]] * 132, dtype=object)
+        grouper = pipeline.RareCategoryGrouper(min_frequency=132).fit(train)
+
+        transformed = grouper.transform(np.array([["UNSEEN"]], dtype=object))
+
+        self.assertTrue(np.isnan(transformed[0, 0]))
+
+    def test_ridge_one_hot_uses_approved_rare_and_unseen_behavior(self):
+        train = self._model_frame()
+        preprocessor = pipeline.build_ridge_preprocessor().fit(train)
+        categorical = preprocessor.named_transformers_["categorical"]
+        encoder = categorical.named_steps["encoder"]
+        sample = train.iloc[[132, 132, 0]].copy().reset_index(drop=True)
+        sample.loc[0, "cat1"] = "UNSEEN"
+        sample.loc[2, "cat2"] = "UNSEEN"
+        encoded = categorical.transform(sample[pipeline.CATEGORICAL_COLUMNS]).toarray()
+        cat1_width = len(encoder.categories_[0])
+        cat2_width = len(encoder.categories_[1])
+
+        self.assertEqual(encoder.handle_unknown, "infrequent_if_exist")
+        self.assertEqual(encoder.min_frequency, 132)
+        self.assertTrue(encoder.sparse_output)
+        np.testing.assert_array_equal(
+            encoded[0, :cat1_width], encoded[1, :cat1_width]
+        )
+        self.assertEqual(encoded[2, cat1_width : cat1_width + cat2_width].sum(), 0)
+
+    def test_continuous_imputer_and_scaler_ignore_validation_values(self):
+        train = self._model_frame()
+        preprocessor = pipeline.build_ridge_preprocessor().fit(train)
+        continuous = preprocessor.named_transformers_["continuous"]
+        imputer = continuous.named_steps["imputer"]
+        scaler = continuous.named_steps["scaler"]
+
+        self.assertAlmostEqual(imputer.statistics_[0], 67.5)
+        self.assertAlmostEqual(scaler.mean_[0], 67.5)
+
+        validation = train.iloc[[0]].copy()
+        validation.loc[:, "cont1"] = 1_000_000.0
+        continuous.transform(validation[pipeline.CONTINUOUS_COLUMNS])
+        self.assertAlmostEqual(imputer.statistics_[0], 67.5)
+        self.assertAlmostEqual(scaler.mean_[0], 67.5)
+
+    def test_tree_preprocessor_uses_pooled_and_missing_codes(self):
+        train = self._model_frame()
+        preprocessor = pipeline.build_tree_preprocessor().fit(train)
+        sample = train.iloc[[0, 1]].copy()
+        sample.loc[sample.index[0], "cat1"] = "UNSEEN"
+        sample.loc[sample.index[1], "cat2"] = "UNSEEN"
+
+        transformed = preprocessor.transform(sample)
+        training_transformed = preprocessor.transform(train.iloc[[132]])
+
+        self.assertEqual(transformed[0, 0], training_transformed[0, 0])
+        self.assertTrue(np.isnan(transformed[1, 1]))
+        self.assertEqual(transformed.shape[1], 130)
+
+
+class ModelFamilyPipelineTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.data = pipeline.load_frozen_partitions(REPO_ROOT)
+
+    def test_training_pipeline_refits_preprocessing_inside_each_fold(self):
+        RecordingRegressor.fit_sizes = []
+        X = self.data.X_train.iloc[:15].copy()
+        y = self.data.y_train.iloc[:15].copy()
+        folds = pipeline.make_predefined_split(
+            pd.Series([0] * 5 + [1] * 5 + [2] * 5)
+        )
+        model = pipeline.build_training_pipeline("ridge", RecordingRegressor())
+
+        cross_validate(model, X, y, cv=folds, scoring="neg_mean_absolute_error")
+
+        self.assertEqual(RecordingRegressor.fit_sizes, [10, 10, 10])
+
+    def test_ridge_outputs_aligned_finite_sparse_matrices(self):
+        preprocessor = pipeline.build_ridge_preprocessor().fit(self.data.X_train)
+
+        train_matrix = preprocessor.transform(self.data.X_train)
+        validation_matrix = preprocessor.transform(self.data.X_validation)
+
+        self.assertTrue(sparse.issparse(train_matrix))
+        self.assertEqual(train_matrix.shape[1], validation_matrix.shape[1])
+        self.assertTrue(np.isfinite(train_matrix.data).all())
+        self.assertTrue(np.isfinite(validation_matrix.data).all())
+
+    def test_tree_outputs_exact_mask_cardinality_and_nonfinite_policy(self):
+        preprocessor = pipeline.build_tree_preprocessor().fit(self.data.X_train)
+
+        train_matrix = preprocessor.transform(self.data.X_train)
+        validation_matrix = preprocessor.transform(self.data.X_validation)
+        mask = pipeline.tree_categorical_mask()
+        summary = pipeline.summarize_category_handling(
+            self.data.X_train, self.data.X_validation
+        )
+
+        self.assertEqual(train_matrix.shape, (131_822, 130))
+        self.assertEqual(validation_matrix.shape, (28_248, 130))
+        self.assertEqual(mask, [True] * 116 + [False] * 14)
+        self.assertLessEqual(summary["tree_cardinality_after_pooling"].max(), 255)
+        self.assertFalse(np.isinf(train_matrix).any())
+        self.assertFalse(np.isinf(validation_matrix).any())
+        self.assertFalse(np.isnan(train_matrix[:, 116:]).any())
+        self.assertFalse(np.isnan(validation_matrix[:, 116:]).any())
+
+    def test_tree_wrapper_sets_explicit_categorical_mask(self):
+        estimator = HistGradientBoostingRegressor(max_iter=1, random_state=0)
+
+        model = pipeline.build_training_pipeline(
+            "hist_gradient_boosting", estimator
+        )
+
+        self.assertEqual(
+            model.named_steps["model"].categorical_features,
+            [True] * 116 + [False] * 14,
+        )
+
+    def test_unknown_model_family_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "model_family"):
+            pipeline.build_training_pipeline("random_forest", RecordingRegressor())
 
 
 if __name__ == "__main__":
