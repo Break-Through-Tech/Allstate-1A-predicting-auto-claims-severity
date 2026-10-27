@@ -1,0 +1,66 @@
+{
+  "run_id": "OCT-PREP-20261027T070913Z-31aeb879",
+  "run_utc": "2026-10-27T07:09:13+00:00",
+  "modeling_data_version": "OCT-MD-001",
+  "split_version": "OCT-SPLIT-001",
+  "source_path": "data/allstate_claims_data.csv",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "manifest_path": "notebooks/final-deliverables/October/Gate 1/partition_manifest.csv",
+  "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+  "preprocessing_code_path": "notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/preprocessing_pipeline.py",
+  "preprocessing_code_sha256": "51e01ca4678da8c4a855ec1e30d32cfe9dc40e49ae41f46d758b6909de305cac",
+  "git_commit": "31aeb8797b54b7a921bf29e47316146ac30c24e9",
+  "git_dirty_before_run": true,
+  "library_versions": {
+    "python": "3.12.12",
+    "scikit-learn": "1.6.1",
+    "pandas": "2.3.3",
+    "numpy": "2.0.2"
+  },
+  "fitting_scope": "train only; validation transform only",
+  "target_transform": "none",
+  "baseline_reproduction": {
+    "training_mean_constant": {
+      "fitted_constant": 3038.8402548133095,
+      "validation_mae": 1962.918654312225
+    },
+    "training_median_constant": {
+      "fitted_constant": 2115.39,
+      "validation_mae": 1805.0863526621356
+    }
+  },
+  "matrix_evidence": {
+    "ridge": {
+      "train_shape": [
+        131822,
+        670
+      ],
+      "validation_shape": [
+        28248,
+        670
+      ],
+      "sparse": true,
+      "finite": true
+    },
+    "tree": {
+      "train_shape": [
+        131822,
+        130
+      ],
+      "validation_shape": [
+        28248,
+        130
+      ],
+      "categorical_mask_true": 116,
+      "max_categorical_cardinality": 105,
+      "infinite_cells": 0,
+      "continuous_nan_cells": 0
+    }
+  },
+  "artifact_sha256": {
+    "preprocessing_checks.csv": "4c5491b24f097643b7032865cf8cbd219c6682f5abc27172b1c59d5c1180608c",
+    "category_handling_summary.csv": "48c77e4c655ac2573eaeeaeaa556d0ab4a592fe2444f53b0fec29cbfcafce0b5",
+    "categorical_vocabulary.json": "5063a094c3e0a73757f3703120840c43a1d41763cfff71be19b2faa64c7fa3b5",
+    "feature_schema.json": "0fb1b2daf0d80e4408702f1a79ba4b66cad476666563695095c200c8357835ce"
+  }
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import sys
 import tempfile
 import unittest
@@ -347,6 +348,122 @@ class ModelFamilyPipelineTests(unittest.TestCase):
     def test_unknown_model_family_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "model_family"):
             pipeline.build_training_pipeline("random_forest", RecordingRegressor())
+
+
+class SavedArtifactTests(unittest.TestCase):
+    expected_files = {
+        "preprocessing_checks.csv",
+        "category_handling_summary.csv",
+        "categorical_vocabulary.json",
+        "feature_schema.json",
+        "preprocessing_run_receipt.json",
+    }
+
+    def test_all_required_artifacts_exist(self):
+        self.assertTrue(hasattr(pipeline, "generate_preprocessing_artifacts"))
+        self.assertEqual(
+            {path.name for path in ISSUE_DIR.iterdir()} & self.expected_files,
+            self.expected_files,
+        )
+
+    def test_all_recorded_checks_pass_and_cover_contract(self):
+        checks = pd.read_csv(ISSUE_DIR / "preprocessing_checks.csv")
+        expected_checks = {
+            "source_hash",
+            "manifest_hash",
+            "partition_counts",
+            "test_partition_protected",
+            "feature_contract",
+            "train_only_fit",
+            "category_unseen_counts",
+            "category_rare_or_unseen_cells",
+            "ridge_matrix",
+            "tree_matrix",
+            "cv_folds",
+            "original_target",
+            "mean_baseline_reproduction",
+            "median_baseline_reproduction",
+        }
+
+        self.assertEqual(set(checks["check_id"]), expected_checks)
+        self.assertEqual(set(checks["status"]), {"pass"})
+
+    def test_category_evidence_matches_approved_observations(self):
+        summary = pd.read_csv(ISSUE_DIR / "category_handling_summary.csv")
+        unseen = summary.set_index("feature")["validation_unseen_cells"]
+
+        self.assertEqual(len(summary), 116)
+        self.assertEqual(int(unseen.sum()), 9)
+        self.assertEqual(
+            unseen[unseen > 0].astype(int).to_dict(),
+            {"cat105": 1, "cat110": 1, "cat113": 1, "cat116": 6},
+        )
+        self.assertEqual(
+            int(summary["validation_rare_or_unseen_cells"].sum()), 2_560
+        )
+        self.assertLessEqual(summary["tree_cardinality_after_pooling"].max(), 255)
+
+    def test_vocabulary_is_train_derived_and_complete(self):
+        vocabulary = json.loads(
+            (ISSUE_DIR / "categorical_vocabulary.json").read_text()
+        )
+
+        self.assertEqual(vocabulary["min_frequency"], 132)
+        self.assertEqual(set(vocabulary["features"]), set(pipeline.CATEGORICAL_COLUMNS))
+        self.assertEqual(
+            len(vocabulary["features"]["cat116"]["frequent_levels"])
+            + len(vocabulary["features"]["cat116"]["rare_levels"]),
+            306,
+        )
+        self.assertNotIn("validation_counts", json.dumps(vocabulary))
+
+    def test_feature_schema_names_both_families_and_exclusions(self):
+        schema = json.loads((ISSUE_DIR / "feature_schema.json").read_text())
+
+        self.assertEqual(schema["feature_columns"], pipeline.FEATURE_COLUMNS)
+        self.assertEqual(schema["categorical_columns"], pipeline.CATEGORICAL_COLUMNS)
+        self.assertEqual(schema["continuous_columns"], pipeline.CONTINUOUS_COLUMNS)
+        self.assertEqual(schema["excluded_fields"], ["id", "loss"])
+        self.assertEqual(schema["target_transform"], "none")
+        self.assertEqual(
+            schema["model_families"]["hist_gradient_boosting"][
+                "categorical_mask"
+            ],
+            [True] * 116 + [False] * 14,
+        )
+
+    def test_receipt_records_versions_hashes_state_and_baselines(self):
+        receipt = json.loads(
+            (ISSUE_DIR / "preprocessing_run_receipt.json").read_text()
+        )
+
+        self.assertEqual(receipt["modeling_data_version"], "OCT-MD-001")
+        self.assertEqual(receipt["split_version"], "OCT-SPLIT-001")
+        self.assertEqual(receipt["source_sha256"], pipeline.SOURCE_SHA256)
+        self.assertEqual(receipt["manifest_sha256"], pipeline.MANIFEST_SHA256)
+        self.assertEqual(receipt["library_versions"]["scikit-learn"], "1.6.1")
+        self.assertIn("git_commit", receipt)
+        self.assertIn("git_dirty_before_run", receipt)
+        self.assertIn("preprocessing_code_sha256", receipt)
+        self.assertAlmostEqual(
+            receipt["baseline_reproduction"]["training_mean_constant"][
+                "fitted_constant"
+            ],
+            3038.8402548133095,
+        )
+        self.assertAlmostEqual(
+            receipt["baseline_reproduction"]["training_mean_constant"][
+                "validation_mae"
+            ],
+            1962.918654312225,
+        )
+        self.assertAlmostEqual(
+            receipt["baseline_reproduction"]["training_median_constant"][
+                "validation_mae"
+            ],
+            1805.0863526621356,
+        )
+        self.assertNotIn("feature_model_mae", json.dumps(receipt))
 
 
 if __name__ == "__main__":

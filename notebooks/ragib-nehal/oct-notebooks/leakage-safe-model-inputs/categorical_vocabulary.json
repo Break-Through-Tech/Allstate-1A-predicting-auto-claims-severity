@@ -1,0 +1,3346 @@
+{
+  "fitted_on": "OCT-SPLIT-001 train partition only",
+  "min_frequency": 132,
+  "missing_value": "__MISSING__",
+  "rare_value": "__INFREQUENT__",
+  "features": {
+    "cat1": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 99255,
+        "B": 32567
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat2": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 74753,
+        "B": 57069
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat3": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 124578,
+        "B": 7244
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat4": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 89956,
+        "B": 41866
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat5": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 86554,
+        "B": 45268
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat6": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 92212,
+        "B": 39610
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat7": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 128599,
+        "B": 3223
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat8": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 124028,
+        "B": 7794
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat9": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 79272,
+        "B": 52550
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat10": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 112239,
+        "B": 19583
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat11": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 117820,
+        "B": 14002
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat12": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 111991,
+        "B": 19831
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat13": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 118199,
+        "B": 13623
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat14": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130235,
+        "B": 1587
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat15": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131796
+      },
+      "rare_level_counts": {
+        "B": 26
+      },
+      "has_rare_bucket": true
+    },
+    "cat16": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 127262,
+        "B": 4560
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat17": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130907,
+        "B": 915
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat18": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131159,
+        "B": 663
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat19": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130548,
+        "B": 1274
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat20": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131667,
+        "B": 155
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat21": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131527,
+        "B": 295
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat22": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131789
+      },
+      "rare_level_counts": {
+        "B": 33
+      },
+      "has_rare_bucket": true
+    },
+    "cat23": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 110320,
+        "B": 21502
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat24": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 127421,
+        "B": 4401
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat25": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 119005,
+        "B": 12817
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat26": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 123999,
+        "B": 7823
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat27": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 117809,
+        "B": 14013
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat28": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 126707,
+        "B": 5115
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat29": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 129177,
+        "B": 2645
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat30": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 129315,
+        "B": 2507
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat31": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 128125,
+        "B": 3697
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat32": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130998,
+        "B": 824
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat33": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131150,
+        "B": 672
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat34": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131415,
+        "B": 407
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat35": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131677,
+        "B": 145
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat36": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 109293,
+        "B": 22529
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat37": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 115967,
+        "B": 15855
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat38": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 118528,
+        "B": 13294
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat39": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 128341,
+        "B": 3481
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat40": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 125999,
+        "B": 5823
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat41": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 126808,
+        "B": 5014
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat42": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130638,
+        "B": 1184
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat43": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 128848,
+        "B": 2974
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat44": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 121013,
+        "B": 10809
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat45": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 128775,
+        "B": 3047
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat46": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131203,
+        "B": 619
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat47": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131333,
+        "B": 489
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat48": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131629,
+        "B": 193
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat49": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 125330,
+        "B": 6492
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat50": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 96386,
+        "B": 35436
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat51": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130942,
+        "B": 880
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat52": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 125667,
+        "B": 6155
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat53": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 121040,
+        "B": 10782
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat54": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 128609,
+        "B": 3213
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat55": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131723
+      },
+      "rare_level_counts": {
+        "B": 99
+      },
+      "has_rare_bucket": true
+    },
+    "cat56": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131699
+      },
+      "rare_level_counts": {
+        "B": 123
+      },
+      "has_rare_bucket": true
+    },
+    "cat57": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 129709,
+        "B": 2113
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat58": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131656,
+        "B": 166
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat59": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131617,
+        "B": 205
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat60": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131497,
+        "B": 325
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat61": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131297,
+        "B": 525
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat62": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131791
+      },
+      "rare_level_counts": {
+        "B": 31
+      },
+      "has_rare_bucket": true
+    },
+    "cat63": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131764
+      },
+      "rare_level_counts": {
+        "B": 58
+      },
+      "has_rare_bucket": true
+    },
+    "cat64": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131788
+      },
+      "rare_level_counts": {
+        "B": 34
+      },
+      "has_rare_bucket": true
+    },
+    "cat65": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 130207,
+        "B": 1615
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat66": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 125971,
+        "B": 5851
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat67": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131319,
+        "B": 503
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat68": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131716
+      },
+      "rare_level_counts": {
+        "B": 106
+      },
+      "has_rare_bucket": true
+    },
+    "cat69": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 131599,
+        "B": 223
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat70": {
+      "frequent_levels": [
+        "A"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 131808
+      },
+      "rare_level_counts": {
+        "B": 14
+      },
+      "has_rare_bucket": true
+    },
+    "cat71": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 124944,
+        "B": 6878
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat72": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 82783,
+        "B": 49039
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat73": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [
+        "C"
+      ],
+      "frequent_level_counts": {
+        "A": 107899,
+        "B": 23908
+      },
+      "rare_level_counts": {
+        "C": 15
+      },
+      "has_rare_bucket": true
+    },
+    "cat74": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [
+        "C"
+      ],
+      "frequent_level_counts": {
+        "A": 129261,
+        "B": 2546
+      },
+      "rare_level_counts": {
+        "C": 15
+      },
+      "has_rare_bucket": true
+    },
+    "cat75": {
+      "frequent_levels": [
+        "A",
+        "B"
+      ],
+      "rare_levels": [
+        "C"
+      ],
+      "frequent_level_counts": {
+        "A": 108141,
+        "B": 23680
+      },
+      "rare_level_counts": {
+        "C": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat76": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 126922,
+        "B": 4330,
+        "C": 570
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat77": {
+      "frequent_levels": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [
+        "A"
+      ],
+      "frequent_level_counts": {
+        "B": 264,
+        "C": 292,
+        "D": 131227
+      },
+      "rare_level_counts": {
+        "A": 39
+      },
+      "has_rare_bucket": true
+    },
+    "cat78": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 569,
+        "B": 130542,
+        "C": 456,
+        "D": 255
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat79": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 4968,
+        "B": 106929,
+        "C": 1181,
+        "D": 18744
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat80": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 565,
+        "B": 32602,
+        "C": 2469,
+        "D": 96186
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat81": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 569,
+        "B": 16841,
+        "C": 6317,
+        "D": 108095
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat82": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 13614,
+        "B": 103220,
+        "C": 1857,
+        "D": 13131
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat83": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 18263,
+        "B": 99137,
+        "C": 3442,
+        "D": 10980
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat84": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 20672,
+        "B": 296,
+        "C": 108415,
+        "D": 2439
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat85": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 569,
+        "B": 130176,
+        "C": 718,
+        "D": 359
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat86": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 1116,
+        "B": 72703,
+        "C": 7203,
+        "D": 50800
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat87": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 569,
+        "B": 116885,
+        "C": 6178,
+        "D": 8190
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat88": {
+      "frequent_levels": [
+        "A",
+        "D"
+      ],
+      "rare_levels": [
+        "B",
+        "E"
+      ],
+      "frequent_level_counts": {
+        "A": 118252,
+        "D": 13500
+      },
+      "rare_level_counts": {
+        "B": 6,
+        "E": 64
+      },
+      "has_rare_bucket": true
+    },
+    "cat89": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C"
+      ],
+      "rare_levels": [
+        "D",
+        "E",
+        "G",
+        "H",
+        "I"
+      ],
+      "frequent_level_counts": {
+        "A": 128599,
+        "B": 3040,
+        "C": 153
+      },
+      "rare_level_counts": {
+        "D": 22,
+        "E": 4,
+        "G": 1,
+        "H": 1,
+        "I": 2
+      },
+      "has_rare_bucket": true
+    },
+    "cat90": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C"
+      ],
+      "rare_levels": [
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "frequent_level_counts": {
+        "A": 124578,
+        "B": 6676,
+        "C": 505
+      },
+      "rare_level_counts": {
+        "D": 53,
+        "E": 4,
+        "F": 4,
+        "G": 2
+      },
+      "has_rare_bucket": true
+    },
+    "cat91": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "G"
+      ],
+      "rare_levels": [
+        "F",
+        "H"
+      ],
+      "frequent_level_counts": {
+        "A": 77716,
+        "B": 29827,
+        "C": 4479,
+        "D": 784,
+        "E": 184,
+        "G": 18753
+      },
+      "rare_level_counts": {
+        "F": 64,
+        "H": 15
+      },
+      "has_rare_bucket": true
+    },
+    "cat92": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "H"
+      ],
+      "rare_levels": [
+        "C",
+        "D",
+        "F",
+        "I"
+      ],
+      "frequent_level_counts": {
+        "A": 87270,
+        "B": 458,
+        "H": 44028
+      },
+      "rare_level_counts": {
+        "C": 42,
+        "D": 8,
+        "F": 1,
+        "I": 15
+      },
+      "has_rare_bucket": true
+    },
+    "cat93": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 303,
+        "B": 798,
+        "C": 25088,
+        "D": 105133,
+        "E": 500
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat94": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "rare_levels": [
+        "E",
+        "G"
+      ],
+      "frequent_level_counts": {
+        "A": 513,
+        "B": 36080,
+        "C": 9519,
+        "D": 85282,
+        "F": 348
+      },
+      "rare_level_counts": {
+        "E": 64,
+        "G": 16
+      },
+      "has_rare_bucket": true
+    },
+    "cat95": {
+      "frequent_levels": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 2660,
+        "C": 61207,
+        "D": 55655,
+        "E": 12227
+      },
+      "rare_level_counts": {
+        "B": 73
+      },
+      "has_rare_bucket": true
+    },
+    "cat96": {
+      "frequent_levels": [
+        "B",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "rare_levels": [
+        "A",
+        "C",
+        "I"
+      ],
+      "frequent_level_counts": {
+        "B": 2084,
+        "D": 5515,
+        "E": 122123,
+        "F": 219,
+        "G": 1833
+      },
+      "rare_level_counts": {
+        "A": 25,
+        "C": 16,
+        "I": 7
+      },
+      "has_rare_bucket": true
+    },
+    "cat97": {
+      "frequent_levels": [
+        "A",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "rare_levels": [
+        "B"
+      ],
+      "frequent_level_counts": {
+        "A": 29358,
+        "C": 54644,
+        "D": 2653,
+        "E": 33221,
+        "F": 144,
+        "G": 11781
+      },
+      "rare_level_counts": {
+        "B": 21
+      },
+      "has_rare_bucket": true
+    },
+    "cat98": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 73855,
+        "B": 393,
+        "C": 15014,
+        "D": 35393,
+        "E": 7167
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat99": {
+      "frequent_levels": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "J",
+        "K",
+        "N",
+        "P",
+        "R",
+        "S",
+        "T"
+      ],
+      "rare_levels": [
+        "G",
+        "H",
+        "I",
+        "M"
+      ],
+      "frequent_level_counts": {
+        "C": 207,
+        "D": 6152,
+        "E": 733,
+        "F": 1927,
+        "J": 176,
+        "K": 1902,
+        "N": 2000,
+        "P": 55607,
+        "R": 7203,
+        "S": 4974,
+        "T": 50802
+      },
+      "rare_level_counts": {
+        "G": 13,
+        "H": 66,
+        "I": 23,
+        "M": 37
+      },
+      "has_rare_bucket": true
+    },
+    "cat100": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O"
+      ],
+      "rare_levels": [
+        "E"
+      ],
+      "frequent_level_counts": {
+        "A": 6534,
+        "B": 4644,
+        "C": 566,
+        "D": 410,
+        "F": 30008,
+        "G": 9113,
+        "H": 7523,
+        "I": 28030,
+        "J": 8391,
+        "K": 9706,
+        "L": 13959,
+        "M": 3632,
+        "N": 5300,
+        "O": 3991
+      },
+      "rare_level_counts": {
+        "E": 15
+      },
+      "has_rare_bucket": true
+    },
+    "cat101": {
+      "frequent_levels": [
+        "A",
+        "C",
+        "D",
+        "F",
+        "G",
+        "I",
+        "J",
+        "L",
+        "M",
+        "O",
+        "Q"
+      ],
+      "rare_levels": [
+        "B",
+        "E",
+        "H",
+        "K",
+        "N",
+        "R",
+        "S",
+        "U"
+      ],
+      "frequent_level_counts": {
+        "A": 74753,
+        "C": 11860,
+        "D": 12022,
+        "F": 7170,
+        "G": 7720,
+        "I": 4635,
+        "J": 5048,
+        "L": 2206,
+        "M": 2548,
+        "O": 1722,
+        "Q": 1919
+      },
+      "rare_level_counts": {
+        "B": 3,
+        "E": 6,
+        "H": 1,
+        "K": 1,
+        "N": 1,
+        "R": 90,
+        "S": 116,
+        "U": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat102": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rare_levels": [
+        "F",
+        "G",
+        "H",
+        "J"
+      ],
+      "frequent_level_counts": {
+        "A": 124028,
+        "B": 3621,
+        "C": 3491,
+        "D": 322,
+        "E": 338
+      },
+      "rare_level_counts": {
+        "F": 7,
+        "G": 13,
+        "H": 1,
+        "J": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat103": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "rare_levels": [
+        "I",
+        "J",
+        "K",
+        "L",
+        "N"
+      ],
+      "frequent_level_counts": {
+        "A": 86554,
+        "B": 23340,
+        "C": 11515,
+        "D": 5518,
+        "E": 3211,
+        "F": 1050,
+        "G": 364,
+        "H": 137
+      },
+      "rare_level_counts": {
+        "I": 83,
+        "J": 31,
+        "K": 6,
+        "L": 11,
+        "N": 2
+      },
+      "has_rare_bucket": true
+    },
+    "cat104": {
+      "frequent_levels": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "O"
+      ],
+      "rare_levels": [
+        "A",
+        "B",
+        "N",
+        "P",
+        "Q"
+      ],
+      "frequent_level_counts": {
+        "C": 4850,
+        "D": 19331,
+        "E": 30155,
+        "F": 13391,
+        "G": 28394,
+        "H": 12070,
+        "I": 7704,
+        "J": 2212,
+        "K": 9890,
+        "L": 2475,
+        "M": 819,
+        "O": 289
+      },
+      "rare_level_counts": {
+        "A": 48,
+        "B": 24,
+        "N": 110,
+        "P": 58,
+        "Q": 2
+      },
+      "has_rare_bucket": true
+    },
+    "cat105": {
+      "frequent_levels": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K"
+      ],
+      "rare_levels": [
+        "A",
+        "B",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "S"
+      ],
+      "frequent_level_counts": {
+        "C": 197,
+        "D": 8567,
+        "E": 53661,
+        "F": 43852,
+        "G": 14374,
+        "H": 7900,
+        "I": 2075,
+        "J": 493,
+        "K": 356
+      },
+      "rare_level_counts": {
+        "A": 52,
+        "B": 3,
+        "L": 107,
+        "M": 116,
+        "N": 52,
+        "O": 4,
+        "P": 9,
+        "Q": 3,
+        "S": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat106": {
+      "frequent_levels": [
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N"
+      ],
+      "rare_levels": [
+        "A",
+        "B",
+        "C",
+        "O",
+        "P",
+        "R"
+      ],
+      "frequent_level_counts": {
+        "D": 1367,
+        "E": 9127,
+        "F": 25375,
+        "G": 32922,
+        "H": 26440,
+        "I": 14904,
+        "J": 12814,
+        "K": 5564,
+        "L": 2113,
+        "M": 821,
+        "N": 169
+      },
+      "rare_level_counts": {
+        "A": 51,
+        "B": 7,
+        "C": 85,
+        "O": 41,
+        "P": 2,
+        "R": 20
+      },
+      "has_rare_bucket": true
+    },
+    "cat107": {
+      "frequent_levels": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N"
+      ],
+      "rare_levels": [
+        "A",
+        "B",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "U"
+      ],
+      "frequent_level_counts": {
+        "C": 152,
+        "D": 2282,
+        "E": 8715,
+        "F": 33147,
+        "G": 19885,
+        "H": 16461,
+        "I": 14146,
+        "J": 15610,
+        "K": 14181,
+        "L": 4889,
+        "M": 1449,
+        "N": 563
+      },
+      "rare_level_counts": {
+        "A": 51,
+        "B": 1,
+        "O": 87,
+        "P": 71,
+        "Q": 107,
+        "R": 4,
+        "S": 1,
+        "U": 20
+      },
+      "has_rare_bucket": true
+    },
+    "cat108": {
+      "frequent_levels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K"
+      ],
+      "rare_levels": [],
+      "frequent_level_counts": {
+        "A": 6488,
+        "B": 45757,
+        "C": 379,
+        "D": 13517,
+        "E": 5569,
+        "F": 7167,
+        "G": 14970,
+        "H": 2999,
+        "I": 5124,
+        "J": 144,
+        "K": 29708
+      },
+      "rare_level_counts": {},
+      "has_rare_bucket": false
+    },
+    "cat109": {
+      "frequent_levels": [
+        "AB",
+        "AR",
+        "AT",
+        "BH",
+        "BI",
+        "BO",
+        "BQ",
+        "BU",
+        "D",
+        "G",
+        "K",
+        "M",
+        "N"
+      ],
+      "rare_levels": [
+        "A",
+        "AA",
+        "AE",
+        "AF",
+        "AG",
+        "AH",
+        "AI",
+        "AJ",
+        "AL",
+        "AM",
+        "AN",
+        "AO",
+        "AP",
+        "AQ",
+        "AS",
+        "AU",
+        "AV",
+        "AW",
+        "AX",
+        "AY",
+        "BA",
+        "BB",
+        "BC",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BJ",
+        "BK",
+        "BL",
+        "BM",
+        "BN",
+        "BP",
+        "BR",
+        "BS",
+        "BT",
+        "BV",
+        "BX",
+        "BY",
+        "C",
+        "CA",
+        "CC",
+        "CD",
+        "CE",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CJ",
+        "CK",
+        "CL",
+        "E",
+        "F",
+        "H",
+        "I",
+        "J",
+        "L",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "X",
+        "Y",
+        "ZZ"
+      ],
+      "frequent_level_counts": {
+        "AB": 15283,
+        "AR": 142,
+        "AT": 133,
+        "BH": 186,
+        "BI": 107118,
+        "BO": 232,
+        "BQ": 737,
+        "BU": 2189,
+        "D": 140,
+        "G": 923,
+        "K": 2129,
+        "M": 315,
+        "N": 316
+      },
+      "rare_level_counts": {
+        "A": 37,
+        "AA": 12,
+        "AE": 41,
+        "AF": 6,
+        "AG": 1,
+        "AH": 42,
+        "AI": 11,
+        "AJ": 35,
+        "AL": 109,
+        "AM": 33,
+        "AN": 12,
+        "AO": 2,
+        "AP": 7,
+        "AQ": 38,
+        "AS": 108,
+        "AU": 17,
+        "AV": 4,
+        "AW": 51,
+        "AX": 35,
+        "AY": 4,
+        "BA": 19,
+        "BB": 9,
+        "BC": 11,
+        "BD": 29,
+        "BE": 5,
+        "BF": 1,
+        "BG": 1,
+        "BJ": 16,
+        "BK": 10,
+        "BL": 93,
+        "BM": 1,
+        "BN": 2,
+        "BP": 1,
+        "BR": 11,
+        "BS": 7,
+        "BT": 2,
+        "BV": 2,
+        "BX": 43,
+        "BY": 3,
+        "C": 26,
+        "CA": 47,
+        "CC": 30,
+        "CD": 98,
+        "CE": 5,
+        "CF": 10,
+        "CG": 7,
+        "CH": 5,
+        "CI": 82,
+        "CJ": 6,
+        "CK": 6,
+        "CL": 123,
+        "E": 12,
+        "F": 92,
+        "H": 56,
+        "I": 64,
+        "J": 1,
+        "L": 64,
+        "O": 41,
+        "P": 5,
+        "Q": 46,
+        "R": 112,
+        "S": 21,
+        "T": 37,
+        "U": 49,
+        "V": 10,
+        "X": 34,
+        "Y": 18,
+        "ZZ": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat110": {
+      "frequent_levels": [
+        "A",
+        "AC",
+        "AD",
+        "AI",
+        "AK",
+        "AM",
+        "AP",
+        "AY",
+        "BC",
+        "BP",
+        "BS",
+        "BT",
+        "C",
+        "CG",
+        "CH",
+        "CI",
+        "CL",
+        "CM",
+        "CO",
+        "CQ",
+        "CR",
+        "CS",
+        "DJ",
+        "DK",
+        "DL",
+        "DM",
+        "DW",
+        "DX",
+        "EB",
+        "EE",
+        "EF",
+        "EG",
+        "EL",
+        "I",
+        "N",
+        "T",
+        "U",
+        "V",
+        "W"
+      ],
+      "rare_levels": [
+        "AA",
+        "AB",
+        "AE",
+        "AF",
+        "AG",
+        "AH",
+        "AJ",
+        "AL",
+        "AN",
+        "AO",
+        "AR",
+        "AT",
+        "AU",
+        "AV",
+        "AW",
+        "AX",
+        "B",
+        "BA",
+        "BB",
+        "BE",
+        "BF",
+        "BG",
+        "BI",
+        "BJ",
+        "BK",
+        "BL",
+        "BM",
+        "BN",
+        "BO",
+        "BQ",
+        "BR",
+        "BU",
+        "BV",
+        "BW",
+        "BX",
+        "BY",
+        "CB",
+        "CC",
+        "CD",
+        "CF",
+        "CJ",
+        "CK",
+        "CN",
+        "CP",
+        "CT",
+        "CU",
+        "CV",
+        "CW",
+        "CX",
+        "CY",
+        "D",
+        "DA",
+        "DB",
+        "DC",
+        "DD",
+        "DE",
+        "DF",
+        "DG",
+        "DH",
+        "DI",
+        "DN",
+        "DO",
+        "DP",
+        "DQ",
+        "DR",
+        "DS",
+        "DT",
+        "DU",
+        "DY",
+        "E",
+        "EA",
+        "ED",
+        "EH",
+        "EI",
+        "EJ",
+        "EK",
+        "EM",
+        "G",
+        "H",
+        "J",
+        "K",
+        "L",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "X",
+        "Y"
+      ],
+      "frequent_level_counts": {
+        "A": 888,
+        "AC": 1845,
+        "AD": 440,
+        "AI": 2066,
+        "AK": 215,
+        "AM": 436,
+        "AP": 418,
+        "AY": 148,
+        "BC": 2877,
+        "BP": 2012,
+        "BS": 1357,
+        "BT": 11545,
+        "C": 1862,
+        "CG": 145,
+        "CH": 209,
+        "CI": 789,
+        "CL": 17802,
+        "CM": 1387,
+        "CO": 12179,
+        "CQ": 2232,
+        "CR": 534,
+        "CS": 17265,
+        "DJ": 148,
+        "DK": 1208,
+        "DL": 283,
+        "DM": 551,
+        "DW": 2566,
+        "DX": 2153,
+        "EB": 14973,
+        "EE": 824,
+        "EF": 808,
+        "EG": 17115,
+        "EL": 6519,
+        "I": 168,
+        "N": 148,
+        "T": 365,
+        "U": 244,
+        "V": 1167,
+        "W": 1883
+      },
+      "rare_level_counts": {
+        "AA": 12,
+        "AB": 39,
+        "AE": 13,
+        "AF": 2,
+        "AG": 5,
+        "AH": 3,
+        "AJ": 11,
+        "AL": 84,
+        "AN": 3,
+        "AO": 20,
+        "AR": 60,
+        "AT": 29,
+        "AU": 26,
+        "AV": 6,
+        "AW": 33,
+        "AX": 13,
+        "B": 6,
+        "BA": 43,
+        "BB": 4,
+        "BE": 12,
+        "BF": 10,
+        "BG": 103,
+        "BI": 1,
+        "BJ": 18,
+        "BK": 1,
+        "BL": 11,
+        "BM": 1,
+        "BN": 1,
+        "BO": 27,
+        "BQ": 11,
+        "BR": 39,
+        "BU": 3,
+        "BV": 2,
+        "BW": 12,
+        "BX": 22,
+        "BY": 6,
+        "CB": 1,
+        "CC": 7,
+        "CD": 5,
+        "CF": 22,
+        "CJ": 114,
+        "CK": 20,
+        "CN": 52,
+        "CP": 18,
+        "CT": 28,
+        "CU": 1,
+        "CV": 51,
+        "CW": 5,
+        "CX": 3,
+        "CY": 9,
+        "D": 36,
+        "DA": 13,
+        "DB": 2,
+        "DC": 18,
+        "DD": 2,
+        "DE": 10,
+        "DF": 16,
+        "DG": 9,
+        "DH": 82,
+        "DI": 51,
+        "DN": 1,
+        "DO": 8,
+        "DP": 10,
+        "DQ": 13,
+        "DR": 23,
+        "DS": 14,
+        "DT": 2,
+        "DU": 98,
+        "DY": 8,
+        "E": 121,
+        "EA": 126,
+        "ED": 5,
+        "EH": 1,
+        "EI": 2,
+        "EJ": 2,
+        "EK": 2,
+        "EM": 122,
+        "G": 23,
+        "H": 7,
+        "J": 16,
+        "K": 14,
+        "L": 7,
+        "O": 69,
+        "P": 11,
+        "Q": 1,
+        "R": 16,
+        "S": 1,
+        "X": 50,
+        "Y": 8
+      },
+      "has_rare_bucket": true
+    },
+    "cat111": {
+      "frequent_levels": [
+        "A",
+        "C",
+        "E",
+        "G",
+        "I",
+        "K",
+        "M",
+        "O"
+      ],
+      "rare_levels": [
+        "B",
+        "D",
+        "F",
+        "Q",
+        "S",
+        "U",
+        "W",
+        "Y"
+      ],
+      "frequent_level_counts": {
+        "A": 89956,
+        "C": 22709,
+        "E": 10228,
+        "G": 4913,
+        "I": 2466,
+        "K": 941,
+        "M": 329,
+        "O": 156
+      },
+      "rare_level_counts": {
+        "B": 5,
+        "D": 2,
+        "F": 2,
+        "Q": 60,
+        "S": 29,
+        "U": 14,
+        "W": 11,
+        "Y": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat112": {
+      "frequent_levels": [
+        "A",
+        "AA",
+        "AB",
+        "AC",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AH",
+        "AI",
+        "AK",
+        "AL",
+        "AM",
+        "AN",
+        "AO",
+        "AP",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AV",
+        "AW",
+        "AX",
+        "AY",
+        "B",
+        "BA",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y"
+      ],
+      "rare_levels": [
+        "AJ",
+        "AQ"
+      ],
+      "frequent_level_counts": {
+        "A": 1700,
+        "AA": 879,
+        "AB": 180,
+        "AC": 312,
+        "AD": 1107,
+        "AE": 585,
+        "AF": 6627,
+        "AG": 957,
+        "AH": 13086,
+        "AI": 3328,
+        "AK": 4705,
+        "AL": 776,
+        "AM": 817,
+        "AN": 6390,
+        "AO": 355,
+        "AP": 2792,
+        "AR": 1652,
+        "AS": 12475,
+        "AT": 885,
+        "AU": 311,
+        "AV": 4953,
+        "AW": 2183,
+        "AX": 728,
+        "AY": 961,
+        "B": 305,
+        "BA": 141,
+        "C": 1604,
+        "D": 1120,
+        "E": 17595,
+        "F": 2190,
+        "G": 2207,
+        "H": 384,
+        "I": 653,
+        "J": 11370,
+        "K": 4244,
+        "L": 338,
+        "M": 299,
+        "N": 5817,
+        "O": 1509,
+        "P": 301,
+        "Q": 541,
+        "R": 788,
+        "S": 2924,
+        "T": 361,
+        "U": 5822,
+        "V": 501,
+        "W": 330,
+        "X": 664,
+        "Y": 951
+      },
+      "rare_level_counts": {
+        "AJ": 97,
+        "AQ": 22
+      },
+      "has_rare_bucket": true
+    },
+    "cat113": {
+      "frequent_levels": [
+        "A",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AH",
+        "AI",
+        "AJ",
+        "AK",
+        "AM",
+        "AN",
+        "AO",
+        "AS",
+        "AT",
+        "AU",
+        "AV",
+        "AW",
+        "AX",
+        "AY",
+        "BC",
+        "BD",
+        "BF",
+        "BG",
+        "BH",
+        "BJ",
+        "BK",
+        "BM",
+        "BN",
+        "BO",
+        "F",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "Q",
+        "S",
+        "X",
+        "Y"
+      ],
+      "rare_levels": [
+        "AB",
+        "AC",
+        "AL",
+        "AP",
+        "AQ",
+        "AR",
+        "B",
+        "BA",
+        "BB",
+        "BI",
+        "BL",
+        "C",
+        "E",
+        "G",
+        "O",
+        "P",
+        "T",
+        "U",
+        "V"
+      ],
+      "frequent_level_counts": {
+        "A": 2298,
+        "AD": 3084,
+        "AE": 15397,
+        "AF": 4271,
+        "AG": 1687,
+        "AH": 141,
+        "AI": 331,
+        "AJ": 3102,
+        "AK": 2500,
+        "AM": 327,
+        "AN": 3635,
+        "AO": 1166,
+        "AS": 2688,
+        "AT": 3254,
+        "AU": 1120,
+        "AV": 356,
+        "AW": 1295,
+        "AX": 8807,
+        "AY": 323,
+        "BC": 1910,
+        "BD": 235,
+        "BF": 253,
+        "BG": 1255,
+        "BH": 869,
+        "BJ": 1844,
+        "BK": 477,
+        "BM": 18302,
+        "BN": 2454,
+        "BO": 997,
+        "F": 1049,
+        "H": 3554,
+        "I": 2272,
+        "J": 2186,
+        "K": 5390,
+        "L": 9163,
+        "M": 1742,
+        "N": 1966,
+        "Q": 1965,
+        "S": 4897,
+        "X": 4972,
+        "Y": 8012
+      },
+      "rare_level_counts": {
+        "AB": 13,
+        "AC": 1,
+        "AL": 1,
+        "AP": 4,
+        "AQ": 14,
+        "AR": 1,
+        "B": 1,
+        "BA": 33,
+        "BB": 36,
+        "BI": 20,
+        "BL": 3,
+        "C": 99,
+        "E": 4,
+        "G": 14,
+        "O": 10,
+        "P": 1,
+        "T": 1,
+        "U": 8,
+        "V": 12
+      },
+      "has_rare_bucket": true
+    },
+    "cat114": {
+      "frequent_levels": [
+        "A",
+        "C",
+        "E",
+        "F",
+        "I",
+        "J",
+        "L",
+        "N",
+        "O",
+        "R",
+        "U"
+      ],
+      "rare_levels": [
+        "B",
+        "D",
+        "G",
+        "Q",
+        "S",
+        "V",
+        "W",
+        "X"
+      ],
+      "frequent_level_counts": {
+        "A": 92212,
+        "C": 11805,
+        "E": 11451,
+        "F": 5532,
+        "I": 1691,
+        "J": 5711,
+        "L": 602,
+        "N": 1746,
+        "O": 175,
+        "R": 650,
+        "U": 178
+      },
+      "rare_level_counts": {
+        "B": 6,
+        "D": 4,
+        "G": 1,
+        "Q": 29,
+        "S": 2,
+        "V": 25,
+        "W": 1,
+        "X": 1
+      },
+      "has_rare_bucket": true
+    },
+    "cat115": {
+      "frequent_levels": [
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "rare_levels": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "T",
+        "U",
+        "W",
+        "X"
+      ],
+      "frequent_level_counts": {
+        "F": 193,
+        "G": 213,
+        "H": 1954,
+        "I": 4998,
+        "J": 16828,
+        "K": 30585,
+        "L": 11250,
+        "M": 8714,
+        "N": 15733,
+        "O": 18696,
+        "P": 15145,
+        "Q": 5767,
+        "R": 1433,
+        "S": 187
+      },
+      "rare_level_counts": {
+        "A": 51,
+        "B": 1,
+        "D": 3,
+        "E": 7,
+        "T": 38,
+        "U": 18,
+        "W": 4,
+        "X": 4
+      },
+      "has_rare_bucket": true
+    },
+    "cat116": {
+      "frequent_levels": [
+        "BD",
+        "BP",
+        "BV",
+        "BX",
+        "BY",
+        "CB",
+        "CD",
+        "CG",
+        "CI",
+        "CK",
+        "CN",
+        "CO",
+        "CP",
+        "CR",
+        "CS",
+        "CU",
+        "CW",
+        "DC",
+        "DD",
+        "DF",
+        "DH",
+        "DI",
+        "DJ",
+        "DK",
+        "DP",
+        "DS",
+        "EA",
+        "EC",
+        "EE",
+        "EI",
+        "EK",
+        "EL",
+        "EO",
+        "EP",
+        "EY",
+        "FB",
+        "FC",
+        "FD",
+        "FH",
+        "FR",
+        "FT",
+        "GA",
+        "GB",
+        "GC",
+        "GE",
+        "GI",
+        "GK",
+        "GN",
+        "GS",
+        "GT",
+        "GU",
+        "GX",
+        "HA",
+        "HB",
+        "HC",
+        "HG",
+        "HH",
+        "HJ",
+        "HK",
+        "HL",
+        "HM",
+        "HN",
+        "HQ",
+        "HV",
+        "HX",
+        "HY",
+        "IC",
+        "IE",
+        "IF",
+        "IG",
+        "IH",
+        "IT",
+        "JR",
+        "JW",
+        "JX",
+        "KA",
+        "KB",
+        "KC",
+        "KD",
+        "KL",
+        "KP",
+        "KQ",
+        "KR",
+        "KW",
+        "KX",
+        "LB",
+        "LC",
+        "LF",
+        "LI",
+        "LJ",
+        "LL",
+        "LM",
+        "LN",
+        "LO",
+        "LQ",
+        "LV",
+        "LW",
+        "LX",
+        "LY",
+        "MC",
+        "MD",
+        "ME",
+        "MG",
+        "MJ"
+      ],
+      "rare_levels": [
+        "AA",
+        "AB",
+        "AC",
+        "AD",
+        "AF",
+        "AG",
+        "AJ",
+        "AK",
+        "AL",
+        "AM",
+        "AO",
+        "AP",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AV",
+        "AW",
+        "AX",
+        "AY",
+        "B",
+        "BA",
+        "BB",
+        "BC",
+        "BF",
+        "BG",
+        "BI",
+        "BK",
+        "BM",
+        "BO",
+        "BQ",
+        "BS",
+        "BT",
+        "BU",
+        "BW",
+        "C",
+        "CA",
+        "CC",
+        "CE",
+        "CF",
+        "CH",
+        "CJ",
+        "CL",
+        "CM",
+        "CQ",
+        "CT",
+        "CV",
+        "CX",
+        "CY",
+        "D",
+        "DA",
+        "DE",
+        "DG",
+        "DL",
+        "DM",
+        "DN",
+        "DO",
+        "DQ",
+        "DR",
+        "DT",
+        "DU",
+        "DV",
+        "DW",
+        "DX",
+        "E",
+        "EB",
+        "ED",
+        "EF",
+        "EG",
+        "EH",
+        "EJ",
+        "EN",
+        "EQ",
+        "ES",
+        "EU",
+        "EW",
+        "F",
+        "FA",
+        "FE",
+        "FF",
+        "FG",
+        "FI",
+        "FK",
+        "FL",
+        "FN",
+        "FO",
+        "FP",
+        "FQ",
+        "FS",
+        "FU",
+        "FV",
+        "FW",
+        "FX",
+        "G",
+        "GD",
+        "GF",
+        "GG",
+        "GH",
+        "GJ",
+        "GL",
+        "GM",
+        "GO",
+        "GP",
+        "GQ",
+        "GR",
+        "GV",
+        "GW",
+        "GY",
+        "H",
+        "HD",
+        "HE",
+        "HF",
+        "HI",
+        "HP",
+        "HR",
+        "HT",
+        "HU",
+        "HW",
+        "I",
+        "IA",
+        "ID",
+        "II",
+        "IJ",
+        "IK",
+        "IL",
+        "IM",
+        "IN",
+        "IP",
+        "IQ",
+        "IR",
+        "IU",
+        "IV",
+        "IX",
+        "IY",
+        "JB",
+        "JC",
+        "JE",
+        "JF",
+        "JG",
+        "JH",
+        "JI",
+        "JJ",
+        "JK",
+        "JL",
+        "JM",
+        "JP",
+        "JQ",
+        "JU",
+        "JV",
+        "JY",
+        "K",
+        "KE",
+        "KF",
+        "KG",
+        "KH",
+        "KI",
+        "KJ",
+        "KK",
+        "KM",
+        "KN",
+        "KT",
+        "KU",
+        "KV",
+        "KY",
+        "L",
+        "LA",
+        "LD",
+        "LE",
+        "LG",
+        "LH",
+        "LK",
+        "LR",
+        "LT",
+        "LU",
+        "M",
+        "MA",
+        "MB",
+        "MF",
+        "MH",
+        "MI",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MO",
+        "MP",
+        "MQ",
+        "MR",
+        "MS",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "X",
+        "Y"
+      ],
+      "frequent_level_counts": {
+        "BD": 209,
+        "BP": 189,
+        "BV": 209,
+        "BX": 213,
+        "BY": 1129,
+        "CB": 1365,
+        "CD": 207,
+        "CG": 166,
+        "CI": 901,
+        "CK": 7122,
+        "CN": 140,
+        "CO": 172,
+        "CP": 239,
+        "CR": 4784,
+        "CS": 663,
+        "CU": 306,
+        "CW": 500,
+        "DC": 3148,
+        "DD": 174,
+        "DF": 1769,
+        "DH": 320,
+        "DI": 311,
+        "DJ": 14194,
+        "DK": 470,
+        "DP": 6475,
+        "DS": 389,
+        "EA": 268,
+        "EC": 496,
+        "EE": 155,
+        "EI": 191,
+        "EK": 444,
+        "EL": 312,
+        "EO": 303,
+        "EP": 143,
+        "EY": 164,
+        "FB": 422,
+        "FC": 366,
+        "FD": 195,
+        "FH": 345,
+        "FR": 576,
+        "FT": 238,
+        "GA": 359,
+        "GB": 163,
+        "GC": 2645,
+        "GE": 955,
+        "GI": 1263,
+        "GK": 1864,
+        "GN": 367,
+        "GS": 6099,
+        "GT": 279,
+        "GU": 407,
+        "GX": 433,
+        "HA": 680,
+        "HB": 1376,
+        "HC": 567,
+        "HG": 3121,
+        "HH": 422,
+        "HJ": 1887,
+        "HK": 14722,
+        "HL": 441,
+        "HM": 517,
+        "HN": 918,
+        "HQ": 2824,
+        "HV": 2674,
+        "HX": 3976,
+        "HY": 136,
+        "IC": 474,
+        "IE": 2941,
+        "IF": 442,
+        "IG": 1585,
+        "IH": 826,
+        "IT": 212,
+        "JR": 705,
+        "JW": 268,
+        "JX": 136,
+        "KA": 432,
+        "KB": 253,
+        "KC": 1098,
+        "KD": 138,
+        "KL": 210,
+        "KP": 173,
+        "KQ": 158,
+        "KR": 364,
+        "KW": 2191,
+        "KX": 156,
+        "LB": 2212,
+        "LC": 216,
+        "LF": 1315,
+        "LI": 182,
+        "LJ": 264,
+        "LL": 174,
+        "LM": 2261,
+        "LN": 2175,
+        "LO": 1430,
+        "LQ": 399,
+        "LV": 195,
+        "LW": 464,
+        "LX": 225,
+        "LY": 919,
+        "MC": 219,
+        "MD": 1377,
+        "ME": 192,
+        "MG": 252,
+        "MJ": 521
+      },
+      "rare_level_counts": {
+        "AA": 4,
+        "AB": 2,
+        "AC": 48,
+        "AD": 1,
+        "AF": 20,
+        "AG": 2,
+        "AJ": 24,
+        "AK": 3,
+        "AL": 5,
+        "AM": 1,
+        "AO": 26,
+        "AP": 1,
+        "AR": 1,
+        "AS": 1,
+        "AT": 1,
+        "AU": 2,
+        "AV": 3,
+        "AW": 13,
+        "AX": 5,
+        "AY": 2,
+        "B": 10,
+        "BA": 9,
+        "BB": 1,
+        "BC": 1,
+        "BF": 1,
+        "BG": 1,
+        "BI": 1,
+        "BK": 6,
+        "BM": 1,
+        "BO": 76,
+        "BQ": 6,
+        "BS": 16,
+        "BT": 2,
+        "BU": 6,
+        "BW": 11,
+        "C": 1,
+        "CA": 13,
+        "CC": 1,
+        "CE": 12,
+        "CF": 60,
+        "CH": 25,
+        "CJ": 1,
+        "CL": 4,
+        "CM": 40,
+        "CQ": 25,
+        "CT": 78,
+        "CV": 12,
+        "CX": 11,
+        "CY": 3,
+        "D": 2,
+        "DA": 32,
+        "DE": 6,
+        "DG": 18,
+        "DL": 35,
+        "DM": 24,
+        "DN": 121,
+        "DO": 5,
+        "DQ": 1,
+        "DR": 6,
+        "DT": 40,
+        "DU": 71,
+        "DV": 2,
+        "DW": 75,
+        "DX": 52,
+        "E": 58,
+        "EB": 26,
+        "ED": 109,
+        "EF": 43,
+        "EG": 41,
+        "EH": 49,
+        "EJ": 6,
+        "EN": 60,
+        "EQ": 1,
+        "ES": 57,
+        "EU": 3,
+        "EW": 5,
+        "F": 5,
+        "FA": 37,
+        "FE": 120,
+        "FF": 23,
+        "FG": 92,
+        "FI": 1,
+        "FK": 2,
+        "FL": 2,
+        "FN": 1,
+        "FO": 1,
+        "FP": 1,
+        "FQ": 1,
+        "FS": 1,
+        "FU": 13,
+        "FV": 3,
+        "FW": 9,
+        "FX": 100,
+        "G": 1,
+        "GD": 3,
+        "GF": 17,
+        "GG": 7,
+        "GH": 11,
+        "GJ": 91,
+        "GL": 113,
+        "GM": 51,
+        "GO": 20,
+        "GP": 17,
+        "GQ": 2,
+        "GR": 51,
+        "GV": 35,
+        "GW": 57,
+        "GY": 5,
+        "H": 13,
+        "HD": 17,
+        "HE": 2,
+        "HF": 25,
+        "HI": 24,
+        "HP": 107,
+        "HR": 49,
+        "HT": 5,
+        "HU": 1,
+        "HW": 83,
+        "I": 1,
+        "IA": 3,
+        "ID": 96,
+        "II": 10,
+        "IJ": 2,
+        "IK": 1,
+        "IL": 10,
+        "IM": 27,
+        "IN": 29,
+        "IP": 19,
+        "IQ": 107,
+        "IR": 1,
+        "IU": 63,
+        "IV": 1,
+        "IX": 1,
+        "IY": 50,
+        "JB": 4,
+        "JC": 12,
+        "JE": 14,
+        "JF": 14,
+        "JG": 5,
+        "JH": 3,
+        "JI": 1,
+        "JJ": 5,
+        "JK": 1,
+        "JL": 68,
+        "JM": 21,
+        "JP": 2,
+        "JQ": 9,
+        "JU": 76,
+        "JV": 3,
+        "JY": 5,
+        "K": 103,
+        "KE": 22,
+        "KF": 1,
+        "KG": 3,
+        "KH": 1,
+        "KI": 125,
+        "KJ": 98,
+        "KK": 16,
+        "KM": 12,
+        "KN": 42,
+        "KT": 70,
+        "KU": 84,
+        "KV": 2,
+        "KY": 9,
+        "L": 5,
+        "LA": 13,
+        "LD": 85,
+        "LE": 4,
+        "LG": 4,
+        "LH": 19,
+        "LK": 12,
+        "LR": 26,
+        "LT": 34,
+        "LU": 2,
+        "M": 2,
+        "MA": 55,
+        "MB": 1,
+        "MF": 1,
+        "MH": 1,
+        "MI": 66,
+        "MK": 22,
+        "ML": 10,
+        "MM": 6,
+        "MN": 5,
+        "MO": 24,
+        "MP": 53,
+        "MQ": 28,
+        "MR": 13,
+        "MS": 1,
+        "MT": 1,
+        "MU": 34,
+        "MV": 1,
+        "MW": 16,
+        "O": 2,
+        "P": 1,
+        "Q": 2,
+        "R": 1,
+        "S": 2,
+        "T": 1,
+        "U": 12,
+        "X": 1,
+        "Y": 7
+      },
+      "has_rare_bucket": true
+    }
+  }
+}
