@@ -42,6 +42,10 @@ Replace `<your-folder>` and check `csv_path.exists()` before loading. Do not cop
 
 Use four spaces for Python indentation, `snake_case` for variables and notebook filenames, and descriptive Markdown headings. Explain each analysis near its code. Name notebooks by milestone and task, such as `notebooks/October/task_2_baseline.ipynb`. Keep generated reports, checkpoints, virtual environments, and derived datasets out of commits. No formatter or linter is configured; use PEP 8 style.
 
+## Issue Reports & Reviews
+
+Use the canonical templates in `docs/team/templates/` when creating or updating issue documentation. Start issue reports from `artifact_bundle_template.md` and independent reviews from `review_checklist.md`; preserve their core sections, replace all placeholders, use repository-relative artifact paths, and keep completion and review statuses accurate. Do not mark an issue or independent review complete until the required checks and reviewer approval are recorded.
+
 ## Testing Guidelines
 
 No test framework or coverage threshold is configured. For notebook changes, restart the kernel and run all cells; check outputs against the narrative. For models, report mean absolute error (MAE) on held-out data, fit preprocessing only on training data, and document the split and random seed. Add tests under `tests/` for reusable Python modules.
