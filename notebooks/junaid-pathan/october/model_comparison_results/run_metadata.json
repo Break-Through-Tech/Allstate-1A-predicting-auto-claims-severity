@@ -1,0 +1,35 @@
+{
+  "workflow_run": "OCT-JP-MODEL-COMPARISON-001",
+  "modeling_data_version": "OCT-MD-001",
+  "split_version": "OCT-SPLIT-001",
+  "seed": 42,
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+  "partition_counts_used": {
+    "train": 131822,
+    "validation": 28248,
+    "test": "not loaded for modeling"
+  },
+  "cv_folds": 5,
+  "rare_min_frequency": 132,
+  "metric": "MAE, original loss units",
+  "train_p90": 6401.738,
+  "train_p99": 14024.143299999967,
+  "git_commit": "3f51455b583945489f8ae7e9e6e5bb2b11134ed9",
+  "git_dirty": false,
+  "library_versions": {
+    "python": "3.10.0",
+    "scikit-learn": "1.7.2",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  },
+  "total_runtime_seconds_models": 824.0945511000009,
+  "validation_consults": {
+    "B01": 1,
+    "B02": 1,
+    "E01-ridge": 1,
+    "E02-hgb": 1,
+    "E02-hgb-iter1": 1
+  },
+  "test_policy": "test rows dropped at load; no target summary, prediction or score"
+}
