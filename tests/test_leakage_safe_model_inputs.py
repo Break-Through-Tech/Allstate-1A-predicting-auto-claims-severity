@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import importlib.util
 import sys
 import tempfile
 import unittest
@@ -11,6 +12,7 @@ from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
+import nbformat
 from scipy import sparse
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -464,6 +466,93 @@ class SavedArtifactTests(unittest.TestCase):
             1805.0863526621356,
         )
         self.assertNotIn("feature_model_mae", json.dumps(receipt))
+
+
+class NotebookAndReviewPackageTests(unittest.TestCase):
+    notebook_path = ISSUE_DIR / "leakage_safe_model_inputs.ipynb"
+    verifier_path = ISSUE_DIR / "verify_preprocessing.py"
+    validation_path = ISSUE_DIR / "preprocessing_validation.md"
+    approval_path = ISSUE_DIR / "gate2_approval_record.md"
+    team_report_path = (
+        REPO_ROOT
+        / "docs"
+        / "team"
+        / "october"
+        / "Gate 2"
+        / "issue_44_independent_review.md"
+    )
+
+    def test_notebook_executes_sequentially_and_calls_reusable_module(self):
+        notebook = nbformat.read(self.notebook_path, as_version=4)
+        code_cells = [cell for cell in notebook.cells if cell.cell_type == "code"]
+        counts = [cell.execution_count for cell in code_cells]
+        source = "\n".join(cell.source for cell in code_cells)
+        output_text = "\n".join(
+            str(output.get("text", ""))
+            + str(output.get("data", {}).get("text/plain", ""))
+            for cell in code_cells
+            for output in cell.get("outputs", [])
+        )
+
+        self.assertEqual(counts, list(range(1, len(code_cells) + 1)))
+        self.assertIn("REPO_ROOT_OVERRIDE", source)
+        self.assertIn("generate_preprocessing_artifacts", source)
+        self.assertNotIn("OneHotEncoder(", source)
+        self.assertNotIn("RareCategoryGrouper(", source)
+        self.assertIn("ridge", output_text.lower())
+        self.assertIn("hist_gradient_boosting", output_text.lower())
+        self.assertIn("validation_unseen_cells", output_text)
+        self.assertNotIn("candidate_validation_mae", output_text)
+
+    def test_independent_verifier_recomputes_all_evidence_sections(self):
+        spec = importlib.util.spec_from_file_location(
+            "issue44_verifier", self.verifier_path
+        )
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+
+        results = verifier.verify(REPO_ROOT, ISSUE_DIR)
+
+        self.assertEqual(
+            set(results), {"source_split", "category", "schema", "baseline", "artifacts"}
+        )
+        self.assertTrue(all(results.values()))
+
+    def test_validation_report_covers_evidence_policy_limits_and_handoff(self):
+        report = self.validation_path.read_text()
+
+        for heading in (
+            "## Observed evidence",
+            "## Configured policy",
+            "## Limitations",
+            "## Issue #45 handoff",
+        ):
+            self.assertIn(heading, report)
+
+    def test_gate2_record_is_complete_but_pending_and_unsigned(self):
+        record = self.approval_path.read_text()
+
+        self.assertIn("Gate 2 status: pending independent review", record)
+        self.assertIn("OCT-MD-001", record)
+        self.assertIn("OCT-SPLIT-001", record)
+        self.assertIn(pipeline.SOURCE_SHA256, record)
+        self.assertIn(pipeline.MANIFEST_SHA256, record)
+        for artifact in SavedArtifactTests.expected_files:
+            self.assertIn(artifact, record)
+        self.assertIn("Reviewer: ____________________", record)
+        self.assertIn("Review date: ____________________", record)
+        self.assertIn("Decision: ____________________", record)
+
+    def test_team_report_is_actionable_and_leaves_decision_unsigned(self):
+        report = self.team_report_path.read_text()
+
+        self.assertIn("verify_preprocessing.py", report)
+        self.assertIn("python -m unittest", report)
+        self.assertIn("Expected independent evidence", report)
+        self.assertIn("Artifact inventory", report)
+        self.assertIn("Reviewer checklist", report)
+        self.assertIn("Reviewer: ____________________", report)
+        self.assertIn("Decision: ____________________", report)
 
 
 if __name__ == "__main__":
