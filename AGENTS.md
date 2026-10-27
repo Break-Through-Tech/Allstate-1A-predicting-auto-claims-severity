@@ -46,6 +46,18 @@ Use four spaces for Python indentation, `snake_case` for variables and notebook 
 
 No test framework or coverage threshold is configured. For notebook changes, restart the kernel and run all cells; check outputs against the narrative. For models, report mean absolute error (MAE) on held-out data, fit preprocessing only on training data, and document the split and random seed. Add tests under `tests/` for reusable Python modules.
 
+## Post-Implementation Cleanup
+
+Before declaring implementation complete, inspect `git status` and every file created or modified during the task.
+
+- Remove temporary notes, debug output, scratch files, obsolete drafts, and superseded generated files created during the current task.
+- Convert completed implementation plans into concise implementation records. Remove agent instructions, future-tense steps, and stale unchecked boxes while preserving decisions, delivered artifacts, verification results, limitations, and review status.
+- Update references whose paths, commands, or artifact names changed.
+- Do not delete pre-existing or user-authored files without explicit approval.
+- Preserve approval records, reproducibility evidence, decision records, and other durable audit artifacts.
+- Run `git diff --check` and inspect `git status --short` after cleanup.
+- Leave the working tree clean before handoff, or explicitly report any remaining changes.
+
 ## Commit & Pull Request Guidelines
 
 Recent commits use short subjects such as `task 1 notebook` and `docs: update next session date`; use an imperative summary and optional area prefix (`docs:`, `notebooks:`). In pull requests, describe the milestone, changes, dependency needs, and checks. Link the task or issue; include plots or screenshots when visual results change. Avoid committing personal paths or credentials.
