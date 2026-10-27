@@ -6,7 +6,14 @@ This plan builds on `modeling_contract.md` and `split_design_decision.md`. It do
 
 - Use `cat1`-`cat116` and `cont1`-`cont14` (130 predictors).
 - Exclude `id` (identifier) and `loss` (target).
-- Load with the pattern in `split_design_decision.md`: merge the manifest on `id`, then drop `partition == "test"` rows at load time.
+- Load with the pattern in `split_design_decision.md`: read the frozen source and manifest, merge them on `id`, and immediately filter out `partition == "test"` before selecting feature or target columns.
+
+Verify these frozen inputs before any model run:
+
+| Artifact | Path | SHA-256 |
+|---|---|---|
+| Source data | `data/allstate_claims_data.csv` | `74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03` |
+| Partition manifest | `notebooks/final-deliverables/October/Gate 1/partition_manifest.csv` | `de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b` |
 
 ## 2. Leakage boundary
 
@@ -16,7 +23,7 @@ Everything learned from data is fitted on training rows only. Validation rows ar
 |---|---|---|
 | Category vocabularies and level frequencies | train | train, validation |
 | Rare-level pooling threshold and pooled-level list | train | train, validation |
-| Imputers (guard only, see section 6) | train | train, validation |
+| Imputers (guard only, see section 5) | train | train, validation |
 | Scalers (linear models only) | train | train, validation |
 | Feature-selection thresholds or rankings (optional experiments) | train, inside CV folds | train, validation |
 | Hyperparameters | train, 5 recorded CV folds | validation (one comparison) |
@@ -26,7 +33,7 @@ Two rules make this enforceable:
 1. All preprocessing and the model sit in one scikit-learn `Pipeline`, so `fit` can only see the rows it is given.
 2. During cross-validation the whole pipeline is refit inside each fold's training portion, using the manifest's `cv_fold` column (`PredefinedSplit`). Fitting the vocabulary once on all of train and then cross-validating would leak level information across folds.
 
-The test partition is not loaded in October.
+The source-file read necessarily includes test rows so they can be matched to the frozen manifest. After the merge and integrity checks, test rows are immediately removed. No test feature or target values enter preprocessing, model fitting, tuning, prediction, or scoring during October.
 
 ## 3. Nominal categorical fields
 
@@ -96,7 +103,7 @@ All of these use the same split and fit any selection rule on train inside CV fo
 ## 10. Checks for the independent reviewer
 
 1. The pipeline's `fit` is called only on training rows (or only on a fold's training portion).
-2. No cell reads `partition == "test"` rows.
+2. After the source-manifest merge and integrity checks, test rows are filtered before feature or target extraction; no later cell accesses test features or targets.
 3. The categorical mask covers all 116 categorical columns for tree models.
 4. Vocabularies and pooled-level lists are saved as an artifact and come from train counts.
 5. `cv_fold` comes from the manifest, and each fold's pipeline is refit.

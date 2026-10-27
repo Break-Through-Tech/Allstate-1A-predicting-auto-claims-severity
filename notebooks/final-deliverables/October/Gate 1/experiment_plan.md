@@ -23,12 +23,12 @@ The Challenge Advisor's required training-mean constant and the training-median 
 
 The median constant is 8.0% better than the mean constant. The median is the correct constant to beat, because it minimizes absolute error for a constant prediction.
 
-Two items on the baseline receipt need a decision before Gate 1 closes:
+The baseline receipt has a documented metadata-only reproducibility deviation:
 
 - It records `git_dirty: true`, so the code version is not a clean commit.
 - It records scikit-learn 1.5.1, pandas 2.2.2 and numpy 1.26.4. The split manifest records 1.6.1, 2.3.3 and 2.0.2.
 
-The constants are plain train statistics, so the numbers are not in doubt. The cleanest fix is to rerun the baseline notebook from a clean commit on the pinned versions and record that receipt as the approved one. The alternative is to record the mismatch as a documented deviation.
+This affects the run's provenance metadata, not the accepted numerical evidence. The constants and validation MAEs are plain statistics, and an independent verification reproduced them exactly from the frozen source and partition manifest. The mismatch is therefore retained and disclosed as a metadata deviation rather than requiring another baseline run.
 
 ## 3. Model approaches to test after the baselines
 
@@ -52,7 +52,7 @@ Two approaches are required. Both use the same claims in every partition. Prepro
 
 ### Not in the first comparison
 
-- Explicit target encoding and CatBoost (see the preprocessing plan, section 9).
+- Explicit target encoding and CatBoost (see the preprocessing plan, section 8).
 - Random forest: optional if time permits.
 - Semantic feature engineering: not a priority, because the predictors are anonymous.
 
@@ -94,7 +94,7 @@ An approved run must have a clean working tree. A run on a dirty tree is recorde
 A teammate who did not write the plan or the code checks four things:
 
 1. **Split manifest:** both SHA-256 values, partition counts, and fold sizes.
-2. **Leakage boundaries:** the checks listed in `preprocessing_plan.md`, section 11.
+2. **Leakage boundaries:** the checks listed in `preprocessing_plan.md`, section 10.
 3. **Metric code:** an independent recomputation of validation MAE, as `tests/test_october_baseline_artifacts.py` does for the baselines.
 4. **Approved plan:** that the plan, register template and approval record agree with each other.
 
@@ -105,8 +105,8 @@ The reviewer's name and result go in `gate1_approval_record.md`.
 - Rare-level threshold of 132 training claims (0.1% of train).
 - Scikit-learn gradient boosting first, XGBoost as a variant only if the dependency is added.
 - CatBoost and target encoding deferred.
-- Whether to rerun the baselines on a clean commit or record the deviation.
-- Which teammate owns each experiment row (owners are blank in the register).
+- The baseline receipt's dirty-tree and library-version mismatch is recorded as a metadata-only reproducibility deviation; its numerical results were independently reproduced.
+- Which teammates own E02 and optional experiments O1-O4 (Ragib Nehal owns E01).
 
 ## 9. Limitations
 
