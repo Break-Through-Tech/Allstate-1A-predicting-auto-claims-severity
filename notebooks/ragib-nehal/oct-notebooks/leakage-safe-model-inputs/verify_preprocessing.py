@@ -63,22 +63,74 @@ def verify(repo_root: Path, artifact_dir: Path) -> dict[str, bool]:
 
     unseen_counts = {}
     rare_or_unseen_cells = 0
+    category_rows = []
+    vocabulary_features = {}
     for column in CATEGORICAL_COLUMNS:
         train_counts = train[column].value_counts(dropna=False)
+        frequent_levels = set(train_counts[train_counts >= MIN_FREQUENCY].index)
         rare_levels = set(train_counts[train_counts < MIN_FREQUENCY].index)
         unseen = ~validation[column].isin(train_counts.index)
         unseen_count = int(unseen.sum())
         if unseen_count:
             unseen_counts[column] = unseen_count
-        rare_or_unseen_cells += int(
+        rare_or_unseen = int(
             (unseen | validation[column].isin(rare_levels)).sum()
         )
-    category = unseen_counts == {
+        rare_or_unseen_cells += rare_or_unseen
+        category_rows.append(
+            {
+                "feature": column,
+                "train_levels": int(len(train_counts)),
+                "frequent_train_levels": int(len(frequent_levels)),
+                "rare_train_levels": int(len(rare_levels)),
+                "rare_train_cells": int(train_counts.loc[list(rare_levels)].sum())
+                if rare_levels
+                else 0,
+                "validation_unseen_cells": unseen_count,
+                "validation_rare_or_unseen_cells": rare_or_unseen,
+                "has_rare_bucket": bool(rare_levels),
+                "tree_cardinality_after_pooling": int(
+                    len(frequent_levels) + bool(rare_levels)
+                ),
+            }
+        )
+        frequent = train_counts[train_counts >= MIN_FREQUENCY]
+        rare = train_counts[train_counts < MIN_FREQUENCY]
+        vocabulary_features[column] = {
+            "frequent_levels": sorted(map(str, frequent.index)),
+            "rare_levels": sorted(map(str, rare.index)),
+            "frequent_level_counts": {
+                str(level): int(count) for level, count in sorted(frequent.items())
+            },
+            "rare_level_counts": {
+                str(level): int(count) for level, count in sorted(rare.items())
+            },
+            "has_rare_bucket": bool(len(rare)),
+        }
+    saved_summary = pd.read_csv(artifact_dir / "category_handling_summary.csv")
+    computed_summary = pd.DataFrame(category_rows)
+    saved_vocabulary = json.loads(
+        (artifact_dir / "categorical_vocabulary.json").read_text()
+    )
+    computed_vocabulary = {
+        "fitted_on": "OCT-SPLIT-001 train partition only",
+        "min_frequency": MIN_FREQUENCY,
+        "missing_value": "__MISSING__",
+        "rare_value": "__INFREQUENT__",
+        "features": vocabulary_features,
+    }
+    category = (
+        unseen_counts
+        == {
         "cat105": 1,
         "cat110": 1,
         "cat113": 1,
         "cat116": 6,
-    } and rare_or_unseen_cells == 2_560
+        }
+        and rare_or_unseen_cells == 2_560
+        and saved_summary.equals(computed_summary)
+        and saved_vocabulary == computed_vocabulary
+    )
 
     schema_document = json.loads((artifact_dir / "feature_schema.json").read_text())
     schema = (
@@ -96,16 +148,41 @@ def verify(repo_root: Path, artifact_dir: Path) -> dict[str, bool]:
     median_constant = float(train["loss"].median())
     mean_mae = float(np.mean(np.abs(validation["loss"] - mean_constant)))
     median_mae = float(np.mean(np.abs(validation["loss"] - median_constant)))
+    receipt = json.loads(
+        (artifact_dir / "preprocessing_run_receipt.json").read_text()
+    )
+    saved_baselines = receipt.get("baseline_reproduction", {})
     baseline = (
         np.isclose(mean_constant, 3038.8402548133095, rtol=0, atol=1e-9)
         and np.isclose(median_constant, 2115.39, rtol=0, atol=1e-9)
         and np.isclose(mean_mae, 1962.918654312225, rtol=0, atol=1e-9)
         and np.isclose(median_mae, 1805.0863526621356, rtol=0, atol=1e-9)
+        and np.isclose(
+            saved_baselines["training_mean_constant"]["fitted_constant"],
+            mean_constant,
+            rtol=0,
+            atol=1e-9,
+        )
+        and np.isclose(
+            saved_baselines["training_mean_constant"]["validation_mae"],
+            mean_mae,
+            rtol=0,
+            atol=1e-9,
+        )
+        and np.isclose(
+            saved_baselines["training_median_constant"]["fitted_constant"],
+            median_constant,
+            rtol=0,
+            atol=1e-9,
+        )
+        and np.isclose(
+            saved_baselines["training_median_constant"]["validation_mae"],
+            median_mae,
+            rtol=0,
+            atol=1e-9,
+        )
     )
 
-    receipt = json.loads(
-        (artifact_dir / "preprocessing_run_receipt.json").read_text()
-    )
     checks = pd.read_csv(artifact_dir / "preprocessing_checks.csv")
     expected_artifacts = {
         "preprocessing_checks.csv",
@@ -114,6 +191,7 @@ def verify(repo_root: Path, artifact_dir: Path) -> dict[str, bool]:
         "feature_schema.json",
     }
     artifact_hashes = receipt.get("artifact_sha256", {})
+    preprocessing_code_path = repo_root / receipt["preprocessing_code_path"]
     artifacts = (
         set(artifact_hashes) == expected_artifacts
         and all(
@@ -123,6 +201,9 @@ def verify(repo_root: Path, artifact_dir: Path) -> dict[str, bool]:
         and set(checks["status"]) == {"pass"}
         and receipt["library_versions"]["scikit-learn"] == "1.6.1"
         and receipt["target_transform"] == "none"
+        and preprocessing_code_path.is_file()
+        and _sha256(preprocessing_code_path)
+        == receipt["preprocessing_code_sha256"]
     )
 
     return {

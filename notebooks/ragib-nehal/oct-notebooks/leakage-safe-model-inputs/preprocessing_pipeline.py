@@ -314,6 +314,22 @@ def tree_categorical_mask() -> list[bool]:
     return [True] * len(CATEGORICAL_COLUMNS) + [False] * len(CONTINUOUS_COLUMNS)
 
 
+class NoMissingTrainingGuard(TransformerMixin, BaseEstimator):
+    """Reject missing fit data while leaving transform-time guards available."""
+
+    def fit(self, X, y=None):
+        values = X.to_numpy() if isinstance(X, pd.DataFrame) else np.asarray(X)
+        if pd.isna(values).any():
+            raise ValueError("training features must contain zero missing values")
+        self.n_features_in_ = values.shape[1]
+        return self
+
+    def transform(self, X):
+        if np.asarray(X).ndim != 2 or np.asarray(X).shape[1] != self.n_features_in_:
+            raise ValueError("feature count changed after training guard fit")
+        return X
+
+
 def build_training_pipeline(model_family: str, estimator) -> Pipeline:
     """Attach the approved family preprocessing to a caller-supplied estimator."""
 
@@ -332,7 +348,11 @@ def build_training_pipeline(model_family: str, estimator) -> Pipeline:
             "model_family must be 'ridge' or 'hist_gradient_boosting'"
         )
     return Pipeline(
-        steps=[("preprocessing", preprocessor), ("model", fitted_estimator)]
+        steps=[
+            ("training_missing_guard", NoMissingTrainingGuard()),
+            ("preprocessing", preprocessor),
+            ("model", fitted_estimator),
+        ]
     )
 
 

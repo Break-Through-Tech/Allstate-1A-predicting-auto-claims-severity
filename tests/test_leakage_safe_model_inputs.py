@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import importlib.util
+import shutil
 import sys
 import tempfile
 import unittest
@@ -351,6 +352,24 @@ class ModelFamilyPipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "model_family"):
             pipeline.build_training_pipeline("random_forest", RecordingRegressor())
 
+    def test_both_training_wrappers_reject_missing_fit_inputs(self):
+        X = self.data.X_train.iloc[:200].copy()
+        X.loc[X.index[0], "cont1"] = np.nan
+        y = self.data.y_train.iloc[:200]
+        configurations = (
+            ("ridge", RecordingRegressor()),
+            (
+                "hist_gradient_boosting",
+                HistGradientBoostingRegressor(max_iter=1, random_state=0),
+            ),
+        )
+
+        for family, estimator in configurations:
+            with self.subTest(family=family):
+                model = pipeline.build_training_pipeline(family, estimator)
+                with self.assertRaisesRegex(ValueError, "zero missing"):
+                    model.fit(X, y)
+
 
 class SavedArtifactTests(unittest.TestCase):
     expected_files = {
@@ -503,6 +522,7 @@ class NotebookAndReviewPackageTests(unittest.TestCase):
         self.assertIn("hist_gradient_boosting", output_text.lower())
         self.assertIn("validation_unseen_cells", output_text)
         self.assertNotIn("candidate_validation_mae", output_text)
+        self.assertNotIn(str(Path.home()), output_text)
 
     def test_independent_verifier_recomputes_all_evidence_sections(self):
         spec = importlib.util.spec_from_file_location(
@@ -517,6 +537,71 @@ class NotebookAndReviewPackageTests(unittest.TestCase):
             set(results), {"source_split", "category", "schema", "baseline", "artifacts"}
         )
         self.assertTrue(all(results.values()))
+
+    def _load_verifier(self):
+        spec = importlib.util.spec_from_file_location(
+            "issue44_verifier_for_negative_test", self.verifier_path
+        )
+        verifier = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verifier)
+        return verifier
+
+    def _copy_artifacts(self, destination: Path):
+        for name in SavedArtifactTests.expected_files:
+            shutil.copy2(ISSUE_DIR / name, destination / name)
+
+    def test_verifier_rejects_saved_baseline_mismatch(self):
+        verifier = self._load_verifier()
+        with tempfile.TemporaryDirectory() as raw_directory:
+            artifact_dir = Path(raw_directory)
+            self._copy_artifacts(artifact_dir)
+            receipt_path = artifact_dir / "preprocessing_run_receipt.json"
+            receipt = json.loads(receipt_path.read_text())
+            receipt["baseline_reproduction"]["training_mean_constant"][
+                "validation_mae"
+            ] = -999
+            receipt_path.write_text(json.dumps(receipt))
+
+            results = verifier.verify(REPO_ROOT, artifact_dir)
+
+        self.assertFalse(results["baseline"])
+
+    def test_verifier_rejects_saved_category_evidence_mismatch(self):
+        verifier = self._load_verifier()
+        with tempfile.TemporaryDirectory() as raw_directory:
+            artifact_dir = Path(raw_directory)
+            self._copy_artifacts(artifact_dir)
+            summary_path = artifact_dir / "category_handling_summary.csv"
+            summary = pd.read_csv(summary_path)
+            summary.loc[summary["feature"] == "cat105", "validation_unseen_cells"] = 2
+            summary.to_csv(summary_path, index=False)
+            vocabulary_path = artifact_dir / "categorical_vocabulary.json"
+            vocabulary = json.loads(vocabulary_path.read_text())
+            vocabulary["features"]["cat116"]["rare_level_counts"]["ZZ_FAKE"] = 1
+            vocabulary_path.write_text(json.dumps(vocabulary))
+            receipt_path = artifact_dir / "preprocessing_run_receipt.json"
+            receipt = json.loads(receipt_path.read_text())
+            receipt["artifact_sha256"][summary_path.name] = _sha256(summary_path)
+            receipt["artifact_sha256"][vocabulary_path.name] = _sha256(vocabulary_path)
+            receipt_path.write_text(json.dumps(receipt))
+
+            results = verifier.verify(REPO_ROOT, artifact_dir)
+
+        self.assertFalse(results["category"])
+
+    def test_verifier_rejects_recorded_code_hash_mismatch(self):
+        verifier = self._load_verifier()
+        with tempfile.TemporaryDirectory() as raw_directory:
+            artifact_dir = Path(raw_directory)
+            self._copy_artifacts(artifact_dir)
+            receipt_path = artifact_dir / "preprocessing_run_receipt.json"
+            receipt = json.loads(receipt_path.read_text())
+            receipt["preprocessing_code_sha256"] = "0" * 64
+            receipt_path.write_text(json.dumps(receipt))
+
+            results = verifier.verify(REPO_ROOT, artifact_dir)
+
+        self.assertFalse(results["artifacts"])
 
     def test_validation_report_covers_evidence_policy_limits_and_handoff(self):
         report = self.validation_path.read_text()
