@@ -1,0 +1,15 @@
+check_id,description,expected,observed,status
+source_hash,Source hash matches frozen OCT-MD-001,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03,pass
+manifest_hash,Manifest hash matches frozen OCT-SPLIT-001,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b,pass
+partition_counts,Train and validation counts match the frozen split,"{""train"": 131822, ""validation"": 28248}","{""train"": 131822, ""validation"": 28248}",pass
+test_partition_protected,Returned modeling object exposes no test rows,true,true,pass
+feature_contract,Inputs are exactly 116 categorical plus 14 continuous fields,"{""excluded"": [""id"", ""loss""], ""features"": 130}","{""excluded"": [""id"", ""loss""], ""features"": 130}",pass
+train_only_fit,All fitted preprocessing state used training rows only,131822,131822,pass
+category_unseen_counts,Validation-only categories are counted without validation loss,"{""cat105"": 1, ""cat110"": 1, ""cat113"": 1, ""cat116"": 6}","{""cat105"": 1, ""cat110"": 1, ""cat113"": 1, ""cat116"": 6}",pass
+category_rare_or_unseen_cells,Validation rare-or-unseen cell count matches approved evidence,2560,2560,pass
+ridge_matrix,Ridge matrices align and contain only finite values,"{""aligned"": true, ""finite"": true, ""sparse"": true}","{""aligned"": true, ""finite"": true, ""sparse"": true}",pass
+tree_matrix,"Tree matrices preserve mask, cardinality, and finite policy","{""categorical_mask_true"": 116, ""columns"": 130, ""continuous_nan_cells"": 0, ""infinite_cells"": 0, ""max_cardinality_at_most"": 255}","{""categorical_mask_true"": 116, ""columns"": 130, ""continuous_nan_cells"": 0, ""infinite_cells"": 0, ""max_categorical_cardinality"": 105}",pass
+cv_folds,Recorded training folds are complete and unchanged,"{""0"": 26365, ""1"": 26365, ""2"": 26364, ""3"": 26364, ""4"": 26364}","{""0"": 26365, ""1"": 26365, ""2"": 26364, ""3"": 26364, ""4"": 26364}",pass
+original_target,Issue 44 uses original loss with no target transform,none,none,pass
+mean_baseline_reproduction,Mean baseline independently matches accepted validation MAE,1962.918654312225,1962.918654312225,pass
+median_baseline_reproduction,Median baseline independently matches accepted validation MAE,1805.0863526621356,1805.0863526621356,pass
