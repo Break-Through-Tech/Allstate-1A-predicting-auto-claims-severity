@@ -24,7 +24,7 @@ Issue #44 establishes reusable, leakage-safe model inputs for Ridge and histogra
 - September full-file EDA informed the approved hypotheses, so future target-informed feature changes must be recalculated inside training folds.
 - The threshold of 132 is the approved starting rule, not a tuned conclusion.
 - The baseline receipt used different library versions; this package independently reproduces its numeric results under scikit-learn 1.6.1, pandas 2.3.3, and NumPy 2.0.2.
-- Gate 2 remains pending until a teammate reruns the independent verifier and signs the approval record.
+- Gate 2 was approved by Mia Chavez on October 27, 2026 after the independent verifier and pipeline checks passed with no discrepancies.
 
 ## Issue #45 handoff
 

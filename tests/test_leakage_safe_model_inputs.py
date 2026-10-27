@@ -24,8 +24,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 ISSUE_DIR = (
     REPO_ROOT
     / "notebooks"
-    / "ragib-nehal"
-    / "oct-notebooks"
+    / "final-deliverables"
+    / "October"
+    / "Gate 2"
     / "leakage-safe-model-inputs"
 )
 sys.path.insert(0, str(ISSUE_DIR))
@@ -498,7 +499,7 @@ class NotebookAndReviewPackageTests(unittest.TestCase):
         / "team"
         / "october"
         / "Gate 2"
-        / "issue_44_independent_review.md"
+        / "leakage-safe-model-inputs.md"
     )
 
     def test_notebook_executes_sequentially_and_calls_reusable_module(self):
@@ -614,21 +615,22 @@ class NotebookAndReviewPackageTests(unittest.TestCase):
         ):
             self.assertIn(heading, report)
 
-    def test_gate2_record_is_complete_but_pending_and_unsigned(self):
+    def test_gate2_record_is_complete_and_approved(self):
         record = self.approval_path.read_text()
 
-        self.assertIn("Gate 2 status: pending independent review", record)
+        self.assertIn("Gate 2 status: approved", record)
         self.assertIn("OCT-MD-001", record)
         self.assertIn("OCT-SPLIT-001", record)
         self.assertIn(pipeline.SOURCE_SHA256, record)
         self.assertIn(pipeline.MANIFEST_SHA256, record)
         for artifact in SavedArtifactTests.expected_files:
             self.assertIn(artifact, record)
-        self.assertIn("Reviewer: ____________________", record)
-        self.assertIn("Review date: ____________________", record)
-        self.assertIn("Decision: ____________________", record)
+        self.assertIn("Reviewer: Mia Chavez", record)
+        self.assertIn("Review date: 10/27/2026", record)
+        self.assertIn("Verifier result: Runs cleanly and passes all tests", record)
+        self.assertIn("Decision: Approve", record)
 
-    def test_team_report_is_actionable_and_leaves_decision_unsigned(self):
+    def test_team_report_is_actionable_and_records_approval(self):
         report = self.team_report_path.read_text()
 
         self.assertIn("verify_preprocessing.py", report)
@@ -636,8 +638,9 @@ class NotebookAndReviewPackageTests(unittest.TestCase):
         self.assertIn("Expected independent evidence", report)
         self.assertIn("Artifact inventory", report)
         self.assertIn("Reviewer checklist", report)
-        self.assertIn("Reviewer: ____________________", report)
-        self.assertIn("Decision: ____________________", report)
+        self.assertIn("Reviewer: Mia Chavez", report)
+        self.assertIn("Verifier result: Runs cleanly and passes all tests", report)
+        self.assertIn("Decision: Approve", report)
 
 
 if __name__ == "__main__":

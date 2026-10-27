@@ -216,7 +216,7 @@ def verify(repo_root: Path, artifact_dir: Path) -> dict[str, bool]:
 
 
 def main() -> int:
-    default_repo = Path(__file__).resolve().parents[4]
+    default_repo = Path(__file__).resolve().parents[5]
     default_artifacts = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=default_repo)

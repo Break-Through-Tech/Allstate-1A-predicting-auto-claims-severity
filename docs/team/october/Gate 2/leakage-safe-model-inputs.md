@@ -1,6 +1,6 @@
 # Issue #44: Leakage-Safe Model Inputs
 
-**Status:** Completed — implementation complete; independent review pending
+**Status:** Completed — implementation complete; Gate 2 approved
 
 **Owners:** Mia Chavez and Ragib Nehal
 
@@ -16,16 +16,16 @@ All learned transformations are fit on training rows or training-fold subsets an
 
 ## Final artifacts / Artifact inventory
 
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/preprocessing_pipeline.py`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/leakage_safe_model_inputs.ipynb`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/verify_preprocessing.py`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/preprocessing_validation.md`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/preprocessing_checks.csv`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/category_handling_summary.csv`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/categorical_vocabulary.json`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/feature_schema.json`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/preprocessing_run_receipt.json`
-- `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/gate2_approval_record.md`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/preprocessing_pipeline.py`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/leakage_safe_model_inputs.ipynb`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/verify_preprocessing.py`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/preprocessing_validation.md`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/preprocessing_checks.csv`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/category_handling_summary.csv`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/categorical_vocabulary.json`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/feature_schema.json`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/preprocessing_run_receipt.json`
+- `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/gate2_approval_record.md`
 - `tests/test_leakage_safe_model_inputs.py`
 
 ## Frozen data and split
@@ -102,18 +102,18 @@ These values are readiness checks only. They do not constitute candidate-model c
 From the repository root, use a Python 3.12 environment with the versions in `requirements.txt`, including scikit-learn 1.6.1, and run:
 
 ```sh
-python notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/verify_preprocessing.py
+python "notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/verify_preprocessing.py"
 python -m unittest tests.test_leakage_safe_model_inputs -v
 python -m unittest discover -s tests -v
 ```
 
-Restart the notebook kernel and run `notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/leakage_safe_model_inputs.ipynb` from top to bottom. When inputs and code are unchanged, regenerated artifact differences should be limited to explicit run metadata.
+Restart the notebook kernel and run `notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/leakage_safe_model_inputs.ipynb` from top to bottom. When inputs and code are unchanged, regenerated artifact differences should be limited to explicit run metadata.
 
 ## Independent verification
 
-Independent review remains pending. A teammate must rerun the verifier and tests, confirm both model-family pipelines against the frozen contract, resolve any discrepancy, and sign:
+Mia Chavez completed the independent review, reran the verifier and tests, confirmed both model-family pipelines against the frozen contract, and recorded approval in:
 
-`notebooks/ragib-nehal/oct-notebooks/leakage-safe-model-inputs/gate2_approval_record.md`
+`notebooks/final-deliverables/October/Gate 2/leakage-safe-model-inputs/gate2_approval_record.md`
 
 ### Expected independent evidence
 
@@ -156,4 +156,4 @@ Comments or discrepancies: None
 
 The Issue #44 implementation artifacts establish reproducible, leakage-safe inputs for both approved model families and provide the required validation evidence and rerun instructions.
 
-Issue #44 remains open until an independent teammate completes the rerun, resolves any discrepancies, signs the Gate 2 approval record, and records the approval decision.
+Gate 2 approval for Issue #44 was recorded by Mia Chavez on October 27, 2026 after the verifier and pipeline checks passed with no discrepancies.
