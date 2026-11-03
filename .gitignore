@@ -1,5 +1,6 @@
 # Local Python environments and secrets
 .venv/
+.venv-issue45-review/
 venv/
 env/
 .env

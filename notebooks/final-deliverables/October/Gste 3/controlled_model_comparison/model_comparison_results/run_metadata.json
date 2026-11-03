@@ -15,15 +15,15 @@
   "metric": "MAE, original loss units",
   "train_p90": 6401.738,
   "train_p99": 14024.143299999967,
-  "git_commit": "3f51455b583945489f8ae7e9e6e5bb2b11134ed9",
-  "git_dirty": false,
+  "git_commit": "7c5ba0cf9b4b943855403c8496c81c60dadce752",
+  "git_dirty": true,
   "library_versions": {
-    "python": "3.10.0",
-    "scikit-learn": "1.7.2",
-    "pandas": "2.3.3",
-    "numpy": "2.2.6"
+    "python": "3.14.2",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.0.5",
+    "numpy": "2.5.1"
   },
-  "total_runtime_seconds_models": 824.0945511000009,
+  "total_runtime_seconds_models": 204.97156162402825,
   "validation_consults": {
     "B01": 1,
     "B02": 1,

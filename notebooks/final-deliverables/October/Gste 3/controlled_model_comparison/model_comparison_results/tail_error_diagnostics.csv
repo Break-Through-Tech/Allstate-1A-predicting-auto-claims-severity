@@ -1,0 +1,21 @@
+model,partition,segment,support_claims,mae_original_loss_units
+training_median_constant,validation,loss < train p90,25422,1168.5043906852331
+training_median_constant,validation,train p90 <= loss < p99,2547,6593.71148409894
+training_median_constant,validation,loss >= train p99,279,16093.826236559138
+training_median_constant,validation,all validation claims,28248,1805.0863526621354
+training_mean_constant,validation,loss < train p90,25422,1446.535909728351
+training_mean_constant,validation,train p90 <= loss < p99,2547,5670.261229285631
+training_mean_constant,validation,loss >= train p99,279,15170.37598174583
+training_mean_constant,validation,all validation claims,28248,1962.9186543122248
+ridge_onehot_pooled,validation,loss < train p90,25422,1050.671011656817
+ridge_onehot_pooled,validation,train p90 <= loss < p99,2547,2770.053671729489
+ridge_onehot_pooled,validation,loss >= train p99,279,9629.509628396168
+ridge_onehot_pooled,validation,all validation claims,28248,1290.4318304501962
+hist_gradient_boosting,validation,loss < train p90,25422,874.2062636446899
+hist_gradient_boosting,validation,train p90 <= loss < p99,2547,3006.885859801847
+hist_gradient_boosting,validation,loss >= train p99,279,9446.515995289894
+hist_gradient_boosting,validation,all validation claims,28248,1151.1677953121105
+hist_gradient_boosting_max_iter_400,validation,loss < train p90,25422,874.2055714576745
+hist_gradient_boosting_max_iter_400,validation,train p90 <= loss < p99,2547,3006.7228972750013
+hist_gradient_boosting_max_iter_400,validation,loss >= train p99,279,9446.18094944993
+hist_gradient_boosting_max_iter_400,validation,all validation claims,28248,1151.1491695643217
