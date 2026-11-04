@@ -6,7 +6,7 @@
 
 **Reviewer:** Ragib Nehal
 
-**Artifact version:** Workflow Run `OCT-JP-MODEL-COMPARISON-001`; review rerun from commit `7c5ba0c`
+**Artifact version:** Workflow Run `OCT-JP-MODEL-COMPARISON-001`; review rerun from commit `7c5ba0c`; merged in PR #55 as commit `87c736e`
 
 ## Scope
 
@@ -16,15 +16,15 @@ Issue #45 compares two approved and distinct learned approaches against the requ
 
 | Artifact | Location | Purpose |
 |---|---|---|
-| Controlled comparison notebook | `notebooks/junaid-pathan/october/task_45_controlled_model_comparison.ipynb` | Executes the frozen split checks, preprocessing, cross-validation, validation comparison, diagnostics, iteration, and exports. |
-| Model comparison | `notebooks/junaid-pathan/october/model_comparison_results/model_comparison.csv` | Records CV and validation MAE, baseline improvements, claim counts, complexity, and runtime for the selected comparisons. |
-| Experiment register | `notebooks/junaid-pathan/october/model_comparison_results/experiment_register.csv` | Preserves hypotheses, settings, negative results, interpretations, and next decisions for all 11 registered runs. |
-| Tuning-grid results | `notebooks/junaid-pathan/october/model_comparison_results/tuning_grid_results.csv` | Records the complete Ridge and HistGradientBoosting training-fold searches, including unselected settings. |
-| Tail diagnostics | `notebooks/junaid-pathan/october/model_comparison_results/tail_error_diagnostics.csv` | Reports validation MAE and support counts below training p90, from p90 to p99, at or above p99, and overall. |
-| Validation predictions | `notebooks/junaid-pathan/october/model_comparison_results/validation_predictions.csv` | Supplies row-level validation targets and predictions for independent metric verification. |
-| Pooled vocabulary | `notebooks/junaid-pathan/october/model_comparison_results/pooled_vocabulary.csv` | Records the training-derived categorical vocabulary and rare-level pooling evidence. |
-| Teammate cross-check | `notebooks/junaid-pathan/october/model_comparison_results/teammate_crosscheck.csv` | Compares the results with Jonathan Deng's independent model run. |
-| Run metadata | `notebooks/junaid-pathan/october/model_comparison_results/run_metadata.json` | Records hashes, split and modeling versions, seed, partitions, software versions, runtime, validation consultations, and test policy. |
+| Controlled comparison notebook | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/task_45_controlled_model_comparison.ipynb` | Executes the frozen split checks, preprocessing, cross-validation, validation comparison, diagnostics, iteration, and exports. |
+| Model comparison | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/model_comparison.csv` | Records CV and validation MAE, baseline improvements, claim counts, complexity, and runtime for the selected comparisons. |
+| Experiment register | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/experiment_register.csv` | Preserves hypotheses, settings, negative results, interpretations, and next decisions for all 11 registered runs. |
+| Tuning-grid results | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/tuning_grid_results.csv` | Records the complete Ridge and HistGradientBoosting training-fold searches, including unselected settings. |
+| Tail diagnostics | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/tail_error_diagnostics.csv` | Reports validation MAE and support counts below training p90, from p90 to p99, at or above p99, and overall. |
+| Validation predictions | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/validation_predictions.csv` | Supplies row-level validation targets and predictions for independent metric verification. |
+| Pooled vocabulary | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/pooled_vocabulary.csv` | Records the training-derived categorical vocabulary and rare-level pooling evidence. |
+| Teammate cross-check | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/teammate_crosscheck.csv` | Compares the results with Jonathan Deng's independent model run. |
+| Run metadata | `notebooks/final-deliverables/October/Gste 3/controlled_model_comparison/model_comparison_results/run_metadata.json` | Records hashes, split and modeling versions, seed, partitions, software versions, runtime, validation consultations, and test policy. |
 
 ## Method
 
@@ -62,7 +62,7 @@ Nine validation cells contained a category level unseen during training: one eac
 ## Anomalies and limitations
 
 - The review environment contained newer libraries than the Gate 1 reference environment: scikit-learn 1.9.1 rather than 1.6.1, pandas 3.0.5 rather than 2.3.3, and NumPy 2.5.1 rather than 2.0.2. The run is a successful environment-variant replication, not an exact version-matched reproduction. Versions are recorded, source and manifest hashes passed, and the principal model-selection conclusion remained unchanged.
-- The review run metadata records `git_dirty: true` because the notebook, generated evidence, dependency setup, and this review were being updated in the working tree. The final PR commit should be used as the immutable artifact version.
+- The review run metadata records `git_dirty: true` because the notebook, generated evidence, dependency setup, and this review were being updated in the working tree. The reviewed artifacts were subsequently merged in PR #55 as commit `87c736e`, which is the durable artifact version.
 - The selected HGB leaf count of 63 was the largest value tested, so the grid does not establish whether a larger value would improve CV MAE.
 - The p99 diagnostic contains only 279 validation claims. Differences between models in this segment are not strong enough to support a separate selection decision.
 - September exploration used the full labeled dataset, so the October validation partition is not wholly unseen by the broader project.
@@ -84,4 +84,4 @@ Nine validation cells contained a category level unseen during training: one eac
 
 ## Completion
 
-Issue #45's controlled model comparison deliverables and independent review are complete. The selected result is HistGradientBoosting E02 at 200 maximum rounds; the single-variable 400-round iteration did not produce a reliable improvement and meets the stopping rule. The protected final test partition remains unused. The remaining repository action is to commit the reviewed notebook, result bundle, and this report so the final PR commit becomes the durable artifact version.
+Issue #45's controlled model comparison deliverables and independent review are complete. The selected result is HistGradientBoosting E02 at 200 maximum rounds; the single-variable 400-round iteration did not produce a reliable improvement and meets the stopping rule. The protected final test partition remains unused. The reviewed notebook, result bundle, and report were merged in PR #55 as commit `87c736e`; issue #45 remains open.
