@@ -1,4 +1,4 @@
-# Issue #46: Feature Experiments and Review
+# Issue #46: Feature Experiments Report
 
 **Status:** Ready for independent review
 
@@ -6,29 +6,36 @@
 
 **Reviewer:** Mia Chavez (pending)
 
-**Artifact version:** Workflow Run `OCT-RN-FEATURE-REVIEW-001`; notebook code commit `b22c13bdb56c939225000bf820ab8642f99a5726`; exact file hashes in `artifact_manifest.csv`
+**Artifact version:** Workflow Run `OCT-RN-FEATURE-REVIEW-001`; notebook code commit `b22c13bdb56c939225000bf820ab8642f99a5726`; exact file hashes in `notebooks/ragib-nehal/oct-notebooks/feature-experiments-review/receipt/artifact_manifest.csv`
 
 ## Scope
 
 Issue #46 records the October feature inclusion decision, runs optional
 experiment O1, analyzes prediction errors including high-loss claims, checks
 overfitting and prediction failures, and prepares an independent reproduction
-and Gate 3 approval record. O2-O4 are explicitly deferred to the November
-handoff. The protected test partition is outside this work.
+and Gate 3 approval record. O2-O4 are explicitly deferred as findings for the
+November handoff process. The protected test partition is outside this work.
+
+The resulting comparison is evidence for the team, not a final model-selection
+decision. Retaining E02-full means only that O1 did not justify replacing its
+130-predictor configuration in this experiment. Issue #47 governs completion
+and any provisional November candidate, while Issue #48 owns the November
+handoff and team decision process.
 
 ## Final artifacts
 
 | Artifact | Location | Purpose |
 |---|---|---|
-| Executed analysis | `error_analysis.ipynb` | Reproduces E02, runs O1, applies the selection rule, and exports diagnostics. |
-| Feature comparison | `feature_experiment_comparison.csv` | Records fold and validation MAE, runtime, feature counts, and the selected run. |
-| Feature decisions | `feature_decisions.csv` | Records the O1 decision and O2-O4 deferrals. |
-| Row-level evidence | `validation_predictions.csv` | Supports independent MAE and error-diagnostic recalculation for 28,248 validation claims. |
-| Error diagnostics | `error_diagnostics.csv` | Reports support, MAE, signed error, error quantiles, underprediction, and failure counts. |
-| Largest errors | `largest_errors.csv` | Records the selected model's 25 largest validation absolute errors. |
-| Run receipt | `run_receipt.json` | Binds inputs, code, settings, environment, consultations, and output hashes. |
-| November handoff | `november_handoff.md` | Preserves O2-O4 hypotheses and deferral reasons. |
-| Verification | `verify_feature_experiments_review.py` and `artifact_manifest.csv` | Independently checks the evidence contract and exact artifact versions. |
+| Executed analysis | `analysis/error_analysis.ipynb` | Reproduces E02, runs O1, applies the selection rule, and exports diagnostics. |
+| Feature comparison | `outputs/feature_experiment_comparison.csv` | Records fold and validation MAE, runtime, feature counts, and the retained run for this experiment. |
+| Feature decisions | `outputs/feature_decisions.csv` | Records the O1 decision and O2-O4 deferrals. |
+| Row-level evidence | `outputs/validation_predictions.csv` | Supports independent MAE and error-diagnostic recalculation for 28,248 validation claims. |
+| Error diagnostics | `outputs/error_diagnostics.csv` | Reports support, MAE, signed error, error quantiles, underprediction, and failure counts. |
+| Largest errors | `outputs/largest_errors.csv` | Records the retained Issue #46 comparison configuration's 25 largest validation absolute errors. |
+| Run receipt | `receipt/run_receipt.json` | Binds inputs, code, settings, environment, consultations, and output hashes. |
+| Artifact manifest | `receipt/artifact_manifest.csv` | Records the exact path, SHA-256, and size of each bundle file. |
+| November findings | `records/november_handoff.md` | Supplies O2-O4 hypotheses and deferral reasons to the Issue #48 handoff process. |
+| Verification | `verification/verify_feature_experiments_review.py` | Independently checks the evidence contract and exact artifact versions. |
 
 All paths are relative to this draft bundle.
 
@@ -53,15 +60,16 @@ All paths are relative to this draft bundle.
 
 ## Results
 
-| Run | Predictors | Train 5-fold CV MAE | CV SD | Validation MAE | Result |
+| Run | Predictors | Train 5-fold CV MAE | CV SD | Validation MAE | Issue #46 result |
 |---|---:|---:|---:|---:|---|
-| E02-full | 130 | 1,171.51 | 5.87 | 1,151.24 | Selected / retain |
-| O1 | 99 | 1,172.58 | 6.64 | 1,152.50 | Not selected |
+| E02-full | 130 | 1,171.51 | 5.87 | 1,151.24 | Retained comparison configuration |
+| O1 | 99 | 1,172.58 | 6.64 | 1,152.50 | Not retained |
 
 O1 regressed mean CV MAE by 0.0915% and validation MAE by 0.1094%. It did not
 meet either side of the 1% improvement rule, so the recorded feature decision
-is to retain all 130 predictors. O2-O4 are deferred with reasons in
-`november_handoff.md`.
+is to retain all 130 predictors for this experiment. This does not confirm a
+final selected model or final feature set. O2-O4 are deferred with reasons in
+`records/november_handoff.md` for consideration through Issue #48.
 
 For the retained E02 reproduction, validation MAE was 874.15 below training
 p90 (25,422 claims), 3,007.94 from p90 to p99 (2,547 claims), and 9,450.11 at
@@ -79,20 +87,22 @@ values and no non-finite values.
 
 ## Anomalies and limitations
 
-- The selected HGB still performs poorly on large claims; the p99 segment has
-  MAE 9,450.11 and only 279 validation claims.
+- The retained HGB comparison configuration still performs poorly on large
+  claims; the p99 segment has MAE 9,450.11 and only 279 validation claims.
 - September EDA used the full labeled file, so October validation is protected
   from fitting but is not wholly unseen by the broader project.
 - One random internal split cannot establish temporal or population stability.
 - The issue #45 review rerun used newer libraries. This run deliberately uses
   the repository-pinned scikit-learn 1.6.1 environment and reproduces the same
-  model-selection conclusion with a validation MAE within 0.08.
+  within-experiment conclusion with a validation MAE within 0.08.
 - The predictors are anonymous. Model coefficients, splits, or importance
   scores describe model behavior only; they do not establish a predictor's
   business meaning, causal effect, or suitability for an individual claim
   decision.
 - O1 tests one predeclared exclusion rule. It does not establish that every
   retained field is individually necessary.
+- Issue #46 does not establish a final selected model. That conclusion remains
+  subject to the Issue #47 completion process and Issue #48 team handoff.
 
 ## Verification
 
@@ -101,7 +111,7 @@ values and no non-finite values.
   coverage, MAEs, severity supports, decision logic, and receipt provenance.
 - [x] Required outputs were generated inside the draft bundle.
 - [ ] Independent reviewer reran the notebook from the recorded artifact version.
-- [ ] Independent reviewer rebuilt the comparison table and audited the selected candidate.
+- [ ] Independent reviewer rebuilt the comparison table and audited the retained Issue #46 configuration.
 - [ ] Full-team Gate 3 decisions were recorded.
 
 **Reviewed by:** Mia Chavez (pending)
@@ -115,4 +125,5 @@ agreement or disagreement is recorded yet.
 
 The author draft is ready for independent review. Issue #46 and Gate 3 remain
 open. The Gate 1 experiment register has not been changed, the artifacts have
-not been promoted, and no team approval has been inferred.
+not been promoted, and no team approval or final model selection has been
+inferred.

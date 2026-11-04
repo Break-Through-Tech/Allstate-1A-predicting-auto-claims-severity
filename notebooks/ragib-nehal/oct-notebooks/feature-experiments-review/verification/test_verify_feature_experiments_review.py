@@ -12,8 +12,8 @@ from unittest.mock import patch
 import pandas as pd
 
 
-BUNDLE = Path(__file__).resolve().parent
-VERIFIER_PATH = BUNDLE / "verify_feature_experiments_review.py"
+BUNDLE = Path(__file__).resolve().parents[1]
+VERIFIER_PATH = Path(__file__).resolve().parent / "verify_feature_experiments_review.py"
 
 
 def load_verifier():
@@ -81,7 +81,21 @@ class VerifierMutationTests(unittest.TestCase):
 
     def test_completed_work_uses_an_implementation_record_not_an_active_plan(self):
         self.assertFalse((BUNDLE / "issue_46_implementation_plan.md").exists())
-        self.assertTrue((BUNDLE / "issue_46_implementation_record.md").is_file())
+        self.assertTrue((BUNDLE / "records" / "issue_46_implementation_record.md").is_file())
+
+    def test_issue_report_lives_only_in_docs_and_remains_manifested(self):
+        issue_report = (
+            self.verifier.ROOT
+            / "docs/team/october/Gate 3/feature_experiments_report.md"
+        )
+        self.assertEqual(
+            getattr(self.verifier, "ISSUE_REPORT", None),
+            issue_report,
+        )
+        self.assertTrue(issue_report.is_file())
+        self.assertIn(issue_report, self.verifier.artifact_files())
+        self.assertFalse((BUNDLE / "feature_experiments_report.md").exists())
+        self.assertFalse((BUNDLE / "model_review.md").exists())
 
     def test_markdown_files_have_no_trailing_whitespace(self):
         offenders = []

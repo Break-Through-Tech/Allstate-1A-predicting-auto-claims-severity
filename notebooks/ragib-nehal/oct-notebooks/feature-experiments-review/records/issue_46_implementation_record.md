@@ -27,8 +27,12 @@ review.
   claim-level target alignment, feature selection, predictions, every severity
   diagnostic, largest-error values, receipt provenance, notebook execution,
   and pending review state.
-- Prepared the November deferral handoff, model review, independent-review
+- Prepared the November deferral handoff, feature experiments issue report, independent-review
   checklist, reviewer evidence directory, and Gate 3 approval record.
+- Grouped the draft bundle into `analysis/`, `outputs/`, `receipt/`, `verification/`,
+  `review/`, and `records/`. `review/reviewer_reproduction/` is reserved for Mia
+  Chavez's independently generated evidence. The canonical report remains in
+  `docs/team/october/Gate 3/feature_experiments_report.md`.
 
 ## Decisions
 
@@ -37,15 +41,22 @@ training level exceeded 99% support. It produced mean CV MAE 1,172.58 and
 validation MAE 1,152.50, compared with 1,171.51 and 1,151.24 for full E02.
 Those changes were regressions of 0.0915% and 0.1094%, so O1 failed the
 predeclared requirement for at least 1% improvement in both measures. The
-recorded decision is to retain all 130 predictors.
+recorded Issue #46 experiment decision is to retain all 130 predictors rather
+than adopt O1. This is a finding for team consideration, not confirmation of a
+final selected model or final feature set. Issue #47 governs completion and any
+provisional candidate; Issue #48 owns the November handoff and team decision.
 
 O2-O4 were deferred with their hypotheses and reasons preserved in
-`november_handoff.md`. Correlation or weak marginal association alone was not
+`records/november_handoff.md`. Correlation or weak marginal association alone was not
 used to remove any field. Anonymous predictors were not assigned business
 meaning or causal effects.
 
 ## Verification evidence
 
+- Export paths in the notebook now write into `outputs/` and `receipt/`. That
+  path edit changed the notebook code hash. The notebook was not re-run, and
+  the five output CSV hashes did not change. The receipt and the notebook's
+  printed receipt use the updated code hash.
 - The final notebook ran from a fresh Python 3.12 kernel with scikit-learn
   1.6.1, pandas 2.3.3, and NumPy 2.3.5.
 - The standalone verifier passed all frozen-input, row-coverage, metric,

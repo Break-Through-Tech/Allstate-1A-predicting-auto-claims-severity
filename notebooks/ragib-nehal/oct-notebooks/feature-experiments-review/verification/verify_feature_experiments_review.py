@@ -15,19 +15,21 @@ import numpy as np
 import pandas as pd
 
 
-BUNDLE = Path(__file__).resolve().parent
+BUNDLE = Path(__file__).resolve().parents[1]
 ROOT = BUNDLE.parents[3]
 SOURCE = ROOT / "data/allstate_claims_data.csv"
 MANIFEST = ROOT / "notebooks/final-deliverables/October/Gate 1/partition_manifest.csv"
-NOTEBOOK = BUNDLE / "error_analysis.ipynb"
-COMPARISON = BUNDLE / "feature_experiment_comparison.csv"
-DECISIONS = BUNDLE / "feature_decisions.csv"
-PREDICTIONS = BUNDLE / "validation_predictions.csv"
-DIAGNOSTICS = BUNDLE / "error_diagnostics.csv"
-LARGEST = BUNDLE / "largest_errors.csv"
-RECEIPT = BUNDLE / "run_receipt.json"
-ARTIFACT_MANIFEST = BUNDLE / "artifact_manifest.csv"
-IMPLEMENTATION_RECORD = BUNDLE / "issue_46_implementation_record.md"
+OUTPUTS = BUNDLE / "outputs"
+NOTEBOOK = BUNDLE / "analysis" / "error_analysis.ipynb"
+COMPARISON = OUTPUTS / "feature_experiment_comparison.csv"
+DECISIONS = OUTPUTS / "feature_decisions.csv"
+PREDICTIONS = OUTPUTS / "validation_predictions.csv"
+DIAGNOSTICS = OUTPUTS / "error_diagnostics.csv"
+LARGEST = OUTPUTS / "largest_errors.csv"
+RECEIPT = BUNDLE / "receipt" / "run_receipt.json"
+ARTIFACT_MANIFEST = BUNDLE / "receipt" / "artifact_manifest.csv"
+IMPLEMENTATION_RECORD = BUNDLE / "records" / "issue_46_implementation_record.md"
+ISSUE_REPORT = ROOT / "docs/team/october/Gate 3/feature_experiments_report.md"
 
 SOURCE_SHA256 = "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03"
 MANIFEST_SHA256 = "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b"
@@ -53,12 +55,12 @@ REQUIRED_FILES = [
     LARGEST,
     RECEIPT,
     ARTIFACT_MANIFEST,
-    BUNDLE / "november_handoff.md",
-    BUNDLE / "model_review.md",
-    BUNDLE / "review_checklist.md",
-    BUNDLE / "gate3_approval_record.md",
+    BUNDLE / "records" / "november_handoff.md",
+    ISSUE_REPORT,
+    BUNDLE / "review" / "review_checklist.md",
+    BUNDLE / "review" / "gate3_approval_record.md",
     IMPLEMENTATION_RECORD,
-    BUNDLE / "reviewer_reproduction/.gitkeep",
+    BUNDLE / "review" / "reviewer_reproduction" / ".gitkeep",
 ]
 
 
@@ -81,20 +83,25 @@ def notebook_code_sha256(path: Path) -> str:
 
 
 def artifact_files() -> list[Path]:
-    return sorted(
+    bundle_files = [
         path
         for path in BUNDLE.rglob("*")
         if path.is_file()
         and path != ARTIFACT_MANIFEST
         and ".ipynb_checkpoints" not in path.parts
         and path.name != ".DS_Store"
-    )
+    ]
+    return sorted(bundle_files + [ISSUE_REPORT])
+
+
+def artifact_key(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
 
 
 def refresh_artifact_manifest() -> None:
     rows = [
         {
-            "relative_path": path.relative_to(BUNDLE).as_posix(),
+            "relative_path": artifact_key(path),
             "sha256": sha256(path),
             "bytes": path.stat().st_size,
         }
@@ -109,7 +116,7 @@ def require(condition: bool, message: str) -> None:
 
 
 def check_required_files() -> None:
-    missing = [path.relative_to(BUNDLE).as_posix() for path in REQUIRED_FILES if not path.is_file()]
+    missing = [artifact_key(path) for path in REQUIRED_FILES if not path.is_file()]
     require(not missing, "missing bundle artifacts: " + ", ".join(missing))
 
 
@@ -306,7 +313,7 @@ def check_receipt_and_notebook() -> None:
     for library in ["python", "numpy", "pandas", "scikit-learn"]:
         require(library in receipt["library_versions"], f"receipt omits {library} version")
     for relative_path, expected_hash in receipt["output_sha256"].items():
-        require(sha256(BUNDLE / relative_path) == expected_hash, f"receipt hash mismatch: {relative_path}")
+        require(sha256(OUTPUTS / relative_path) == expected_hash, f"receipt hash mismatch: {relative_path}")
 
     notebook = nbformat.read(NOTEBOOK, as_version=4)
     code_cells = [cell for cell in notebook.cells if cell.cell_type == "code"]
@@ -326,13 +333,13 @@ def check_receipt_and_notebook() -> None:
 
 
 def check_pending_review_state() -> None:
-    model_review = (BUNDLE / "model_review.md").read_text(encoding="utf-8")
-    checklist = (BUNDLE / "review_checklist.md").read_text(encoding="utf-8")
-    approval = (BUNDLE / "gate3_approval_record.md").read_text(encoding="utf-8")
-    handoff = (BUNDLE / "november_handoff.md").read_text(encoding="utf-8")
-    require("**Status:** Ready for independent review" in model_review,
-            "model review must remain ready for independent review")
-    require("**Reviewer:** Mia Chavez (pending)" in model_review,
+    issue_report = ISSUE_REPORT.read_text(encoding="utf-8")
+    checklist = (BUNDLE / "review" / "review_checklist.md").read_text(encoding="utf-8")
+    approval = (BUNDLE / "review" / "gate3_approval_record.md").read_text(encoding="utf-8")
+    handoff = (BUNDLE / "records" / "november_handoff.md").read_text(encoding="utf-8")
+    require("**Status:** Ready for independent review" in issue_report,
+            "issue report must remain ready for independent review")
+    require("**Reviewer:** Mia Chavez (pending)" in issue_report,
             "Mia must remain the pending independent reviewer")
     require("- [x]" not in checklist, "review checklist contains unverified completion marks")
     require("**Status:** Pending" in checklist, "review checklist status must remain pending")
@@ -340,26 +347,27 @@ def check_pending_review_state() -> None:
     require(approval.count("| Pending |") >= 6, "all six team decisions must remain pending")
     for experiment_id in ["O2", "O3", "O4"]:
         require(experiment_id in handoff, f"November handoff omits {experiment_id}")
-    require("causal" in model_review.lower() and "anonymous" in model_review.lower(),
-            "model review lacks anonymous/non-causal interpretation limits")
+    require("causal" in issue_report.lower() and "anonymous" in issue_report.lower(),
+            "issue report lacks anonymous/non-causal interpretation limits")
     require(IMPLEMENTATION_RECORD.is_file(), "completed work lacks an implementation record")
     require(not (BUNDLE / "issue_46_implementation_plan.md").exists(),
             "completed implementation plan was not converted to a record")
     whitespace_offenders = []
-    for path in BUNDLE.rglob("*.md"):
+    markdown_files = list(BUNDLE.rglob("*.md")) + [ISSUE_REPORT]
+    for path in markdown_files:
         for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
             if line.endswith((" ", "\t")):
-                whitespace_offenders.append(f"{path.relative_to(BUNDLE)}:{line_number}")
+                whitespace_offenders.append(f"{artifact_key(path)}:{line_number}")
     require(not whitespace_offenders,
             "Markdown trailing whitespace: " + ", ".join(whitespace_offenders))
 
 
 def check_artifact_manifest() -> None:
     recorded = pd.read_csv(ARTIFACT_MANIFEST).set_index("relative_path")
-    expected_paths = {path.relative_to(BUNDLE).as_posix() for path in artifact_files()}
+    expected_paths = {artifact_key(path) for path in artifact_files()}
     require(set(recorded.index) == expected_paths, "artifact manifest file list is stale")
     for relative_path, row in recorded.iterrows():
-        path = BUNDLE / relative_path
+        path = ROOT / relative_path
         require(row["sha256"] == sha256(path), f"artifact manifest hash mismatch: {relative_path}")
         require(int(row["bytes"]) == path.stat().st_size, f"artifact manifest byte count mismatch: {relative_path}")
 
