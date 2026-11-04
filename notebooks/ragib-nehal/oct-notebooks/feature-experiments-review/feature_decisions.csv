@@ -1,0 +1,5 @@
+experiment_id,status,hypothesis,decision,reason,excluded_features,next_gate
+O1,completed,Removing training-defined near-constant categorical fields may preserve accuracy with fewer inputs.,retain_all_130_predictors,Predeclared rule requires at least 1% improvement in both CV and validation MAE; observed gains were -0.0915% and -0.1094%.,cat15|cat17|cat18|cat19|cat20|cat21|cat22|cat32|cat33|cat34|cat35|cat42|cat46|cat47|cat48|cat51|cat55|cat56|cat58|cat59|cat60|cat61|cat62|cat63|cat64|cat67|cat68|cat69|cat70|cat77|cat78,independent review
+O2,deferred,Reducing correlated continuous pairs may change MAE little.,defer,"Correlation alone does not justify field deletion, and regularization/tree handling already addresses redundancy.",,November handoff
+O3,deferred,Fold-safe data-driven selection may retain accuracy with fewer fields.,defer,Avoid another feature-selection surface after limited validation use.,,November handoff
+O4,deferred,A log1p target may reduce linear-model MAE after back-transformation.,defer,This changes the target transformation rather than feature inclusion and is not required for Gate 3.,,November handoff

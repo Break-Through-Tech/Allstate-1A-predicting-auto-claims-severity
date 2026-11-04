@@ -1,0 +1,84 @@
+{
+  "workflow_run": "OCT-RN-FEATURE-REVIEW-001",
+  "modeling_data_version": "OCT-MD-001",
+  "split_version": "OCT-SPLIT-001",
+  "seed": 42,
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+  "notebook_code_sha256": "345e1feec736b4bb048c2c0bbc78262c5c185d5de355c31d950026eedad00aec",
+  "code_version_commit": "b22c13bdb56c939225000bf820ab8642f99a5726",
+  "git_dirty_at_start": false,
+  "partition_counts_used": {
+    "train": 131822,
+    "validation": 28248,
+    "test": "excluded"
+  },
+  "cv_folds": 5,
+  "model_settings": {
+    "loss": "absolute_error",
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 63,
+    "min_samples_leaf": 50,
+    "max_iter": 200,
+    "early_stopping": true,
+    "random_state": 42,
+    "rare_min_frequency": 132
+  },
+  "feature_counts": {
+    "E02-full": 130,
+    "O1": 99
+  },
+  "excluded_features": [
+    "cat15",
+    "cat17",
+    "cat18",
+    "cat19",
+    "cat20",
+    "cat21",
+    "cat22",
+    "cat32",
+    "cat33",
+    "cat34",
+    "cat35",
+    "cat42",
+    "cat46",
+    "cat47",
+    "cat48",
+    "cat51",
+    "cat55",
+    "cat56",
+    "cat58",
+    "cat59",
+    "cat60",
+    "cat61",
+    "cat62",
+    "cat63",
+    "cat64",
+    "cat67",
+    "cat68",
+    "cat69",
+    "cat70",
+    "cat77",
+    "cat78"
+  ],
+  "selection_rule": "select O1 only when both mean CV MAE and validation MAE improve by at least 1%",
+  "selected_run": "E02-full",
+  "validation_consults": {
+    "E02-full-reproduction": 1,
+    "O1-new": 1
+  },
+  "test_policy": "test rows excluded before analysis; no test summaries, predictions, or scores",
+  "library_versions": {
+    "python": "3.12.12",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.6.1"
+  },
+  "output_sha256": {
+    "feature_experiment_comparison.csv": "e6e750c4f6d2e8d7d6c45e718b7d13b7af0e93ef56388b97967c37bd75706243",
+    "feature_decisions.csv": "2fd594ba16c456829d910fb9bd2d5cc0b0fadf9337c91f6fb2cdf6a67f4995e5",
+    "validation_predictions.csv": "4eae9ad29363299a3758f4beb785ad4ee88469acdae856ce95c95a0d9805d82e",
+    "error_diagnostics.csv": "3929fb3645c42b71e2128cf110cde216bf0df37dac687b98a41b4f89bd9657e9",
+    "largest_errors.csv": "ee417e632f6da1380adf5a2ad43c5c3f40e2e76d41c55d6a3600af2afca570a6"
+  }
+}
