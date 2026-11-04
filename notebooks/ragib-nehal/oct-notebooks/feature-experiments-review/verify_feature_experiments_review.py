@@ -27,6 +27,7 @@ DIAGNOSTICS = BUNDLE / "error_diagnostics.csv"
 LARGEST = BUNDLE / "largest_errors.csv"
 RECEIPT = BUNDLE / "run_receipt.json"
 ARTIFACT_MANIFEST = BUNDLE / "artifact_manifest.csv"
+IMPLEMENTATION_RECORD = BUNDLE / "issue_46_implementation_record.md"
 
 SOURCE_SHA256 = "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03"
 MANIFEST_SHA256 = "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b"
@@ -56,6 +57,7 @@ REQUIRED_FILES = [
     BUNDLE / "model_review.md",
     BUNDLE / "review_checklist.md",
     BUNDLE / "gate3_approval_record.md",
+    IMPLEMENTATION_RECORD,
     BUNDLE / "reviewer_reproduction/.gitkeep",
 ]
 
@@ -165,6 +167,12 @@ def check_predictions_and_metrics(manifest: pd.DataFrame) -> tuple[pd.DataFrame,
     require(prediction_ids == validation_ids, "prediction IDs do not equal the frozen validation IDs")
     require(prediction_ids.isdisjoint(test_ids), "protected test IDs appear in predictions")
 
+    source_truth = pd.read_csv(SOURCE, usecols=["id", "loss"]).set_index("id")["loss"]
+    expected_loss = predictions["id"].map(source_truth)
+    require(expected_loss.notna().all(), "prediction claim ID is absent from the frozen source")
+    require(np.array_equal(predictions["loss"].to_numpy(), expected_loss.to_numpy()),
+            "recorded loss does not match the frozen source for its claim ID")
+
     prediction_columns = [column for column in predictions if column.startswith("pred_")]
     require(np.isfinite(predictions[prediction_columns].to_numpy(dtype=float)).all(),
             "non-finite validation prediction found")
@@ -203,9 +211,6 @@ def check_diagnostics(predictions: pd.DataFrame, comparison: pd.DataFrame) -> No
     require(set(diagnostics["model"]) == {
         "training_mean", "training_median", "ridge", "e02_full", "o1_reduced"
     }, "diagnostic model set changed")
-    supports = diagnostics.loc[diagnostics["model"] == "e02_full"].set_index("segment")["support_claims"]
-    require(supports.to_dict() == EXPECTED_SUPPORT, "severity support counts changed")
-
     column_of = {
         "training_mean": "pred_training_mean",
         "training_median": "pred_training_median",
@@ -213,26 +218,71 @@ def check_diagnostics(predictions: pd.DataFrame, comparison: pd.DataFrame) -> No
         "e02_full": "pred_e02_full",
         "o1_reduced": "pred_o1_reduced",
     }
+
+    frozen_source = pd.read_csv(SOURCE, usecols=["id", "loss"])
+    frozen_manifest = pd.read_csv(MANIFEST, usecols=["id", "partition"])
+    train_ids = set(frozen_manifest.loc[frozen_manifest["partition"] == "train", "id"])
+    train_loss = frozen_source.loc[frozen_source["id"].isin(train_ids), "loss"]
+    train_p90 = float(train_loss.quantile(0.90))
+    train_p99 = float(train_loss.quantile(0.99))
+    segments = {
+        "loss < train p90": predictions["loss"] < train_p90,
+        "train p90 <= loss < p99": (
+            (predictions["loss"] >= train_p90) & (predictions["loss"] < train_p99)
+        ),
+        "loss >= train p99": predictions["loss"] >= train_p99,
+        "all validation claims": pd.Series(True, index=predictions.index),
+    }
+    require({name: int(mask.sum()) for name, mask in segments.items()} == EXPECTED_SUPPORT,
+            "independently derived severity support counts changed")
+    require(len(diagnostics) == len(column_of) * len(segments), "diagnostic row count changed")
+
+    float_fields = {
+        "mae": lambda absolute, signed, predicted, actual: float(np.mean(absolute)),
+        "mean_signed_error": lambda absolute, signed, predicted, actual: float(np.mean(signed)),
+        "median_absolute_error": lambda absolute, signed, predicted, actual: float(np.median(absolute)),
+        "p90_absolute_error": lambda absolute, signed, predicted, actual: float(np.quantile(absolute, 0.90)),
+        "p99_absolute_error": lambda absolute, signed, predicted, actual: float(np.quantile(absolute, 0.99)),
+        "underprediction_rate": lambda absolute, signed, predicted, actual: float(np.mean(predicted < actual)),
+    }
     for model, prediction_column in column_of.items():
-        row = diagnostics.loc[
-            (diagnostics["model"] == model)
-            & (diagnostics["segment"] == "all validation claims")
-        ].iloc[0]
-        errors = predictions[prediction_column] - predictions["loss"]
-        require(math.isclose(float(np.mean(np.abs(errors))), row["mae"], abs_tol=1e-9),
-                f"{model} overall diagnostic MAE does not recompute")
-        require(int((predictions[prediction_column] < 0).sum()) == int(row["negative_predictions"]),
-                f"{model} negative prediction count changed")
+        for segment, mask in segments.items():
+            matching = diagnostics.loc[
+                (diagnostics["model"] == model) & (diagnostics["segment"] == segment)
+            ]
+            require(len(matching) == 1, f"expected one diagnostic row for {model} / {segment}")
+            row = matching.iloc[0]
+            actual = predictions.loc[mask, "loss"].to_numpy(dtype=float)
+            predicted = predictions.loc[mask, prediction_column].to_numpy(dtype=float)
+            signed = predicted - actual
+            absolute = np.abs(signed)
+            require(int(row["support_claims"]) == len(actual),
+                    f"{model} / {segment} support does not recompute")
+            for field, calculation in float_fields.items():
+                expected = calculation(absolute, signed, predicted, actual)
+                require(math.isclose(float(row[field]), expected, abs_tol=1e-9),
+                        f"{model} / {segment} {field} does not recompute")
+            require(int(row["negative_predictions"]) == int((predicted < 0).sum()),
+                    f"{model} / {segment} negative prediction count changed")
+            require(int(row["non_finite_predictions"]) == int((~np.isfinite(predicted)).sum()),
+                    f"{model} / {segment} non-finite prediction count changed")
 
     largest = pd.read_csv(LARGEST)
     selected_run = comparison.index[comparison["selected"]].item()
     selected_column = "pred_o1_reduced" if selected_run == "O1" else "pred_e02_full"
-    expected_ids = set(
-        predictions.assign(abs_error=(predictions[selected_column] - predictions["loss"]).abs())
-        .nlargest(25, "abs_error")["id"]
-    )
-    require(len(largest) == 25 and set(largest["id"]) == expected_ids,
-            "largest-errors export is not the selected model's top 25")
+    expected_largest = predictions[["id", "loss", selected_column]].copy()
+    expected_largest = expected_largest.rename(columns={selected_column: "prediction"})
+    expected_largest["signed_error"] = expected_largest["prediction"] - expected_largest["loss"]
+    expected_largest["abs_error"] = expected_largest["signed_error"].abs()
+    expected_largest["selected_run"] = selected_run
+    expected_largest = expected_largest.nlargest(25, "abs_error").reset_index(drop=True)
+    require(list(largest.columns) == list(expected_largest.columns), "largest-errors columns changed")
+    require(largest["id"].tolist() == expected_largest["id"].tolist(),
+            "largest-errors export is not the selected model's ordered top 25")
+    require((largest["selected_run"] == selected_run).all(), "largest-errors selected run changed")
+    for field in ["loss", "prediction", "signed_error", "abs_error"]:
+        require(np.allclose(largest[field], expected_largest[field], atol=1e-9, rtol=0),
+                f"largest-errors {field} values do not recompute")
 
 
 def check_receipt_and_notebook() -> None:
@@ -269,6 +319,10 @@ def check_receipt_and_notebook() -> None:
         if output.get("output_type") == "error"
     ]
     require(not errors, "notebook contains error output")
+    serialized_outputs = json.dumps(
+        [output for cell in notebook.cells for output in cell.get("outputs", [])]
+    )
+    require(str(ROOT) not in serialized_outputs, "notebook output contains an absolute personal path")
 
 
 def check_pending_review_state() -> None:
@@ -288,6 +342,16 @@ def check_pending_review_state() -> None:
         require(experiment_id in handoff, f"November handoff omits {experiment_id}")
     require("causal" in model_review.lower() and "anonymous" in model_review.lower(),
             "model review lacks anonymous/non-causal interpretation limits")
+    require(IMPLEMENTATION_RECORD.is_file(), "completed work lacks an implementation record")
+    require(not (BUNDLE / "issue_46_implementation_plan.md").exists(),
+            "completed implementation plan was not converted to a record")
+    whitespace_offenders = []
+    for path in BUNDLE.rglob("*.md"):
+        for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if line.endswith((" ", "\t")):
+                whitespace_offenders.append(f"{path.relative_to(BUNDLE)}:{line_number}")
+    require(not whitespace_offenders,
+            "Markdown trailing whitespace: " + ", ".join(whitespace_offenders))
 
 
 def check_artifact_manifest() -> None:

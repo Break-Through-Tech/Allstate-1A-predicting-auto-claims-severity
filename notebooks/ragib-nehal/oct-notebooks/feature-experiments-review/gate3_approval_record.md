@@ -1,9 +1,13 @@
 # Issue #46 Gate 3 Approval Record
 
-**Status:** Ready for independent review  
-**Workflow Run:** `OCT-RN-FEATURE-REVIEW-001`  
-**Author evidence:** Notebook code commit `b22c13bdb56c939225000bf820ab8642f99a5726`; exact bundle hashes in `artifact_manifest.csv`  
-**Independent reviewer:** Mia Chavez (pending)  
+**Status:** Ready for independent review
+
+**Workflow Run:** `OCT-RN-FEATURE-REVIEW-001`
+
+**Author evidence:** Notebook code commit `b22c13bdb56c939225000bf820ab8642f99a5726`; exact bundle hashes in `artifact_manifest.csv`
+
+**Independent reviewer:** Mia Chavez (pending)
+
 **Gate decision:** Pending
 
 ## Required evidence

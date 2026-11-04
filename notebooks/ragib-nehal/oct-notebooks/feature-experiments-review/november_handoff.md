@@ -1,8 +1,11 @@
 # Issue #46 November Handoff: Deferred Optional Experiments
 
-**Status:** Draft for independent review  
-**Owner:** Ragib Nehal  
-**Workflow Run:** `OCT-RN-FEATURE-REVIEW-001`  
+**Status:** Draft for independent review
+
+**Owner:** Ragib Nehal
+
+**Workflow Run:** `OCT-RN-FEATURE-REVIEW-001`
+
 **Modeling data / split:** `OCT-MD-001` / `OCT-SPLIT-001`
 
 ## October feature decision
