@@ -1,0 +1,3 @@
+name,depth,learning_rate,iterations,cv_mae_mean,cv_mae_std,mean_best_iteration,runtime_seconds
+catboost_1,6,0.08,250,1167.4279614202528,6.937780548567055,249.0,776.387510061264
+catboost_2,8,0.08,250,1159.997163432692,6.893022449036917,249.0,1393.5812318325043

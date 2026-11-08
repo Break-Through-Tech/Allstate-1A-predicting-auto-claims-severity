@@ -1,0 +1,2 @@
+model,variant,feature_count,cv_mae_mean,cv_mae_std,mean_best_iteration,runtime_seconds
+CatBoostRegressor,top75_mae_more_iterations,75,1153.5829266911792,7.189688568401656,497.2,7333.775911092758

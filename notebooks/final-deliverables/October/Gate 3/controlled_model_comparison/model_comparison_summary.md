@@ -1,59 +1,171 @@
-# Controlled Model Comparison Summary (issue #45)
+# Controlled Model Comparison Summary (Issue #45)
 
-Notebook: `task_45_controlled_model_comparison.ipynb`. Raw outputs: `model_comparison_results/`.
+Initial controlled comparison notebook: `task_45_controlled_model_comparison.ipynb`  
+Initial raw outputs: `model_comparison_results/`  
+Additional experiments: `notebooks/liam-stapley/liam_model_experiments.ipynb`  
+Final comparison: `final_model_comparison.ipynb`
 
-## Design (fixed for every row)
+## Design
 
-- Modeling data `OCT-MD-001`, split `OCT-SPLIT-001` (train 131,822 / validation 28,248; test rows dropped at load and not used), seed 42.
-- Tuning: the 5 recorded `cv_fold` folds inside train, pipeline refit per fold. Validation is a limited comparison check.
-- Metric: MAE in original `loss` units, one shared function for baselines and models.
-- Preprocessing follows `docs/team/october/Gate 1/preprocessing_plan.md` (rare-level pooling at 132 train claims, categorical mask for trees).
-- Workflow run `OCT-JP-MODEL-COMPARISON-001`; independent-review rerun from commit `7c5ba0c`, merged in PR #55 as commit `87c736e`; Python 3.14.2, scikit-learn 1.9.1, pandas 3.0.5, numpy 2.5.1. The rerun metadata records a dirty tree because the notebook, generated evidence, and review documentation were being updated together.
+- Modeling data: `OCT-MD-001`
+- Frozen split: `OCT-SPLIT-001`
+- Train: 131,822 claims
+- Validation: 28,248 claims
+- Test: 28,248 claims, still protected and unused for model selection
+- Seed: 42
+- Cross-validation: five recorded `cv_fold` folds inside the training partition
+- Primary metric: MAE in original `loss` units
+- Model-specific preprocessing, feature selection, and tuning were allowed while keeping the same claim-level split across models.
+- Validation was used as a limited comparison set after training-fold experimentation.
 
-## Comparison (original loss units)
+The initial controlled comparison used the approved Ridge and HistGradientBoosting preprocessing. Later CatBoost and XGBoost experiments used model-specific categorical handling appropriate for those model families.
 
-| Run | Model | Train 5-fold CV MAE (+/- SD) | Validation MAE | Validation claims | vs mean baseline | vs median comparator | Complexity | Runtime |
-|---|---|---:|---:|---:|---:|---:|---|---:|
-| B01 | Training mean constant | 1,968.12 (5.76) | 1,962.92 | 28,248 | 0.00% | -8.74% | 1 constant | 0 s |
-| B02 | Training median constant | 1,810.48 (6.20) | 1,805.09 | 28,248 | +8.04% | 0.00% | 1 constant | 0 s |
-| E01 | Ridge, alpha 100 | 1,308.55 (7.82) | 1,290.43 | 28,248 | +34.26% | +28.51% | 670 inputs + intercept | 24.12 s |
-| E02 | HistGradientBoosting, lr 0.1, 63 leaves, min leaf 50 | 1,172.29 (6.29) | 1,151.17 | 28,248 | +41.35% | +36.23% | 200 rounds, up to 63 leaves | 106.28 s |
-| E02-iter1 | Same, `max_iter` 200 to 400 | 1,172.36 (6.41) | 1,151.15 | 28,248 | +41.36% | +36.23% | 201 rounds, up to 63 leaves | 74.57 s |
+## Initial Controlled Comparison
 
-Positive percentages mean lower validation MAE than the baseline.
+| Run | Model | Train 5-fold CV MAE (+/- SD) | Validation MAE | Validation claims | vs mean baseline | vs median comparator |
+|---|---|---:|---:|---:|---:|---:|
+| B01 | Training mean constant | 1,968.12 (5.76) | 1,962.92 | 28,248 | 0.00% | -8.74% |
+| B02 | Training median constant | 1,810.48 (6.20) | 1,805.09 | 28,248 | +8.04% | 0.00% |
+| E01 | Ridge, alpha 100 | 1,308.55 (7.82) | 1,290.43 | 28,248 | +34.26% | +28.51% |
+| E02 | HistGradientBoosting, lr 0.1, 63 leaves, min leaf 50 | 1,172.29 (6.29) | 1,151.17 | 28,248 | +41.35% | +36.23% |
+| E02-iter1 | Same model, `max_iter` 400 | 1,172.36 (6.41) | 1,151.15 | 28,248 | +41.36% | +36.23% |
 
-## Iteration (one changed variable)
+The 400-round HGB iteration produced only a 0.02 MAE validation improvement and slightly worse CV MAE. This was within fold-to-fold variation, so the 200-round HGB remained the selected result from the initial controlled comparison.
 
-The selected boosted model used all 200 allowed rounds. Raising only `max_iter` to 400 moved CV MAE by +0.08 (fold SD 6.29) and validation MAE by -0.02. Early stopping ended at 201 rounds. The change is well inside fold-to-fold noise and the approximately 0.002% validation gain fails the 1% stopping rule, so the result is a negative one and iteration stops. The selected model is E02 (200 rounds); E02-iter1 is equivalent.
+## Additional Model Experiments
 
-## Diagnostics (not a selection metric)
+The controlled comparison was extended with two additional regression approaches:
 
-Validation MAE by segment, using training p90 6,401.74 and p99 14,024.14:
+- `CatBoostRegressor`
+- `XGBRegressor`
 
-| Segment | Support | Median constant | Ridge | HGB |
+Both initially used all 130 predictors and were evaluated using the same five frozen training folds and validation partition.
+
+The full-feature CatBoost model outperformed the initial XGBoost model and the previous HGB leader. This motivated additional CatBoost feature-selection experiments.
+
+## Feature Importance and Selection
+
+Feature importance was evaluated using:
+
+- model-based importance;
+- permutation importance;
+- SHAP importance.
+
+The three measures were converted to ranks and aggregated into one feature ranking.
+
+CatBoost was then evaluated using the top 75, 50, and 30 ranked predictors.
+
+| Feature set | Features | 5-fold CV MAE | CV SD |
+|---|---:|---:|---:|
+| Top 75 | 75 | 1,159.79 | 7.59 |
+| All features | 130 | 1,160.00 | 6.89 |
+| Top 50 | 50 | 1,161.12 | 6.69 |
+| Top 30 | 30 | 1,167.15 | 6.86 |
+
+The top-75 subset slightly improved CV MAE while reducing the model from 130 to 75 predictors. More aggressive reduction to 50 or 30 predictors worsened performance.
+
+The top-75 feature set was therefore retained for final CatBoost tuning.
+
+## Final CatBoost Iteration
+
+The strongest top-75 CatBoost configuration was given additional boosting capacity, increasing the maximum number of iterations from 250 to 500 while retaining:
+
+- MAE loss;
+- depth 8;
+- learning rate 0.08;
+- seed 42;
+- native categorical handling.
+
+The five-fold result was:
+
+| Model | Features | CV MAE | CV SD | Mean best iteration |
 |---|---:|---:|---:|---:|
-| loss < p90 | 25,422 | 1,168.5 | 1,050.7 | 874.2 |
-| p90 to p99 | 2,547 | 6,593.7 | 2,770.1 | 3,006.9 |
-| loss >= p99 | 279 | 16,093.8 | 9,629.5 | 9,446.5 |
+| CatBoostRegressor, top 75, 500 iterations | 75 | **1,153.58** | **7.19** | **497.2** |
 
-- HGB is best overall and on ordinary claims, but Ridge is better on the p90 to p99 band (2,770 vs 3,007). The p99 segment has only 279 claims, so the Ridge vs HGB difference there (about 183) should not be read as settled.
-- Large claims remain poorly predicted by every model: p99 MAE is still about 9,400 to 9,600.
+The selected model used almost the entire 500-iteration allowance across folds, with best iterations between 494 and 499.
 
-## Checks
+Final validation MAE: **[INSERT FINAL 500-ITERATION VALIDATION MAE]**
 
-- Overfitting: validation MAE is 18 to 21 below CV MAE for the learned models (2.3 to 3.4 fold SDs). The gap is in the optimistic-for-validation direction, so there is no sign of overfitting; likely explanations are fold size and sampling, not tuning on validation.
-- Stability: fold SDs are 6 to 8. HGB beats Ridge by 139 validation MAE (about 18 fold SDs), a clear difference. Differences among HGB grid settings (1,172 to 1,177) are close to fold SD and are weak evidence.
-- Grid edge: the best HGB leaf count (63) was the largest tried, so a larger value was not tested.
-- Failed predictions: none non-finite. Ridge makes 270 negative loss predictions on validation (not clipped); HGB makes none.
-- Category handling: 9 validation cells hold a level unseen in train (cat105 1, cat110 1, cat113 1, cat116 6). Ridge sends them to the rare bucket; HGB treats them as missing.
+## Model Progression
 
-## Cross-check against Jonathan Deng's independent run
+The main modeling progression was:
 
-Baselines match to the cent. Ridge matches within 1.6 (1,290.43 vs 1,288.81). Boosted trees differ: 1,151.17 here vs 1,187.53 (his lr 0.08) and 1,209.22 (his lr 0.04). Differences in preprocessing (rare-level pooling and the categorical mask here) are a plausible but untested explanation. His lowering of the learning rate also did not help.
+`Constant baselines`  
+→ `Linear / Ridge`  
+→ `Random Forest / HistGradientBoosting`  
+→ `XGBoost / CatBoost`  
+→ `Feature importance ranking`  
+→ `Top-75 CatBoost`  
+→ `500-iteration top-75 CatBoost`
+
+HistGradientBoosting was the strongest model after the initial controlled comparison at 1,151.17 validation MAE. CatBoost later provided stronger cross-validation evidence and a smaller final feature set, leading to the updated final recommendation.
+
+## Tail Diagnostics
+
+The original HGB comparison used training thresholds:
+
+- p90 = 6,401.74
+- p99 = 14,024.14
+
+with validation support:
+
+| Segment | Support |
+|---|---:|
+| `loss < p90` | 25,422 |
+| `p90 to p99` | 2,547 |
+| `loss >= p99` | 279 |
+
+The original selected HGB produced:
+
+| Segment | HGB MAE |
+|---|---:|
+| `loss < p90` | 874.2 |
+| `p90 to p99` | 3,006.9 |
+| `loss >= p99` | 9,446.5 |
+
+The final CatBoost model is evaluated using the same thresholds and support counts in `final_catboost_tail_diagnostics.csv`.
+
+Tail performance remains a diagnostic rather than a replacement selection metric. The p99 segment contains only 279 validation claims, so small differences in that range should be interpreted cautiously.
+
+## Stability and Prediction Checks
+
+- All models use the same frozen claim-level split.
+- CatBoost's final CV SD of 7.19 is similar to the variability observed in the earlier learned models.
+- The final CatBoost CV result improves on the selected HGB CV MAE of 1,172.29 by approximately 18.71 MAE.
+- The top-75 feature-selection result was reproduced across all five frozen training folds.
+- The final model uses MAE loss, which limits the influence of very large residuals relative to squared-error training while retaining high-loss claims in the dataset.
+- No test rows were used for model training, feature selection, tuning, prediction, or scoring.
+
+## Cross-Check Against Jonathan Deng's Experiments
+
+Jonathan independently evaluated Linear Regression, Ridge, Random Forest, and HistGradientBoosting.
+
+His results included:
+
+| Model | CV MAE | Validation MAE |
+|---|---:|---:|
+| Linear Regression | 1,310.31 | 1,290.13 |
+| Ridge | 1,307.37 | 1,288.81 |
+| Random Forest | 1,243.54 | 1,223.51 |
+| HGB, lr 0.08 | 1,203.84 | 1,187.53 |
+| HGB, lr 0.04 | 1,224.38 | 1,209.22 |
+
+These experiments independently supported the broader conclusion that nonlinear boosted-tree approaches outperform the linear and random-forest alternatives on this dataset.
+
+## Final Recommendation
+
+The final recommended model is the **top-75-feature CatBoostRegressor with MAE loss, depth 8, learning rate 0.08, and 500 boosting iterations**.
+
+The recommendation is based primarily on MAE in original loss units, supported by five-fold CV stability, high-loss diagnostics, and model simplicity.
+
+The selected CatBoost configuration improves substantially over the required constant baselines and improves CV performance over the previous HistGradientBoosting leader while using 55 fewer predictors.
+
+The protected test partition remains unused and should be reserved for final evaluation after model selection is complete.
 
 ## Caveats
 
-- The independent-review rerun used scikit-learn 1.9.1 rather than the Gate 1 reference version 1.6.1. This is an environment-variant replication; the recorded metrics shifted slightly without changing the model-selection conclusion.
-- September EDA used the full labeled file, so validation is not wholly unseen evidence.
-- One split cannot show stability over time. Test was not used.
-- Independent verification is complete. The reviewer reproduced all five validation MAEs from `model_comparison_results/validation_predictions.csv` to numerical precision and confirmed the 28,248 unique validation rows, partition counts, experiment-register entries, tail support, test exclusion, and complete result bundle.
+- September EDA used the full labeled dataset, so later modeling hypotheses were not developed without any prior exposure to validation claims.
+- A single frozen split cannot establish temporal or population stability.
+- High-loss tail estimates are noisy because only 279 validation claims fall at or above the training p99 threshold.
+- CatBoost, XGBoost, and earlier sklearn experiments were run under different model-specific preprocessing and software environments. Their claim-level split and evaluation metric remain comparable, but runtime comparisons should be interpreted cautiously.
+- Feature importance identifies predictive usefulness but cannot provide semantic interpretation because the predictors are anonymous.

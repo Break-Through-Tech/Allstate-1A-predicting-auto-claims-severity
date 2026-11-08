@@ -1,0 +1,2 @@
+model,variant,feature_count,cv_mae_mean,cv_mae_std,mean_best_iteration,validation_mae,validation_claims,vs_mean_baseline_pct,vs_median_baseline_pct,vs_previous_best_hgb
+CatBoostRegressor,top75_mae_500_iterations,75,1153.5829266911792,7.189688568401656,497.2,1136.341877632517,28248,42.10957875731876,37.04778300735344,14.828122367483047

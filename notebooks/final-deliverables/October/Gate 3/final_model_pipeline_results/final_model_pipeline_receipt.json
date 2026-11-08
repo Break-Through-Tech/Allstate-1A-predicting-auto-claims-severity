@@ -1,0 +1,25 @@
+{
+  "modeling_data_version": "OCT-MD-001",
+  "split_version": "OCT-SPLIT-001",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+  "model_path": "notebooks\\liam-stapley\\model_experiment_outputs\\final_top75_catboost_model.cbm",
+  "model_sha256": "f2e364cf596c5fb6b36a7508b439a3f14a11e42b8a3faa3249543f70bfc8a27c",
+  "feature_path": "notebooks\\liam-stapley\\model_experiment_outputs\\final_catboost_features.csv",
+  "feature_count": 75,
+  "categorical_feature_count": 61,
+  "validation_claims": 28248,
+  "validation_mae": 1136.341877632517,
+  "metric": "MAE",
+  "metric_units": "original loss units",
+  "negative_predictions": 0,
+  "finite_predictions": true,
+  "test_partition_used": false,
+  "library_versions": {
+    "python": "3.12.8",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "catboost": "1.2.10",
+    "scikit-learn": "1.5.1"
+  }
+}
