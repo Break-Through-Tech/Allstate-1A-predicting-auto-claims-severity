@@ -4,22 +4,22 @@ This guide is meant to be used as a suggestion for the November milestone for th
 
 **November Milestone:**
 
-Final Evaluation and Presentation -> Complete the approved final evaluation, finalize results and interpretation, build the presentation, and prepare for delivery.
+Final Evaluation and Presentation -> Complete final evaluation, finalize the project story, prepare the presentation, and organize the complete project artifact set for handoff.
 
 ## Gate Handoffs
 
 The November milestone has 4 Gates:
 
 1. **Gate 1:** October Handoff and Final Evaluation Plan Approved
-2. **Gate 2:** Final Evaluation Reviewed
+2. **Gate 2:** Final Evaluation Complete
 3. **Gate 3:** Presentation Draft Reviewed
-4. **Gate 4:** November Complete
+4. **Gate 4:** Final Project Package Complete
 
 Use the same handoff process as prior milestones:
 
-1. **Evidence owner prepares:** link each completed item to the exact committed artifact or approved result.
+1. **Evidence owner prepares:** link each completed item to an exact committed artifact.
 2. **Independent teammate verifies:** someone other than the primary author checks the critical result.
-3. **Team Readiness Review:** review the evidence, limitations, disagreements, and next steps.
+3. **Team Readiness Review:** review the evidence, limitations, disagreements, and decision.
 4. **Board updates:** dependent work becomes ready after the gate decision is recorded.
 
 ## November Scope Protections
@@ -30,115 +30,131 @@ Use the same handoff process as prior milestones:
 - Keep MAE in original `loss` units as the primary evaluation metric.
 - Preserve the protected test partition for the approved final evaluation.
 - Do not describe internal evaluation results as proof of future-period or production performance.
-- Keep anonymous predictors anonymous. Importance does not establish business meaning or causation.
-- Continue presentation work in parallel with final evaluation once the project story is stable.
+- Keep anonymous predictors anonymous. Statistical importance does not establish business meaning or causation.
+- Build the presentation in parallel with final evaluation beginning in Week 2.
+- Prioritize final evaluation, communication, documentation, and project organization over additional experimentation.
 
 # Gate 1 - October Handoff and Final Evaluation Plan Approved
 
-## October handoff
+## October handoff and November plan
 
-- [ ] Confirm October Gate 4 is approved.
-- [ ] Confirm the provisional final model and exact configuration.
-- [ ] Confirm the final feature list, saved model artifact, split manifest, and evaluation code are available.
+- [ ] Confirm October Gate 4 is approved and the provisional candidate is frozen.
+- [ ] Confirm the final feature list, saved model artifact, split manifest, evaluation code, and preprocessing requirements are available.
 - [ ] Confirm the protected test partition has not been used during model selection.
-- [ ] Carry forward documented limitations, anomalies, and deferred experiments.
+- [ ] Carry forward documented limitations, anomalies, deferred experiments, and Challenge Advisor questions.
+- [ ] Freeze the final evaluation procedure, metric, baseline comparisons, and planned diagnostics before opening the test partition.
+- [ ] Confirm that no model tuning or feature selection will occur after viewing final test results unless a confirmed defect is found.
+- [ ] Finalize the presentation outline and assign initial slide sections so presentation development can begin alongside Gate 2.
 
-## Final evaluation plan
+**Gate 1 passes when:** the October handoff is accepted, the model and final evaluation plan are frozen, and presentation development is ready to begin.
 
-- [ ] Freeze the model and preprocessing configuration before test evaluation.
-- [ ] Record the final evaluation metric, test partition, and evaluation procedure.
-- [ ] Record the baseline comparisons that will be reported.
-- [ ] Record the error diagnostics that will be included.
-- [ ] Confirm that no tuning or feature selection will occur after viewing final test results unless a confirmed defect is found.
+# Gate 2 - Final Evaluation Complete
 
-## Presentation kickoff
+## Final evaluation and diagnostics
 
-- [ ] Confirm the final presentation outline and overall story.
-- [ ] Assign initial presentation sections or slide groups.
-- [ ] Begin drafting presentation content that does not depend on final test results.
+- [ ] Run the frozen final model on the protected test partition using the approved pipeline.
+- [ ] Calculate MAE in original `loss` units and compare the final model against the training-mean and training-median constants on the same test claims.
+- [ ] Confirm prediction alignment, finite outputs, claim counts, split integrity, and the exact model/configuration used.
+- [ ] Evaluate errors across the loss distribution, including the agreed high-loss segments and their support counts.
+- [ ] Compare final test performance with October CV and validation evidence and explain any meaningful differences.
+- [ ] Record important model limitations, failure patterns, and interpretation constraints.
+- [ ] Have someone other than the evaluation author independently reproduce or verify the critical final metrics and confirm that no post-test model changes were made.
+- [ ] Resolve any blocking discrepancy before the final evaluation is approved.
+- [ ] Add the approved final results and visuals to the developing presentation.
 
-**Gate 1 passes when:** the October handoff is accepted, the final evaluation plan is frozen, and presentation development can begin.
-
-# Gate 2 - Final Evaluation Reviewed
-
-## Final evaluation
-
-- [ ] Run the frozen final model on the protected test partition.
-- [ ] Calculate overall MAE in original `loss` units.
-- [ ] Compare the final model against the mean and median constant predictors on the same test claims.
-- [ ] Confirm prediction alignment, finite outputs, and test claim count.
-- [ ] Record the exact model, split, code, configuration, and dependency versions used.
-
-## Error analysis
-
-- [ ] Evaluate errors across the claim-severity distribution, including high-loss claims.
-- [ ] Record support counts for each reported segment.
-- [ ] Document important failure patterns or limitations.
-- [ ] Compare final test performance with October CV and validation evidence.
-
-## Independent review
-
-- [ ] Have a teammate independently verify the final evaluation results.
-- [ ] Resolve any blocking discrepancy before Gate 2 approval.
-- [ ] Record the final evaluation decision and limitations.
-
-## Presentation development
-
-- [ ] Update the presentation with final evaluation results.
-- [ ] Build the main model-comparison and error-analysis visuals.
-- [ ] Continue drafting speaker content.
-
-**Gate 2 passes when:** final evaluation is reproducible, independently reviewed, and ready to communicate.
+**Gate 2 passes when:** final evaluation is complete, reproducible, independently reviewed, and ready to communicate.
 
 # Gate 3 - Presentation Draft Reviewed
 
-## Presentation content
+## Presentation development and review
 
-- [ ] Complete a full first draft of the presentation.
-- [ ] Explain the project problem, data, methodology, model comparison, final model, evaluation results, and limitations.
-- [ ] Explain the final model output in plain language.
-- [ ] Clearly distinguish validation evidence from final held-out evaluation.
+- [ ] Complete a full presentation draft covering the problem, data, methodology, model comparison, final evaluation, limitations, and conclusions.
+- [ ] Explain the final model and its output in language appropriate for both technical and non-technical stakeholders.
+- [ ] Include only the most useful EDA, model comparison, feature-selection, and error-analysis evidence.
+- [ ] Clearly distinguish training CV, October validation, and November final held-out evaluation.
 - [ ] Preserve the distinction between anonymous statistical predictors and confirmed business concepts.
+- [ ] Confirm that every reported number and visual traces to an approved project artifact.
+- [ ] Review the full deck as a team and record requested changes or unresolved questions.
+- [ ] Assign speaker ownership and prepare likely Q&A topics.
+- [ ] Complete at least one initial presentation walkthrough before Gate 3 approval.
 
-## Visuals and interpretation
+**Gate 3 passes when:** the complete presentation story, results, visuals, and limitations are accurate and approved for final polishing.
 
-- [ ] Include the key model-comparison result.
-- [ ] Include the final evaluation result.
-- [ ] Include at least one useful error or high-loss diagnostic.
-- [ ] Include only the most relevant data and feature findings.
-- [ ] Confirm that all reported numbers trace to approved artifacts.
+# Gate 4 - Final Project Package Complete
 
-## Team review
-
-- [ ] Review the full deck as a team.
-- [ ] Record requested changes, disagreements, and unresolved questions.
-- [ ] Confirm speaker ownership for each section.
-- [ ] Prepare likely audience Q&A topics.
-
-**Gate 3 passes when:** the complete presentation story is accurate, understandable, and approved for final polishing.
-
-# Gate 4 - November Complete
-
-## Final presentation
+## Final presentation and rehearsal
 
 - [ ] Complete all presentation revisions.
-- [ ] Confirm all metrics, visuals, and claims are accurate.
-- [ ] Confirm slide formatting and terminology are consistent.
+- [ ] Confirm final metrics, claims, visuals, terminology, and citations are accurate.
 - [ ] Complete at least one timed full-team rehearsal.
 - [ ] Refine speaker transitions and Q&A preparation.
+- [ ] Preserve the final presentation and presentation outline in the approved project location.
 
-## Final project artifacts
+## Final project documentation
 
-- [ ] Preserve the final evaluation results and predictions.
-- [ ] Preserve the final model artifact and feature list.
-- [ ] Preserve the final comparison and error-analysis outputs.
-- [ ] Preserve reproduction instructions and review records.
-- [ ] Preserve the final presentation and supporting documentation.
+Review and update the project documentation so that the repository reflects the final state of the project rather than the state at the end of an earlier milestone.
 
-## Final review
+- [ ] Review every September, October, and November issue report and update completion status, final decisions, limitations, review records, and links where needed.
+- [ ] Review milestone handoff documents and confirm that carried-forward work is either completed, explicitly deferred, or still documented as unresolved.
+- [ ] Update project-level and relevant folder-level `README.md` files so they describe the final workflow and point to the canonical artifacts.
+- [ ] Review model comparison, feature experiment, evaluation, and decision summaries for outdated conclusions.
+- [ ] Confirm that references to provisional models, open gates, incomplete reviews, and unused artifacts reflect the final project state.
+- [ ] Confirm reproduction instructions remain accurate from a clean committed version.
+- [ ] Preserve final review records, decisions, limitations, and unresolved risks.
 
-- [ ] Have the full team review the final presentation and evidence.
-- [ ] Record approvals, dissent, remaining limitations, and final artifact versions.
-- [ ] Update the GitHub Projects board with completed November work and any remaining follow-up.
+## Canonical final deliverables
 
-**Gate 4 passes when:** the final evaluation is approved, the presentation is ready to deliver, required artifacts are preserved, and the team has completed its final review.
+Create one clearly organized final-deliverables area that provides a simple path through the project without requiring reviewers to navigate every working notebook.
+
+At minimum, preserve canonical deliverables for each milestone:
+
+### September - Data Understanding
+
+- [ ] Final reproducible EDA pipeline notebook.
+- [ ] Final data dictionary and anomaly record.
+- [ ] Final findings / decision register.
+- [ ] September handoff or completion report.
+- [ ] Reproduction instructions.
+- [ ] Monthly artifact bundle index.
+
+### October - Model Development
+
+- [ ] Final reproducible model pipeline notebook.
+- [ ] Final model comparison and feature-selection evidence.
+- [ ] Final model-selection decision record.
+- [ ] Final fitted model and selected feature list.
+- [ ] October model-development report.
+- [ ] Reproduction instructions.
+- [ ] Monthly artifact bundle index.
+
+### November - Evaluation and Presentation
+
+- [ ] Final evaluation notebook or pipeline.
+- [ ] Final evaluation results, predictions, and diagnostics.
+- [ ] Final evaluation decision record.
+- [ ] Final presentation and presentation outline.
+- [ ] Final project limitations / conclusions record.
+- [ ] Reproduction instructions.
+- [ ] Monthly artifact bundle index.
+
+## Artifact Bundle organization
+
+- [ ] Add an `ARTIFACT_BUNDLE.md` or equivalent index to each final milestone folder.
+- [ ] Add an artifact bundle index to each Gate folder where the gate produces multiple approved artifacts.
+- [ ] Each artifact bundle should identify the exact artifacts used for that gate or milestone, their purpose, status, version or commit, owner, reviewer, and relevant decision record.
+- [ ] Artifact bundle files should link to canonical artifacts rather than unnecessarily duplicating files.
+- [ ] Confirm that every major reported result can be traced from the final presentation or report to its source artifact and review record.
+- [ ] Create one top-level final-deliverables index that links September, October, and November into a single project workflow.
+
+## Repository cleanup and final review
+
+- [ ] Confirm final folders use consistent names and obvious navigation.
+- [ ] Remove or clearly label superseded draft artifacts where they could confuse reviewers.
+- [ ] Do not delete historical experiments or negative results required for traceability.
+- [ ] Confirm all canonical notebooks execute from their documented environment or have a verified reproducible output.
+- [ ] Confirm the protected/final evaluation evidence is preserved exactly as approved.
+- [ ] Have the full team review the final presentation, documentation structure, and canonical artifact set.
+- [ ] Record final approvals, dissent, remaining limitations, and exact committed versions.
+- [ ] Update the GitHub Projects board to reflect completed work and any true post-project follow-up.
+
+**Gate 4 passes when:** the final evaluation and presentation are approved, the team has rehearsed, all major documentation reflects the final project state, and the complete project can be understood and reproduced from the organized final-deliverables package.
