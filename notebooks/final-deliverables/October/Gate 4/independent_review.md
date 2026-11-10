@@ -2,9 +2,9 @@
 
 ## Reviewer
 
-**Reviewer:** Ragib Nehal
+**Reviewer:** Ragib Nehal, Jonathan Deng
 
-**Review date:** 2026-11-10
+**Review date:** 2026-11-10, 2026-11-10
 
 **Reviewed commit:** `164653a2f5a88e07109dda7e08f00bc08ed6c9a4`
 
@@ -56,6 +56,8 @@ and SHAP package versions were not captured by the authoring notebook and are
 recorded as unavailable rather than inferred. The experiment register now
 preserves all 11 extended CatBoost/XGBoost, feature-selection, screening, and
 final-promotion records, including unsuccessful runs.
+
+I agree with Ragib's findings regarding the final CatBoost model. In particular, the validation MAE of `1136.341877632517` reproduces across all `28,248` validation claims; the recorded five-fold CV MAE of `1153.5829266911792 +/- 7.189688568401656` is consistent with the saved comparison artifact; the 75-feature model configuration and saved predictions reproduce exactly within floating-point tolerance; all predictions are finite and non-negative; and the protected test partition was not used for fitting, selection, prediction, or scoring. I also agree that validation-based permutation and SHAP importance, the source-read-before-filtering behavior, and the unavailable historical XGBoost/SHAP package versions should remain documented as limitations rather than treated as blocking discrepancies.
 
 ## Decision
 
