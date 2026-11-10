@@ -47,13 +47,21 @@ Because the predictors are anonymous, importance scores and coefficients are int
 
 Preprocessing differs appropriately by model family.
 
-Ridge uses one-hot encoded categorical predictors and standardized continuous predictors.
+The following descriptions summarize each compared technique in terms the team
+can use with the Challenge Advisor. Unless noted otherwise, learned models use
+all 130 predictors. Every model produces one numeric estimate of claim `loss` in
+the original target units; no target transformation is applied.
 
-HistGradientBoosting uses pooled ordinal categorical representations and a categorical feature mask.
-
-XGBoost uses categorical tree handling.
-
-CatBoost uses native categorical handling. Categorical values are provided as categorical/string inputs, while continuous values are used directly. No target transformation is applied.
+| Model | Input fields and encoding | Key settings used in the comparison | Basic learning approach | Prediction output |
+|---|---|---|---|---|
+| Training-mean constant | Uses no predictor fields. It calculates one constant from the training `loss` values. | Training mean `3038.84`. | Assigns every claim the average training loss; it does not learn relationships between predictors and loss. | The same predicted `loss`, `3038.84`, for every claim. |
+| Training-median constant | Uses no predictor fields. It calculates one constant from the training `loss` values. | Training median `2115.39`. | Assigns every claim the middle training loss, which is the strongest constant predictor under MAE. | The same predicted `loss`, `2115.39`, for every claim. |
+| Linear Regression | Uses `cat1`–`cat116` after median/mode imputation and one-hot encoding with unseen levels ignored; uses `cont1`–`cont14` after median imputation and standardization. | Ordinary least squares with 1,051 fitted coefficients. | Fits one weight for each encoded input so that their weighted sum best matches training losses. | A weighted-sum estimate of claim `loss`. |
+| Ridge Regression | Uses all categorical fields after training-derived rare-level pooling and one-hot encoding; continuous fields are standardized. | `alpha=100`; rare-level threshold `132` training claims. | Learns a linear weight for each encoded input while shrinking the weights to reduce overfitting. | A regularized weighted-sum estimate of claim `loss`. |
+| Random Forest | Uses median/mode imputation and ordinal categorical codes; unseen categories map to `-1`. Continuous fields are used without scaling after imputation. | 80 trees; maximum depth 18; `max_features=0.7`; minimum 2 claims per leaf; seed 42. | Fits many decision trees to different samples and predictor subsets, then averages their predictions to reduce the instability of one tree. | The average predicted `loss` across the 80 trees. |
+| HistGradientBoosting | Uses training-derived pooled ordinal categorical codes, an explicit categorical-feature mask, and unseen categories treated as missing; continuous fields are unscaled. | Absolute-error loss; learning rate 0.1; up to 63 leaves per tree; minimum 50 claims per leaf; maximum 200 rounds. | Adds small trees sequentially, with each tree correcting errors left by the existing ensemble. | The combined trees' estimate of claim `loss`. |
+| XGBoost | Uses all categorical fields through native categorical-tree support with categories defined from training; continuous fields are used directly. | Absolute-error objective; histogram trees; maximum depth 6; learning rate 0.08; maximum 300 trees; 30-round CV early-stopping patience; seed 42. | Adds trees sequentially, using gradient information to focus each new tree on errors made by the preceding trees. | The sum of the boosted trees expressed as predicted claim `loss`. |
+| CatBoost | Uses the selected 75 predictors. Categorical fields are supplied as categorical/string values for native handling; continuous fields are used directly. | MAE loss; depth 8; learning rate 0.08; 500 boosting iterations; seed 42. | Adds symmetric trees sequentially and uses CatBoost's ordered categorical statistics to learn from categorical values while limiting target leakage. | The final boosted ensemble's estimate of claim `loss`. |
 
 ---
 
