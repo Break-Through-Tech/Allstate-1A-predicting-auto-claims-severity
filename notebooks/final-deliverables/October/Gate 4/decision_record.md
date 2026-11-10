@@ -16,7 +16,7 @@ Configuration:
 Five-fold training CV MAE: 1,153.58  
 CV SD: 7.19
 
-Validation MAE: [FINAL VALIDATION MAE]
+Validation MAE: 1,136.34
 
 Mean baseline validation MAE: 1,962.92  
 Median comparator validation MAE: 1,805.09

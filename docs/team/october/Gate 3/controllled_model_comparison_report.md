@@ -237,7 +237,7 @@ The best iteration across folds remained near the new 500-round limit, with a me
 
 This improved CV MAE by approximately 6.21 compared with the initial top-75 model and by approximately 18.71 compared with the selected HGB result.
 
-Final validation MAE: **[INSERT FINAL PIPELINE VALIDATION MAE]**
+Final validation MAE: **1,136.34**
 
 The final validation value should be reproduced directly by `final_model_pipeline.ipynb` from the saved `.cbm` artifact before this report is marked complete.
 
@@ -258,7 +258,7 @@ The major model families tested during Issue #45 can be summarized as follows.
 | HistGradientBoosting | 130 | 1,172.29 | 6.29 | 1,151.17 |
 | Full-feature CatBoost | 130 | 1,160.00 | 6.89 | 1,142.33 |
 | Top-75 CatBoost, 250 iterations | 75 | 1,159.79 | 7.59 | 1,141.14 |
-| Final top-75 CatBoost, 500 iterations | 75 | **1,153.58** | **7.19** | **[FINAL VALUE]** |
+| Final top-75 CatBoost, 500 iterations | 75 | **1,153.58** | **7.19** | **1,136.34** |
 
 The final CatBoost configuration has the strongest five-fold training CV MAE of the tested approaches while using 55 fewer predictors than the original full-feature models.
 

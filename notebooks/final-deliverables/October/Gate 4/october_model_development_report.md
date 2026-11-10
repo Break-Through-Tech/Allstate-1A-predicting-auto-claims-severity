@@ -85,7 +85,7 @@ October modeling included:
 | HistGradientBoosting | 1,172.29 | 1,151.17 |
 | CatBoost, 130 predictors | 1,160.00 | 1,142.33 |
 | CatBoost, top 75, 250 iterations | 1,159.79 | 1,141.14 |
-| CatBoost, top 75, 500 iterations | **1,153.58** | **[FINAL VALIDATION MAE]** |
+| CatBoost, top 75, 500 iterations | **1,153.58** | **1,136.34** |
 
 Boosted-tree approaches consistently outperformed the linear and Random Forest alternatives.
 
@@ -196,7 +196,7 @@ Configuration:
 
 Five-fold CV MAE is **1,153.58 ± 7.19**.
 
-Final validation MAE is **[FINAL VALIDATION MAE]**.
+Final validation MAE is **1,136.34**.
 
 The model substantially outperforms both constant predictors on the same validation claims and improves CV performance over the previous HistGradientBoosting leader.
 

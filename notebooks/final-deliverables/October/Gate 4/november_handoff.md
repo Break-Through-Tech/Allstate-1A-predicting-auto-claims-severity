@@ -56,7 +56,7 @@ October evidence:
 
 - five-fold CV MAE: 1,153.58
 - CV SD: 7.19
-- final validation MAE: [FINAL VALIDATION MAE]
+- final validation MAE: 1,136.34
 
 The fitted model is preserved as a `.cbm` artifact and can be loaded without retraining.
 
