@@ -257,14 +257,14 @@ Gate 4 passes when:
 
 | Team member | Decision | Notes |
 |---|---|---|
-| Liam Stapley | Pending | |
+| Liam Stapley | Pending | Prepared the October report and this handoff (Issue #48). |
 | Mia Chavez | Pending | |
-| Bernardo Xie He | Pending | |
-| Prisha Agarwal | Pending | |
-| Ragib Nehal | Pending | |
+| Ragib Nehal | Pending | Approved the Gate 4 independent technical review on 2026-11-10 (`independent_review.md`, Issue #47); handoff approval not yet recorded on Issue #48. |
 | Junaid Pathan | Pending | |
+| Ella Zou | Approved | Approved on Issue #48 on 2026-11-16 (https://github.com/Break-Through-Tech/Allstate-1A-predicting-auto-claims-severity/issues/48#issuecomment-6903638210); also approved Gate 4 on Issue #47 with non-blocking suggestions for `reproducing_results.md`. |
+| Jonathan Deng | Approved | Approved on Issue #48 on 2026-11-10 ("November handoff approved - reviewed the October report and November plan with no blocking concerns."); also co-signed the Gate 4 independent technical review. |
 
-If the active six-person roster differs, update this table before approval.
+Roster updated on 2026-11-15 to the active six-person team. Decisions are recorded only from approvals posted on Issues #47/#48 or signed review records.
 
 Any dissent or unresolved risk should be recorded rather than silently removed.
 
