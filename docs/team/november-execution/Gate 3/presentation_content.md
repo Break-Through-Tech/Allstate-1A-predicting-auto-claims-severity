@@ -3,9 +3,13 @@
 Slide-by-slide content for the Google Slides deck. Every number below is copied
 from a committed project artifact; the source is listed under each slide.
 
-**Status:** Draft. November Gate 2 (protected test evaluation) has not been run,
-so every `[TEST RESULT]` placeholder must be filled from the approved Gate 2
-artifacts before Gate 3 approval.
+**Status:** Draft. With Challenge Advisor approval, Jonathan Deng ran the
+November Gate 2 protected-test evaluation on 2026-11-16 (branch `jonathan`,
+commit `ffdcb78`). Ella Zou independently reproduced every test metric on
+2026-11-17 (`notebooks/final-deliverables/November/Gate 2/independent_review.md`).
+Test numbers on slides 9–11 are marked **(test)**. They come from the
+not-yet-merged `jonathan` branch, and formal Gate 2 approval is still pending.
+Re-check them against the merged Gate 2 artifacts before Gate 3 approval.
 
 ## Evidence labels
 
@@ -21,7 +25,7 @@ tell the three kinds of evidence apart.
 Wording rules (from the November scope protections and the October independent review):
 
 - Validation is **not** fully independent: September EDA used the full labeled file, and the CatBoost permutation/SHAP feature ranking used validation observations.
-- Before Gate 2, say the test partition was "not used" for fitting, selection, prediction, or scoring; do not say its rows were "never read".
+- Say the test partition was "not used" for fitting, tuning, or model selection and was scored once with the frozen model. Do not say its rows were "never read": the pipelines load the full source before filtering.
 - Test results are an internal held-out evaluation, not proof of future-period, first-filing, or production performance.
 - Predictors are anonymous (`cat1`–`cat116`, `cont1`–`cont14`). Describe them as statistically influential only; never assign business meaning or causation.
 
@@ -218,22 +222,32 @@ Owners follow the team outline; the team should confirm them in the Gate 3 revie
 
 ## Slide 9: November final held-out evaluation
 
-**Blocked until November Gate 2 is approved.** Fill only from the approved Gate 2 artifacts.
-
 **On slide**
 
 | Evidence | Claims | CatBoost MAE | Mean constant | Median constant |
 |---|---:|---:|---:|---:|
 | Training CV (5 folds) | 131,822 | 1,153.58 ± 7.19 | 1,968.12 | 1,810.48 |
 | October validation | 28,248 | 1,136.34 | 1,962.92 | 1,805.09 |
-| **November held-out test** | 28,248 | `[TEST RESULT]` | `[TEST RESULT]` | `[TEST RESULT]` |
+| **November held-out test** | 28,248 | **1,141.57** | 1,963.45 | 1,806.35 |
 
-- Improvement over the median constant on test: `[TEST RESULT]`%
-- One sentence on whether the test result is consistent with CV and validation: `[TEST RESULT]`
+- On the test claims, CatBoost is **41.9% better than the mean baseline** and **36.8% better than the median constant**.
+- The test MAE (1,141.57) falls between CV (1,153.58) and validation (1,136.34), so performance held up on claims the model had never been tuned on.
+- Validation-based improvements (42.1% / 37.0%) and test improvements (41.9% / 36.8%) differ by only about 0.25 percentage points.
 
-**Speaker notes:** The model was frozen before the test set was opened and was not changed afterward. This is our least-exposed estimate, but it is still an internal random split, not future-period performance.
+**Visual:** three grouped bars (CV / validation / test) for CatBoost, with the two constants as grey reference lines. Label each bar with its evidence type.
 
-**Sources:** `[November Gate 2 artifact paths]`
+**Plain-language version:** "On 28,248 claims the model never saw during development, predictions were off by about 1,142 on average. Guessing the typical claim amount for every claim would be off by about 1,806."
+
+**Speaker notes:**
+- The Challenge Advisor approved opening the test set.
+- The model was frozen before the test set was opened, and it was scored once with no changes afterward.
+- A teammate independently reproduced every test number from the saved model; the largest prediction difference was 1.8e-12.
+- This is our least-exposed estimate, but it is still an internal random split, not future-period performance.
+
+**Sources** (branch `jonathan`, commit `ffdcb78`; not yet merged)
+- `notebooks/final-deliverables/November/Gate 2/test_evaluation_outputs/final_test_model_comparison.csv`
+- `notebooks/final-deliverables/November/Gate 2/test_evaluation_outputs/final_test_evaluation_receipt.json`
+- `notebooks/final-deliverables/November/Gate 2/independent_review.md` (reproduction)
 
 ---
 
@@ -242,24 +256,28 @@ Owners follow the team outline; the team should confirm them in the Gate 3 revie
 **On slide**
 - Segments are based on training thresholds: p90 = 6,401.74 and p99 = 14,024.14.
 
-| Segment (October validation) | Claims | CatBoost MAE | Mean-constant MAE |
-|---|---:|---:|---:|
-| Below p90 | 25,422 | 868.05 | 1,446.54 |
-| p90 to p99 | 2,547 | 2,976.91 | 5,670.26 |
-| p99 and above | 279 | 8,779.90 | 15,170.38 |
-| Test-set version | | `[TEST RESULT]` | `[TEST RESULT]` |
+CatBoost MAE by segment:
 
-- Key message: error on the largest claims is about **10× the error on ordinary claims**.
-- CatBoost improved most over HGB in the top group (8,779.90 vs 9,446.5), but the p99 group has only 279 claims, so treat small differences as inconclusive.
+| Segment | Validation claims | Validation MAE | **Test claims** | **Test MAE** | Test mean actual loss | Test mean prediction |
+|---|---:|---:|---:|---:|---:|---:|
+| Below p90 | 25,422 | 868.05 | 25,424 | **870.38** | 2,298.87 | 2,311.25 |
+| p90 to p99 | 2,547 | 2,976.91 | 2,559 | **2,982.06** | 8,715.07 | 6,082.92 |
+| p99 and above | 279 | 8,779.90 | 265 | **9,386.40** | 18,769.69 | 9,449.18 |
 
-**Visual:** grouped bar chart by segment (CatBoost vs mean constant) with the claim counts printed under each group.
+- Key message: on test, error on the largest claims is about **11× the error on ordinary claims** (9,386 vs 870).
+- **New test finding:** for the p99+ claims, the model predicts on average about half the actual loss (9,449 vs 18,770). It systematically under-predicts very large claims. For ordinary claims, the average prediction is close to the average actual loss (2,311 vs 2,299).
+- Ordinary and mid-range segments are almost identical across validation and test. The p99+ segment is noisier (8,780 → 9,386) because it has under 300 claims in each partition.
+- For context, the mean-constant baseline's MAE on validation was 15,170 for p99+ claims and 1,447 for ordinary claims. The test tail file has no baseline segment MAEs, so don't put a test baseline next to these.
 
-**Speaker notes:** In the October error diagnostics, the HGB model under-predicted every claim in the p99 group. The CatBoost tail file records only MAE, so do not claim the same under-prediction rate for CatBoost unless Gate 2 measures it.
+**Visual:** grouped bar chart by segment with validation and test MAE side by side, and claim counts under each group. Optionally add a second small chart of mean actual vs mean predicted loss by segment, to show the tail under-prediction.
+
+**Speaker notes:** Large claims are where the business stakes are highest and where the model is weakest. This is the main limitation to communicate, and a clear target for future work.
 
 **Sources**
-- `notebooks/liam-stapley/model_experiment_outputs/final_catboost_tail_diagnostics.csv`
-- `notebooks/final-deliverables/October/Gate 3/final_model_comparison_results/final_tail_comparison.csv`
-- `notebooks/ragib-nehal/oct-notebooks/feature-experiments-review/outputs/error_diagnostics.csv` (mean-constant rows, HGB under-prediction rate)
+- Validation:
+  - `notebooks/liam-stapley/model_experiment_outputs/final_catboost_tail_diagnostics.csv`
+  - `notebooks/ragib-nehal/oct-notebooks/feature-experiments-review/outputs/error_diagnostics.csv` (mean-constant rows)
+- Test (branch `jonathan`, commit `ffdcb78`): `notebooks/final-deliverables/November/Gate 2/test_evaluation_outputs/final_test_tail_diagnostics.csv`
 
 ---
 
@@ -269,13 +287,13 @@ Owners follow the team outline; the team should confirm them in the Gate 3 revie
 
 **Limitations**
 - **Validation exposure:** September EDA used the full labeled file, and the feature ranking used validation observations. October validation is useful but not fully independent.
-- **High-loss claims** remain much harder to predict, and the top segment is small (279 validation claims).
+- **High-loss claims** remain much harder to predict. On test, the model under-predicts p99+ claims by about half on average. The top segment is also small (279 validation and 265 test claims).
 - **Anonymous predictors:** we can identify influential fields but not explain them in business terms or claim causation.
 - **One random split:** this does not show stability over time or under future data shifts.
 
 **Conclusions**
 - A 75-feature CatBoost model cut validation MAE by about 42% vs the mean baseline and 37% vs the median constant.
-- Final held-out result: `[TEST RESULT]`
+- On the protected test set, the frozen model scored a test MAE of **1,141.57**: 41.9% better than the mean baseline and 36.8% better than the median constant. This is consistent with CV and validation.
 - The workflow (frozen split, training-only preprocessing, logged experiments, independent reproduction) is itself a key deliverable.
 
 **Sources**
@@ -313,13 +331,15 @@ Owners follow the team outline; the team should confirm them in the Gate 3 revie
 |---|---|---|
 | Why CatBoost? | It had the best training CV (1,153.58 ± 7.19) and validation MAE (1,136.34). Its CV gain over HGB (about 19) exceeds the fold SD, and it handles 116 categorical fields natively. | Liam |
 | Why MAE instead of RMSE? | MAE is in loss units and easy to explain. With a heavily skewed target, squared error would let a few very large claims dominate model choice. | Ragib |
-| How does it do on big claims? | Much worse: about 8,780 MAE on the p99+ group vs 868 on ordinary claims. Only 279 validation claims fall in that group. | Ragib |
+| How does it do on big claims? | Much worse. On test, MAE is 9,386 on the p99+ group vs 870 on ordinary claims, and the model predicts about half of the actual loss for those claims on average. Only 265 test claims fall in that group. | Ragib |
+| Did the test result match what you expected? | Yes. Test MAE 1,141.57 sits between CV (1,153.58) and validation (1,136.34), and the improvement over the baselines changed by only about 0.25 percentage points. | Liam |
+| How was the test set protected? | It was held out from the October split onward and was not used for fitting, tuning, or feature selection. The Challenge Advisor approved opening it, the model was frozen first, and the model was scored once. A teammate reproduced the result independently. | Ragib |
 | What do `cat80` / `cat101` mean? | We don't know; the data is anonymized. We only claim they are statistically useful for prediction. | Mia |
 | Is validation leakage a problem? | It is disclosed rather than hidden. Feature ranking used validation, so we kept a protected test set untouched until the model was frozen. | Ragib |
 | Why drop 55 features if accuracy didn't change? | A simpler model with the same CV MAE is easier to run and maintain. Cutting to 30 features hurt, so 75 was the floor we tested. | Mia |
 | Would this work in production / on new claims? | Not shown. Results are internal held-out evaluations on one random split; time-based testing and first-filing data would be needed. | Junaid |
 | Why only a modest gain over HGB/XGBoost? | The boosted models are close; most of the gain comes from moving to boosted trees at all (about 1,290 → about 1,150). | Jonathan |
-| How do you know the numbers are right? | Two teammates independently reproduced the final validation MAE from a clean kernel, matching to within 3.6e-12. | Jonathan |
+| How do you know the numbers are right? | Two teammates independently reproduced the final validation MAE from a clean kernel, matching to within 3.6e-12. A different teammate independently reproduced every test metric; the largest prediction difference was 1.8e-12. | Jonathan |
 
 ---
 
@@ -334,9 +354,10 @@ The pasted outline matches the repo except for these items.
 | Feature experiments | Top 75 "essentially the same or slightly better" | 1,159.79 vs 1,160.00, a 0.21 difference against a SD of about 7 | Say "essentially the same with 55 fewer predictors" |
 | Feature experiments | "reducing to 50 or 30 worsened CV MAE" | Top 50: 1,161.12 (+1.3 vs top 75, within noise). Top 30: 1,167.15 (clearly worse). | "50 was slightly worse, 30 clearly worse" |
 | Feature experiments | (implied) final 1,153.58 compared with subsets | Subset runs used about 250 iterations; 1,153.58 is from 500 iterations | Keep the two on separate lines or slides |
-| Experimental design | "Protected test remains unused" | True only until Gate 2 runs | Update after Gate 2 to "scored once with the frozen model" |
+| Experimental design | "Protected test remains unused" | No longer true: the test set was scored on 2026-11-16 | Say "held out until the model was frozen, then scored once" |
 | Whole outline | No final test evaluation section | Gate 3 requires CV, validation, and November test to be clearly separated | Add slide 9 (held-out evaluation) |
-| Q&A | "why the protected test set has not yet been used" | Becomes outdated after Gate 2 | Replace with "how was the test set protected?" |
+| Q&A | "why the protected test set has not yet been used" | Outdated: the test set has now been used | Replace with "how was the test set protected?" (answer in the Q&A table) |
+| Error analysis | Validation-only diagnostics | Test diagnostics now exist | Show validation and test segment MAE side by side (slide 10) |
 | Final thoughts | Owner "Junaid / sixth team member" | The roster in the hook lists Ella Zou as the sixth member | Assign Junaid + Ella |
 
 Confirmed correct in the outline:
@@ -351,7 +372,8 @@ Confirmed correct in the outline:
 
 ## Gate 3 checklist
 
-- [ ] Fill every `[TEST RESULT]` from approved November Gate 2 artifacts
+- [x] Fill test results from the November Gate 2 artifacts (2026-11-17)
+- [ ] Re-check the test numbers after the `jonathan` branch is merged and Gate 2 is approved
 - [ ] Confirm speaker owners in the team review
 - [ ] Team deck review; record requested changes and open questions below
 - [ ] At least one full walkthrough before Gate 3 approval
