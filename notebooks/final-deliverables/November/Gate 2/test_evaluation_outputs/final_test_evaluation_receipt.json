@@ -1,0 +1,45 @@
+{
+  "evaluation_type": "one-time protected-test evaluation",
+  "modeling_data_version": "OCT-MD-001",
+  "split_version": "OCT-SPLIT-001",
+  "source_sha256": "74037cb248a1064e4d578692a4f4e5d8492ed1b2033daf643496e1b68b14ae03",
+  "manifest_sha256": "de10b0e17ad56174a7b126352a0a41b3b3d477bbddd65f37b87a6235f582a64b",
+  "partition_counts": {
+    "train": 131822,
+    "test": 28248,
+    "validation": 28248
+  },
+  "test_claims": 28248,
+  "test_mae": 1141.5719985709347,
+  "training_mean_constant_mae": 1963.4473134991124,
+  "training_median_constant_mae": 1806.3452361229115,
+  "feature_count": 75,
+  "categorical_feature_count": 61,
+  "model_path": "notebooks/liam-stapley/model_experiment_outputs/final_top75_catboost_model.cbm",
+  "model_sha256": "f2e364cf596c5fb6b36a7508b439a3f14a11e42b8a3faa3249543f70bfc8a27c",
+  "feature_path": "notebooks/liam-stapley/model_experiment_outputs/final_catboost_features.csv",
+  "model_configuration": {
+    "loss_function": "MAE",
+    "depth": 8,
+    "learning_rate": 0.07999999821,
+    "iterations": 500,
+    "random_seed": 42
+  },
+  "p90_training_threshold": 6401.738,
+  "p99_training_threshold": 14024.143299999967,
+  "finite_predictions": true,
+  "negative_predictions": 0,
+  "test_partition_used_for": [
+    "final scoring",
+    "final diagnostics"
+  ],
+  "test_partition_used_for_fitting_or_tuning": false,
+  "post_test_model_change_allowed": false,
+  "library_versions": {
+    "python": "3.14.4",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "catboost": "1.2.10",
+    "scikit-learn": "1.6.1"
+  }
+}

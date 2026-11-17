@@ -1,0 +1,4 @@
+model,test_mae,improvement_vs_mean_pct,improvement_vs_median_pct
+training_mean_constant,1963.4473134991124,0.0,-8.69723429577617
+training_median_constant,1806.3452361229115,8.00133908845382,0.0
+final_top75_catboost,1141.5719985709347,41.85879138582494,36.802114250254135
